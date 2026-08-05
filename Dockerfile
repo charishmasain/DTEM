@@ -12,6 +12,8 @@ COPY . .
 # Seed database on build
 RUN python -m dtem.data.seed_data
 
+# Use Render's $PORT environment variable if provided, fallback to 8000
+ENV PORT=8000
 EXPOSE 8000
 
-CMD ["uvicorn", "dtem.web.app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD sh -c "uvicorn dtem.web.app:app --host 0.0.0.0 --port ${PORT:-8000}"
