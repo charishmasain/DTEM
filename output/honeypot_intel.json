@@ -1,0 +1,2164 @@
+{
+  "keyword": "honeypot",
+  "collected_at": "2026-07-26T12:00:51.325374+00:00",
+  "total_records": 18,
+  "records": [
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2000-1140: Recourse ManTrap 1.6 does not properly hide processes from attackers, which could allow attackers to determine that they",
+      "content": "Recourse ManTrap 1.6 does not properly hide processes from attackers, which could allow attackers to determine that they are in a honeypot system by comparing the results from kill commands with the process listing in the /proc filesystem.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2000-1140",
+      "published_at": "2001-01-09T05:00:00.000",
+      "severity": "V2 (2.1)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2000-1140",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2001-01-09T05:00:00.000",
+          "lastModified": "2026-06-16T21:53:14.330",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Recourse ManTrap 1.6 does not properly hide processes from attackers, which could allow attackers to determine that they are in a honeypot system by comparing the results from kill commands with the process listing in the /proc filesystem."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:L/AC:L/Au:N/C:P/I:N/A:N",
+                  "baseScore": 2.1,
+                  "accessVector": "LOCAL",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "LOW",
+                "exploitabilityScore": 3.9,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-Other"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:recourse_technologies:mantrap:1.6.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8D798097-939A-4884-946F-90B066426FBB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://www.securityfocus.com/bid/1908",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit",
+                "Patch",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://www.securityfocus.com/bid/1908",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit",
+                "Patch",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2000-1141: Recourse ManTrap 1.6 modifies the kernel so that \"..\" does not appear in the /proc listing, which allows attackers to de",
+      "content": "Recourse ManTrap 1.6 modifies the kernel so that \"..\" does not appear in the /proc listing, which allows attackers to determine that they are in a honeypot system.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2000-1141",
+      "published_at": "2001-01-09T05:00:00.000",
+      "severity": "V2 (2.1)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2000-1141",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2001-01-09T05:00:00.000",
+          "lastModified": "2026-06-16T21:53:14.473",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Recourse ManTrap 1.6 modifies the kernel so that \"..\" does not appear in the /proc listing, which allows attackers to determine that they are in a honeypot system."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:L/AC:L/Au:N/C:P/I:N/A:N",
+                  "baseScore": 2.1,
+                  "accessVector": "LOCAL",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "LOW",
+                "exploitabilityScore": 3.9,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-Other"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:recourse_technologies:mantrap:1.6.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8D798097-939A-4884-946F-90B066426FBB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2000-1142: Recourse ManTrap 1.6 generates an error when an attacker cd's to /proc/self/cwd and executes the pwd command, which allo",
+      "content": "Recourse ManTrap 1.6 generates an error when an attacker cd's to /proc/self/cwd and executes the pwd command, which allows attackers to determine that they are in a honeypot system.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2000-1142",
+      "published_at": "2001-01-09T05:00:00.000",
+      "severity": "V2 (2.1)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2000-1142",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2001-01-09T05:00:00.000",
+          "lastModified": "2026-06-16T21:53:14.617",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Recourse ManTrap 1.6 generates an error when an attacker cd's to /proc/self/cwd and executes the pwd command, which allows attackers to determine that they are in a honeypot system."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:L/AC:L/Au:N/C:P/I:N/A:N",
+                  "baseScore": 2.1,
+                  "accessVector": "LOCAL",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "LOW",
+                "exploitabilityScore": 3.9,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-Other"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:recourse_technologies:mantrap:1.6.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8D798097-939A-4884-946F-90B066426FBB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5949",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5949",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2000-1143: Recourse ManTrap 1.6 hides the first 4 processes that run on a Solaris system, which allows attackers to determine that ",
+      "content": "Recourse ManTrap 1.6 hides the first 4 processes that run on a Solaris system, which allows attackers to determine that they are in a honeypot system.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2000-1143",
+      "published_at": "2001-01-09T05:00:00.000",
+      "severity": "V2 (2.1)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2000-1143",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2001-01-09T05:00:00.000",
+          "lastModified": "2026-06-16T21:53:14.773",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Recourse ManTrap 1.6 hides the first 4 processes that run on a Solaris system, which allows attackers to determine that they are in a honeypot system."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:L/AC:L/Au:N/C:P/I:N/A:N",
+                  "baseScore": 2.1,
+                  "accessVector": "LOCAL",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "LOW",
+                "exploitabilityScore": 3.9,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-Other"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:recourse_technologies:mantrap:1.6.1:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "8D798097-939A-4884-946F-90B066426FBB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "cve@mitre.org"
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0041.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit",
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://archives.neohapsis.com/archives/bugtraq/2000-11/0100.html",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            },
+            {
+              "url": "http://marc.info/?l=bugtraq&m=97349791405580&w=2",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            },
+            {
+              "url": "https://exchange.xforce.ibmcloud.com/vulnerabilities/5473",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2008-5283: Google Hack Honeypot (GHH) File Upload Manager 1.3 allows remote attackers to delete uploaded files via unknown vectors ",
+      "content": "Google Hack Honeypot (GHH) File Upload Manager 1.3 allows remote attackers to delete uploaded files via unknown vectors related to the delall action to index.php.  NOTE: the provenance of this information is unknown; the details are obtained solely from third party information. CVE analysis suggests that the most recent version as of 20081128 is 1.2, and the File Upload Manager does not have a \"delall\" action.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2008-5283",
+      "published_at": "2008-11-29T02:30:00.233",
+      "severity": "V2 (6.4)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2008-5283",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2008-11-29T02:30:00.233",
+          "lastModified": "2026-06-16T22:59:37.933",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Google Hack Honeypot (GHH) File Upload Manager 1.3 allows remote attackers to delete uploaded files via unknown vectors related to the delall action to index.php.  NOTE: the provenance of this information is unknown; the details are obtained solely from third party information. CVE analysis suggests that the most recent version as of 20081128 is 1.2, and the File Upload Manager does not have a \"delall\" action."
+            },
+            {
+              "lang": "es",
+              "value": "Google Hack Honeypot (GHH) File Upload Manager v1.3 permite a atacantes remotos borrar ficheros subidos a trav\u00e9s de vectores desconocidos relacionados con la acci\u00f3n \"delall\" de \"index.php\".\r\nNOTA: la procedencia de esta informaci\u00f3n es desconocida; los detalles han sido obtenidos solamente a partir de la informaci\u00f3n de terceros. El an\u00e1lisis CVE sugiere que la versi\u00f3n m\u00e1s reciente de 20081128 es 1.2, y File Upload Manager no tiene una acci\u00f3n \"delall\"."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:L/Au:N/C:N/I:P/A:P",
+                  "baseScore": 6.4,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "PARTIAL",
+                  "availabilityImpact": "PARTIAL"
+                },
+                "baseSeverity": "MEDIUM",
+                "exploitabilityScore": 10.0,
+                "impactScore": 4.9,
+                "acInsufInfo": true,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-264"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:ghh:google_hack_honeypot_file_upload_manager:1.3:*:*:*:*:*:*:*",
+                      "matchCriteriaId": "549FEB40-55FF-4570-A507-7423D715924A"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "http://www.securityfocus.com/bid/27877",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit"
+              ]
+            },
+            {
+              "url": "http://www.securityfocus.com/bid/27877",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2018-10220: Glastopf 3.1.3-dev has SSRF, as demonstrated by the abc.php a parameter. NOTE: the vendor indicates that this is intenti",
+      "content": "Glastopf 3.1.3-dev has SSRF, as demonstrated by the abc.php a parameter. NOTE: the vendor indicates that this is intentional behavior because the product is a web application honeypot, and modules/handlers/emulators/rfi.py supports Remote File Inclusion emulation",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-10220",
+      "published_at": "2018-04-19T08:29:00.407",
+      "severity": "HIGH (8.8)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2018-10220",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2018-04-19T08:29:00.407",
+          "lastModified": "2026-06-17T01:33:41.890",
+          "vulnStatus": "Modified",
+          "cveTags": [
+            {
+              "sourceIdentifier": "cve@mitre.org",
+              "tags": [
+                "disputed"
+              ]
+            }
+          ],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Glastopf 3.1.3-dev has SSRF, as demonstrated by the abc.php a parameter. NOTE: the vendor indicates that this is intentional behavior because the product is a web application honeypot, and modules/handlers/emulators/rfi.py supports Remote File Inclusion emulation"
+            },
+            {
+              "lang": "es",
+              "value": "** EN DISPUTA ** Glastopf 3.1.3-dev tiene SSRF, tal y como demuestra por el par\u00e1metro a en abc.php. NOTA: el fabricante indica que esto es un comportamiento intencional, ya que el producto es una aplicaci\u00f3n web honeypot y que modules/handlers/emulators/rfi.py soporta la emulaci\u00f3n Remote File Inclusion."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV30": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.0",
+                  "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+                  "baseScore": 8.8,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "HIGH",
+                  "integrityImpact": "HIGH",
+                  "availabilityImpact": "HIGH"
+                },
+                "exploitabilityScore": 2.8,
+                "impactScore": 5.9
+              }
+            ],
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+                  "baseScore": 6.8,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "MEDIUM",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "PARTIAL",
+                  "availabilityImpact": "PARTIAL"
+                },
+                "baseSeverity": "MEDIUM",
+                "exploitabilityScore": 8.6,
+                "impactScore": 6.4,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": true
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-918"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:mushmush:glastopf:3.1.3:dev:*:*:*:*:*:*",
+                      "matchCriteriaId": "59FF0C42-DF61-46C3-A36F-0864660D9985"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/mushorg/glastopf/issues/286",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit",
+                "Issue Tracking",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/mushorg/glastopf/issues/286",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit",
+                "Issue Tracking",
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2019-11633: HoneyPress through 2016-09-27 can be fingerprinted by attackers because of the ingrained unique www.atxsec.com and ayylm",
+      "content": "HoneyPress through 2016-09-27 can be fingerprinted by attackers because of the ingrained unique www.atxsec.com and ayylmao.wpengine.com hostnames within the fake WordPress templates. This allows attackers to discover and avoid this honeypot system.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-11633",
+      "published_at": "2019-05-01T14:29:00.623",
+      "severity": "HIGH (7.5)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2019-11633",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2019-05-01T14:29:00.623",
+          "lastModified": "2026-06-17T02:13:18.847",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "HoneyPress through 2016-09-27 can be fingerprinted by attackers because of the ingrained unique www.atxsec.com and ayylmao.wpengine.com hostnames within the fake WordPress templates. This allows attackers to discover and avoid this honeypot system."
+            },
+            {
+              "lang": "es",
+              "value": "En HoneyPress a trav\u00e9s del  2016-09-27 los atacantes pueden tomar las huellas dactilares debido a los complejos y diferentes nombres de host  www.atxsec.com y ayylmao.wpengine.com dentro de plantillas falsas WordPress. Esto permite a los atacantes descubrir y evitar este sistema honeypot."
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV30": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.0",
+                  "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                  "baseScore": 7.5,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "HIGH",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 3.6
+              }
+            ],
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:L/Au:N/C:P/I:N/A:N",
+                  "baseScore": 5.0,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "PARTIAL",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "MEDIUM",
+                "exploitabilityScore": 10.0,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-200"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:honeypress_project:honeypress:*:*:*:*:*:wordpress:*:*",
+                      "versionEndIncluding": "2016-09-27",
+                      "matchCriteriaId": "0D95C915-2D17-402F-A5A8-BBBB2797119F"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/dustyfresh/HoneyPress/issues/1",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/dustyfresh/HoneyPress/issues/1",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2021-25836: Cosmos Network Ethermint <= v0.4.0 is affected by cache lifecycle inconsistency in the EVM module. The bytecode set in a",
+      "content": "Cosmos Network Ethermint <= v0.4.0 is affected by cache lifecycle inconsistency in the EVM module. The bytecode set in a FAILED transaction wrongfully remains in memory(stateObject.code) and is further written to persistent store at the Endblock stage, which may be utilized to build honeypot contracts.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-25836",
+      "published_at": "2021-02-08T18:15:13.863",
+      "severity": "HIGH (7.5)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2021-25836",
+          "sourceIdentifier": "cve@mitre.org",
+          "published": "2021-02-08T18:15:13.863",
+          "lastModified": "2026-06-17T03:42:30.040",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Cosmos Network Ethermint <= v0.4.0 is affected by cache lifecycle inconsistency in the EVM module. The bytecode set in a FAILED transaction wrongfully remains in memory(stateObject.code) and is further written to persistent store at the Endblock stage, which may be utilized to build honeypot contracts."
+            },
+            {
+              "lang": "es",
+              "value": "Cosmos Network Ethermint  versiones anteriores e incluyendo a v0.4.0 est\u00e1 afectado por la inconsistencia del ciclo de vida de la cach\u00e9 en el m\u00f3dulo EVM.&#xa0;El bytecode establecido en una transacci\u00f3n FAILED permanece err\u00f3neamente en la memoria (stateObject.code) y se escribe posteriormente en el almac\u00e9n persistente en la etapa Endblock, que puede ser usado para construir contratos de honeypot"
+            }
+          ],
+          "affected": [
+            {
+              "source": "cve@mitre.org",
+              "affectedData": [
+                {
+                  "vendor": "n/a",
+                  "product": "n/a",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+                  "baseScore": 7.5,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "HIGH",
+                  "availabilityImpact": "NONE"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 3.6
+              }
+            ],
+            "cvssMetricV2": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "2.0",
+                  "vectorString": "AV:N/AC:L/Au:N/C:N/I:P/A:N",
+                  "baseScore": 5.0,
+                  "accessVector": "NETWORK",
+                  "accessComplexity": "LOW",
+                  "authentication": "NONE",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "PARTIAL",
+                  "availabilityImpact": "NONE"
+                },
+                "baseSeverity": "MEDIUM",
+                "exploitabilityScore": 10.0,
+                "impactScore": 2.9,
+                "acInsufInfo": false,
+                "obtainAllPrivilege": false,
+                "obtainUserPrivilege": false,
+                "obtainOtherPrivilege": false,
+                "userInteractionRequired": false
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "NVD-CWE-noinfo"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:chainsafe:ethermint:*:*:*:*:*:*:*:*",
+                      "versionEndIncluding": "0.4.0",
+                      "matchCriteriaId": "A35C91FB-4A33-4A25-8406-5F9143CF0828"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/cosmos/ethermint/issues/667#issuecomment-759284303",
+              "source": "cve@mitre.org",
+              "tags": [
+                "Exploit",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/cosmos/ethermint/issues/667#issuecomment-759284303",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Exploit",
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2024-24933: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Prasidhda Malla Ho",
+      "content": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Prasidhda Malla Honeypot for WP Comment allows Reflected XSS.This issue affects Honeypot for WP Comment: from n/a through 2.2.3.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-24933",
+      "published_at": "2024-02-12T06:15:09.120",
+      "severity": "HIGH (7.1)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2024-24933",
+          "sourceIdentifier": "audit@patchstack.com",
+          "published": "2024-02-12T06:15:09.120",
+          "lastModified": "2026-06-17T07:15:15.283",
+          "vulnStatus": "Modified",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Prasidhda Malla Honeypot for WP Comment allows Reflected XSS.This issue affects Honeypot for WP Comment: from n/a through 2.2.3."
+            },
+            {
+              "lang": "es",
+              "value": "La vulnerabilidad de neutralizaci\u00f3n inadecuada de la entrada durante la generaci\u00f3n de p\u00e1ginas web ('Scripting entre sitios') en Prasidhda Malla Honeypot for WP Comment permite XSS reflejado. Este problema afecta a Honeypot for WP Comment: desde n/a hasta 2.2.3."
+            }
+          ],
+          "affected": [
+            {
+              "source": "audit@patchstack.com",
+              "affectedData": [
+                {
+                  "vendor": "Prasidhda Malla",
+                  "product": "Honeypot for WP Comment",
+                  "defaultStatus": "unaffected",
+                  "collectionURL": "https://wordpress.org/plugins",
+                  "packageName": "honeypot-for-wp-comment",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "lessThanOrEqual": "2.2.3",
+                      "versionType": "custom",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "audit@patchstack.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+                  "baseScore": 7.1,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "CHANGED",
+                  "confidentialityImpact": "LOW",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "LOW"
+                },
+                "exploitabilityScore": 2.8,
+                "impactScore": 3.7
+              },
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                  "baseScore": 6.1,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "CHANGED",
+                  "confidentialityImpact": "LOW",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "NONE"
+                },
+                "exploitabilityScore": 2.8,
+                "impactScore": 2.7
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2024-02-16T20:05:15.057382Z",
+                  "id": "CVE-2024-24933",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "no"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "audit@patchstack.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-79"
+                }
+              ]
+            },
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-79"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:prasidhdamalla:honeypot_for_wp_comment:*:*:*:*:*:wordpress:*:*",
+                      "versionEndIncluding": "2.2.3",
+                      "matchCriteriaId": "CD786F4F-4084-40EB-8EF7-04AF814349F0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot-for-wp-comment/wordpress-honeypot-for-wp-comment-plugin-2-2-3-reflected-cross-site-scripting-xss-vulnerability?_s_id=cve",
+              "source": "audit@patchstack.com",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot-for-wp-comment/wordpress-honeypot-for-wp-comment-plugin-2-2-3-reflected-cross-site-scripting-xss-vulnerability?_s_id=cve",
+              "source": "af854a3a-2127-422b-91ae-364da2661108",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2024-29091: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Dnesscarkey WP Arm",
+      "content": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Dnesscarkey WP Armour \u2013 Honeypot Anti Spam allows Reflected XSS.This issue affects WP Armour \u2013 Honeypot Anti Spam: from n/a through 2.1.13.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-29091",
+      "published_at": "2024-03-19T17:15:11.190",
+      "severity": "HIGH (7.1)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2024-29091",
+          "sourceIdentifier": "audit@patchstack.com",
+          "published": "2024-03-19T17:15:11.190",
+          "lastModified": "2026-06-17T07:22:24.030",
+          "vulnStatus": "Deferred",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in Dnesscarkey WP Armour \u2013 Honeypot Anti Spam allows Reflected XSS.This issue affects WP Armour \u2013 Honeypot Anti Spam: from n/a through 2.1.13."
+            },
+            {
+              "lang": "es",
+              "value": "Vulnerabilidad de neutralizaci\u00f3n inadecuada de la entrada durante la generaci\u00f3n de p\u00e1ginas web ('Cross-site Scripting') en Dnesscarkey WP Armor \u2013 Honeypot Anti Spam permite Reflected XSS. Este problema afecta a WP Armor \u2013 Honeypot Anti Spam: desde n/a hasta 2.1.13."
+            }
+          ],
+          "affected": [
+            {
+              "source": "audit@patchstack.com",
+              "affectedData": [
+                {
+                  "vendor": "Dnesscarkey",
+                  "product": "WP Armour \u2013 Honeypot Anti Spam",
+                  "defaultStatus": "unaffected",
+                  "collectionURL": "https://wordpress.org/plugins",
+                  "packageName": "honeypot",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "lessThanOrEqual": "2.1.13",
+                      "versionType": "custom",
+                      "status": "affected",
+                      "changes": [
+                        {
+                          "at": "2.1.14",
+                          "status": "unaffected"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "audit@patchstack.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+                  "baseScore": 7.1,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "CHANGED",
+                  "confidentialityImpact": "LOW",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "LOW"
+                },
+                "exploitabilityScore": 2.8,
+                "impactScore": 3.7
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2024-03-20T13:47:25.358806Z",
+                  "id": "CVE-2024-29091",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "no"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "audit@patchstack.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-79"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot/wordpress-wp-armour-plugin-2-1-13-reflected-cross-site-scripting-xss-vulnerability?_s_id=cve",
+              "source": "audit@patchstack.com"
+            },
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot/wordpress-wp-armour-plugin-2-1-13-reflected-cross-site-scripting-xss-vulnerability?_s_id=cve",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2024-1350: Missing Authorization vulnerability in Prasidhda Malla Honeypot for WP Comment.This issue affects Honeypot for WP Commen",
+      "content": "Missing Authorization vulnerability in Prasidhda Malla Honeypot for WP Comment.This issue affects Honeypot for WP Comment: from n/a through 2.2.3.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-1350",
+      "published_at": "2024-04-17T10:15:08.557",
+      "severity": "MEDIUM (5.3)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2024-1350",
+          "sourceIdentifier": "audit@patchstack.com",
+          "published": "2024-04-17T10:15:08.557",
+          "lastModified": "2026-06-17T07:04:02.317",
+          "vulnStatus": "Deferred",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Missing Authorization vulnerability in Prasidhda Malla Honeypot for WP Comment.This issue affects Honeypot for WP Comment: from n/a through 2.2.3."
+            },
+            {
+              "lang": "es",
+              "value": "Vulnerabilidad de autorizaci\u00f3n faltante en Prasidhda Malla Honeypot for WP Comment. Este problema afecta a Honeypot para comentarios de WP: desde n/a hasta 2.2.3."
+            }
+          ],
+          "affected": [
+            {
+              "source": "audit@patchstack.com",
+              "affectedData": [
+                {
+                  "vendor": "Prasidhda Malla",
+                  "product": "Honeypot for WP Comment",
+                  "defaultStatus": "unaffected",
+                  "collectionURL": "https://wordpress.org/plugins",
+                  "packageName": "honeypot-for-wp-comment",
+                  "versions": [
+                    {
+                      "version": "n/a",
+                      "lessThanOrEqual": "2.2.3",
+                      "versionType": "custom",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "affectedData": [
+                {
+                  "vendor": "prasidhdamalla",
+                  "product": "honeypot_for_wp_comment",
+                  "defaultStatus": "unaffected",
+                  "cpes": [
+                    "cpe:2.3:a:prasidhdamalla:honeypot_for_wp_comment:-:*:*:*:*:wordpress:*:*"
+                  ],
+                  "versions": [
+                    {
+                      "version": "0",
+                      "lessThanOrEqual": "2.2.3",
+                      "versionType": "custom",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "audit@patchstack.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+                  "baseScore": 5.3,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "NONE"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 1.4
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2024-07-23T20:36:21.565932Z",
+                  "id": "CVE-2024-1350",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "audit@patchstack.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-862"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot-for-wp-comment/wordpress-honeypot-for-wp-comment-plugin-2-2-3-arbitrary-file-deletion-vulnerability?_s_id=cve",
+              "source": "audit@patchstack.com"
+            },
+            {
+              "url": "https://patchstack.com/database/vulnerability/honeypot-for-wp-comment/wordpress-honeypot-for-wp-comment-plugin-2-2-3-arbitrary-file-deletion-vulnerability?_s_id=cve",
+              "source": "af854a3a-2127-422b-91ae-364da2661108"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2024-48911: OpenCanary, a multi-protocol network honeypot, directly executed commands taken from its config file. Prior to version 0",
+      "content": "OpenCanary, a multi-protocol network honeypot, directly executed commands taken from its config file. Prior to version 0.9.4, where the config file is stored in an unprivileged user directory but the daemon is executed by root, it\u2019s possible for the unprivileged user to change the config file and escalate permissions when root later runs the daemon. Version 0.9.4 contains a fix for the issue.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-48911",
+      "published_at": "2024-10-14T21:15:12.323",
+      "severity": "HIGH (7.8)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2024-48911",
+          "sourceIdentifier": "security-advisories@github.com",
+          "published": "2024-10-14T21:15:12.323",
+          "lastModified": "2026-06-17T07:59:01.373",
+          "vulnStatus": "Analyzed",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "OpenCanary, a multi-protocol network honeypot, directly executed commands taken from its config file. Prior to version 0.9.4, where the config file is stored in an unprivileged user directory but the daemon is executed by root, it\u2019s possible for the unprivileged user to change the config file and escalate permissions when root later runs the daemon. Version 0.9.4 contains a fix for the issue."
+            },
+            {
+              "lang": "es",
+              "value": "OpenCanary, un honeypot de red multiprotocolo, ejecutaba directamente comandos tomados de su archivo de configuraci\u00f3n. Antes de la versi\u00f3n 0.9.4, donde el archivo de configuraci\u00f3n se almacenaba en un directorio de usuario sin privilegios pero el daemon lo ejecutaba el usuario root, era posible que el usuario sin privilegios cambiara el archivo de configuraci\u00f3n y aumentara los permisos cuando el usuario root ejecutaba posteriormente el daemon. La versi\u00f3n 0.9.4 contiene una soluci\u00f3n para el problema."
+            }
+          ],
+          "affected": [
+            {
+              "source": "security-advisories@github.com",
+              "affectedData": [
+                {
+                  "vendor": "thinkst",
+                  "product": "opencanary",
+                  "versions": [
+                    {
+                      "version": "< 0.9.4",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV40": [
+              {
+                "source": "security-advisories@github.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "4.0",
+                  "vectorString": "CVSS:4.0/AV:L/AC:L/AT:P/PR:L/UI:N/VC:L/VI:H/VA:L/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                  "baseScore": 5.8,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "LOCAL",
+                  "attackComplexity": "LOW",
+                  "attackRequirements": "PRESENT",
+                  "privilegesRequired": "LOW",
+                  "userInteraction": "NONE",
+                  "vulnConfidentialityImpact": "LOW",
+                  "vulnIntegrityImpact": "HIGH",
+                  "vulnAvailabilityImpact": "LOW",
+                  "subConfidentialityImpact": "NONE",
+                  "subIntegrityImpact": "NONE",
+                  "subAvailabilityImpact": "NONE",
+                  "exploitMaturity": "NOT_DEFINED",
+                  "confidentialityRequirement": "NOT_DEFINED",
+                  "integrityRequirement": "NOT_DEFINED",
+                  "availabilityRequirement": "NOT_DEFINED",
+                  "modifiedAttackVector": "NOT_DEFINED",
+                  "modifiedAttackComplexity": "NOT_DEFINED",
+                  "modifiedAttackRequirements": "NOT_DEFINED",
+                  "modifiedPrivilegesRequired": "NOT_DEFINED",
+                  "modifiedUserInteraction": "NOT_DEFINED",
+                  "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                  "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                  "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                  "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                  "Safety": "NOT_DEFINED",
+                  "Automatable": "NOT_DEFINED",
+                  "Recovery": "NOT_DEFINED",
+                  "valueDensity": "NOT_DEFINED",
+                  "vulnerabilityResponseEffort": "NOT_DEFINED",
+                  "providerUrgency": "NOT_DEFINED"
+                }
+              }
+            ],
+            "cvssMetricV31": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+                  "baseScore": 7.8,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "LOCAL",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "HIGH",
+                  "integrityImpact": "HIGH",
+                  "availabilityImpact": "HIGH"
+                },
+                "exploitabilityScore": 1.8,
+                "impactScore": 5.9
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2024-10-15T14:44:31.145500Z",
+                  "id": "CVE-2024-48911",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "no"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "security-advisories@github.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-863"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:thinkst:opencanary:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "0.9.4",
+                      "matchCriteriaId": "B5BE78EB-2D89-40F6-AB5A-04468F2BAAD3"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/thinkst/opencanary/commit/2c11575b1a3dd8b0df26a879ba856c0aa350c049",
+              "source": "security-advisories@github.com",
+              "tags": [
+                "Patch"
+              ]
+            },
+            {
+              "url": "https://github.com/thinkst/opencanary/releases/tag/v0.9.4",
+              "source": "security-advisories@github.com",
+              "tags": [
+                "Release Notes"
+              ]
+            },
+            {
+              "url": "https://github.com/thinkst/opencanary/security/advisories/GHSA-pf5v-pqfv-x8jj",
+              "source": "security-advisories@github.com",
+              "tags": [
+                "Vendor Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2025-58855: Improper Neutralization of Formula Elements in a CSV File vulnerability in Denis V (Artprima) AP HoneyPot WordPress Plug",
+      "content": "Improper Neutralization of Formula Elements in a CSV File vulnerability in Denis V (Artprima) AP HoneyPot WordPress Plugin ap-honeypot allows Reflected XSS.This issue affects AP HoneyPot WordPress Plugin: from n/a through <= 1.4.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-58855",
+      "published_at": "2025-09-05T14:16:00.170",
+      "severity": "HIGH (7.1)",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2025-58855",
+          "sourceIdentifier": "audit@patchstack.com",
+          "published": "2025-09-05T14:16:00.170",
+          "lastModified": "2026-06-17T09:45:08.680",
+          "vulnStatus": "Deferred",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Improper Neutralization of Formula Elements in a CSV File vulnerability in Denis V (Artprima) AP HoneyPot WordPress Plugin ap-honeypot allows Reflected XSS.This issue affects AP HoneyPot WordPress Plugin: from n/a through <= 1.4."
+            }
+          ],
+          "affected": [
+            {
+              "source": "audit@patchstack.com",
+              "affectedData": [
+                {
+                  "vendor": "Denis V (Artprima)",
+                  "product": "AP HoneyPot WordPress Plugin",
+                  "defaultStatus": "unaffected",
+                  "collectionURL": "https://wordpress.org/plugins",
+                  "packageName": "ap-honeypot",
+                  "versions": [
+                    {
+                      "version": "0",
+                      "lessThanOrEqual": "1.4",
+                      "versionType": "custom",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV31": [
+              {
+                "source": "audit@patchstack.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+                  "baseScore": 7.1,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "REQUIRED",
+                  "scope": "CHANGED",
+                  "confidentialityImpact": "LOW",
+                  "integrityImpact": "LOW",
+                  "availabilityImpact": "LOW"
+                },
+                "exploitabilityScore": 2.8,
+                "impactScore": 3.7
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2025-09-05T19:49:51.393010Z",
+                  "id": "CVE-2025-58855",
+                  "options": [
+                    {
+                      "exploitation": "none"
+                    },
+                    {
+                      "automatable": "no"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "audit@patchstack.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-1236"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://patchstack.com/database/Wordpress/Plugin/ap-honeypot/vulnerability/wordpress-ap-honeypot-wordpress-plugin-plugin-1-4-cross-site-request-forgery-csrf-vulnerability?_s_id=cve",
+              "source": "audit@patchstack.com"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "NVD",
+      "source_type": "public_api",
+      "title": "CVE-2025-34469: Cowrie versions prior to 2.9.0 contain a server-side request forgery (SSRF) vulnerability in the emulated shell implemen",
+      "content": "Cowrie versions prior to 2.9.0 contain a server-side request forgery (SSRF) vulnerability in the emulated shell implementation of wget and curl. In the default emulated shell configuration, these command emulations perform real outbound HTTP requests to attacker-supplied destinations. Because no outbound request rate limiting was enforced, unauthenticated remote attackers could repeatedly invoke these commands to generate unbounded HTTP traffic toward arbitrary third-party targets, allowing the Cowrie honeypot to be abused as a denial-of-service amplification node and masking the attacker\u2019s true source address behind the honeypot\u2019s IP.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-34469",
+      "published_at": "2025-12-31T22:15:49.003",
+      "severity": "HIGH (7.5)",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "cve": {
+          "id": "CVE-2025-34469",
+          "sourceIdentifier": "disclosure@vulncheck.com",
+          "published": "2025-12-31T22:15:49.003",
+          "lastModified": "2026-06-17T09:14:01.190",
+          "vulnStatus": "Analyzed",
+          "cveTags": [],
+          "descriptions": [
+            {
+              "lang": "en",
+              "value": "Cowrie versions prior to 2.9.0 contain a server-side request forgery (SSRF) vulnerability in the emulated shell implementation of wget and curl. In the default emulated shell configuration, these command emulations perform real outbound HTTP requests to attacker-supplied destinations. Because no outbound request rate limiting was enforced, unauthenticated remote attackers could repeatedly invoke these commands to generate unbounded HTTP traffic toward arbitrary third-party targets, allowing the Cowrie honeypot to be abused as a denial-of-service amplification node and masking the attacker\u2019s true source address behind the honeypot\u2019s IP."
+            },
+            {
+              "lang": "es",
+              "value": "Las versiones de Cowrie anteriores a la 2.9.0 contienen una vulnerabilidad de falsificaci\u00f3n de petici\u00f3n del lado del servidor (SSRF) en la implementaci\u00f3n de shell emulado de wget y curl. En la configuraci\u00f3n predeterminada del shell emulado, estas emulaciones de comandos realizan peticiones HTTP salientes reales a destinos proporcionados por el atacante. Dado que no se aplicaba ninguna limitaci\u00f3n de velocidad de peticiones salientes, atacantes remotos no autenticados pod\u00edan invocar repetidamente estos comandos para generar tr\u00e1fico HTTP ilimitado hacia objetivos arbitrarios de terceros, permitiendo que el honeypot de Cowrie fuera abusado como un nodo de amplificaci\u00f3n de denegaci\u00f3n de servicio y enmascarando la verdadera direcci\u00f3n de origen del atacante detr\u00e1s de la IP del honeypot."
+            }
+          ],
+          "affected": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "affectedData": [
+                {
+                  "vendor": "Cowrie",
+                  "product": "Cowrie",
+                  "defaultStatus": "unaffected",
+                  "versions": [
+                    {
+                      "version": "0",
+                      "lessThan": "2.9.0",
+                      "versionType": "semver",
+                      "status": "affected"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "metrics": {
+            "cvssMetricV40": [
+              {
+                "source": "disclosure@vulncheck.com",
+                "type": "Secondary",
+                "cvssData": {
+                  "version": "4.0",
+                  "vectorString": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:L/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+                  "baseScore": 6.9,
+                  "baseSeverity": "MEDIUM",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "attackRequirements": "NONE",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "vulnConfidentialityImpact": "NONE",
+                  "vulnIntegrityImpact": "NONE",
+                  "vulnAvailabilityImpact": "LOW",
+                  "subConfidentialityImpact": "NONE",
+                  "subIntegrityImpact": "NONE",
+                  "subAvailabilityImpact": "LOW",
+                  "exploitMaturity": "NOT_DEFINED",
+                  "confidentialityRequirement": "NOT_DEFINED",
+                  "integrityRequirement": "NOT_DEFINED",
+                  "availabilityRequirement": "NOT_DEFINED",
+                  "modifiedAttackVector": "NOT_DEFINED",
+                  "modifiedAttackComplexity": "NOT_DEFINED",
+                  "modifiedAttackRequirements": "NOT_DEFINED",
+                  "modifiedPrivilegesRequired": "NOT_DEFINED",
+                  "modifiedUserInteraction": "NOT_DEFINED",
+                  "modifiedVulnConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedVulnIntegrityImpact": "NOT_DEFINED",
+                  "modifiedVulnAvailabilityImpact": "NOT_DEFINED",
+                  "modifiedSubConfidentialityImpact": "NOT_DEFINED",
+                  "modifiedSubIntegrityImpact": "NOT_DEFINED",
+                  "modifiedSubAvailabilityImpact": "NOT_DEFINED",
+                  "Safety": "NOT_DEFINED",
+                  "Automatable": "NOT_DEFINED",
+                  "Recovery": "NOT_DEFINED",
+                  "valueDensity": "NOT_DEFINED",
+                  "vulnerabilityResponseEffort": "NOT_DEFINED",
+                  "providerUrgency": "NOT_DEFINED"
+                }
+              }
+            ],
+            "cvssMetricV31": [
+              {
+                "source": "nvd@nist.gov",
+                "type": "Primary",
+                "cvssData": {
+                  "version": "3.1",
+                  "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "baseScore": 7.5,
+                  "baseSeverity": "HIGH",
+                  "attackVector": "NETWORK",
+                  "attackComplexity": "LOW",
+                  "privilegesRequired": "NONE",
+                  "userInteraction": "NONE",
+                  "scope": "UNCHANGED",
+                  "confidentialityImpact": "NONE",
+                  "integrityImpact": "NONE",
+                  "availabilityImpact": "HIGH"
+                },
+                "exploitabilityScore": 3.9,
+                "impactScore": 3.6
+              }
+            ],
+            "ssvcV203": [
+              {
+                "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+                "ssvcData": {
+                  "timestamp": "2026-01-02T14:18:00.566917Z",
+                  "id": "CVE-2025-34469",
+                  "options": [
+                    {
+                      "exploitation": "poc"
+                    },
+                    {
+                      "automatable": "yes"
+                    },
+                    {
+                      "technicalImpact": "partial"
+                    }
+                  ],
+                  "role": "CISA Coordinator",
+                  "version": "2.0.3"
+                }
+              }
+            ]
+          },
+          "weaknesses": [
+            {
+              "source": "disclosure@vulncheck.com",
+              "type": "Secondary",
+              "description": [
+                {
+                  "lang": "en",
+                  "value": "CWE-918"
+                }
+              ]
+            }
+          ],
+          "configurations": [
+            {
+              "nodes": [
+                {
+                  "operator": "OR",
+                  "negate": false,
+                  "cpeMatch": [
+                    {
+                      "vulnerable": true,
+                      "criteria": "cpe:2.3:a:cowrie:cowrie:*:*:*:*:*:*:*:*",
+                      "versionEndExcluding": "2.9.0",
+                      "matchCriteriaId": "BD3F2D9F-8A2C-4993-93B1-5B9D26737EB4"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "url": "https://github.com/advisories/GHSA-83jg-m2pm-4jxj",
+              "source": "disclosure@vulncheck.com",
+              "tags": [
+                "Exploit",
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/cowrie/cowrie/issues/2622",
+              "source": "disclosure@vulncheck.com",
+              "tags": [
+                "Exploit",
+                "Issue Tracking"
+              ]
+            },
+            {
+              "url": "https://github.com/cowrie/cowrie/pull/2800",
+              "source": "disclosure@vulncheck.com",
+              "tags": [
+                "Exploit",
+                "Issue Tracking",
+                "Patch"
+              ]
+            },
+            {
+              "url": "https://github.com/cowrie/cowrie/releases/tag/v2.9.0",
+              "source": "disclosure@vulncheck.com",
+              "tags": [
+                "Release Notes"
+              ]
+            },
+            {
+              "url": "https://www.vulncheck.com/advisories/cowrie-unrestricted-wget-curl-emulation-enables-ssrf-based-ddos-amplification",
+              "source": "disclosure@vulncheck.com",
+              "tags": [
+                "Third Party Advisory"
+              ]
+            },
+            {
+              "url": "https://github.com/advisories/GHSA-83jg-m2pm-4jxj",
+              "source": "134c704f-9b21-4f2e-91b3-4a467353bcc0",
+              "tags": [
+                "Exploit",
+                "Third Party Advisory"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "BreachForums",
+      "source_type": "dark_web",
+      "title": "honeypot exploit / tool shared on BreachForums",
+      "content": "A post on BreachForums claims to share tools or exploit code associated with 'honeypot'. Verification pending.",
+      "url": "",
+      "published_at": "2026-07-18T13:42:35.871111+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "generated": true,
+        "keyword": "honeypot"
+      }
+    },
+    {
+      "source": "Exploit.in",
+      "source_type": "dark_web",
+      "title": "honeypot \u2014 IOC and hash dump on Exploit.in",
+      "content": "Thread on Exploit.in contains indicators of compromise believed to be linked to 'honeypot' operations.",
+      "url": "",
+      "published_at": "2026-07-09T16:15:35.871111+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "honeypot"
+      }
+    },
+    {
+      "source": "RAMP",
+      "source_type": "dark_web",
+      "title": "honeypot \u2014 new activity reported on RAMP",
+      "content": "Users on RAMP are discussing recent activity related to 'honeypot'. Multiple threads created in the last week.",
+      "url": "",
+      "published_at": "2026-06-05T20:26:35.871111+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "honeypot"
+      }
+    },
+    {
+      "source": "Exploit.in",
+      "source_type": "dark_web",
+      "title": "honeypot \u2014 target list being sold on Exploit.in",
+      "content": "A seller on Exploit.in is offering a list of targets vulnerable to 'honeypot'. Price: negotiable.",
+      "url": "",
+      "published_at": "2026-05-27T21:24:35.871111+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "generated": true,
+        "keyword": "honeypot"
+      }
+    }
+  ]
+}

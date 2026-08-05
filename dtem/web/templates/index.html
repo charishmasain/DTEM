@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTEM — Dynamic Threat Emergence Model</title>
+  <!-- Google Fonts & Chart.js -->
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-title">
+          <h1>Dynamic Threat Emergence Model (DTEM)</h1>
+          <div class="brand-subtitle">Early Cyber Threat Identification & Dark Web Intelligence Research Prototype</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="badge-research">UROP Prototype v0.1</span>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <form id="searchForm">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Enter threat search keyword (e.g. LockBit, BlackLock, CVE-2025-12345, APT29)..."
+            value="APT29"
+            required
+          />
+          <button type="submit" class="search-btn">
+            Analyze Threat
+          </button>
+        </div>
+      </form>
+      <div class="quick-search">
+        <span class="quick-label">Quick Suggestions:</span>
+        <button class="quick-chip" data-kw="LockBit">LockBit</button>
+        <button class="quick-chip" data-kw="BlackLock">BlackLock</button>
+        <button class="quick-chip" data-kw="CVE-2025-12345">CVE-2025-12345</button>
+        <button class="quick-chip" data-kw="APT29">APT29</button>
+        <button class="quick-chip" data-kw="Scattered Spider">Scattered Spider</button>
+      </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p class="loading-text">Collecting Multi-Source Intelligence & Computing Emergence Score...</p>
+    </div>
+
+    <!-- Dashboard Results Container -->
+    <main id="resultsContainer" class="dashboard-grid" style="display: none;">
+
+      <!-- 1. Early Warning Alert Banner (Full Width) -->
+      <div class="card col-12 alert-card" id="alertCard">
+        <div class="alert-header">
+          <div class="alert-title-wrap">
+            <span class="alert-icon">⚠️</span>
+            <span class="alert-title" id="alertTitle">DTEM Early Warning Advisory</span>
+          </div>
+          <span class="priority-badge p1" id="alertPriority">P1 - URGENT</span>
+        </div>
+        <div class="alert-body" id="alertBody">
+          Evaluating threat emergence status...
+        </div>
+      </div>
+
+      <!-- 2. KPI Summary Row (4 Cards) -->
+      <!-- Card 1: Emergence Score -->
+      <div class="card col-3 stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Emergence Score (DTEM)</span>
+          <span id="emergenceStage" class="badge-stage dormant">Dormant</span>
+        </div>
+        <div class="stat-value-wrap">
+          <span class="stat-value text-cyan" id="emergenceScore">0</span>
+          <span class="stat-unit">/ 100</span>
+        </div>
+        <div class="stat-footer">
+          <span>Stage: <strong id="emergenceStageSub">Dormant</strong></span>
+        </div>
+      </div>
+
+      <!-- Card 2: Composite Risk Score -->
+      <div class="card col-3 stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Composite Risk Score</span>
+          <span id="riskLevel" class="badge-risk low">Low</span>
+        </div>
+        <div class="stat-value-wrap">
+          <span class="stat-value text-red" id="riskScore">0</span>
+          <span class="stat-unit">/ 100</span>
+        </div>
+        <div class="stat-footer">
+          <span>Level: <strong id="riskLevelSub">Low</strong></span>
+        </div>
+      </div>
+
+      <!-- Card 3: Detection Volume & Growth -->
+      <div class="card col-3 stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Detection Volume</span>
+          <span id="growthBadge" class="badge-trend stable">Stable</span>
+        </div>
+        <div class="stat-value-wrap">
+          <span class="stat-value text-purple" id="detectionCount">0</span>
+          <span class="stat-unit">reports</span>
+        </div>
+        <div class="stat-footer">
+          <span>Growth Rate: <strong id="growthRateVal">+0%</strong></span>
+        </div>
+      </div>
+
+      <!-- Card 4: Exploit Status & Source Diversity -->
+      <div class="card col-3 stat-card">
+        <div class="stat-header">
+          <span class="stat-label">Exploit & Sources</span>
+          <span id="exploitStatusBadge" class="badge-exploit no">No Exploit</span>
+        </div>
+        <div class="stat-value-wrap">
+          <span class="stat-value text-amber" id="sourceCount">0</span>
+          <span class="stat-unit">sources</span>
+        </div>
+        <div class="stat-footer">
+          <span>Exploit Mentions: <strong id="exploitCountVal">0</strong></span>
+        </div>
+      </div>
+
+      <!-- 3. Sub-scores & Indicator Breakdown (col-5) -->
+      <div class="card col-5">
+        <div class="section-header">
+          <span class="section-title">📊 Emergence Sub-Scores</span>
+          <span class="section-subtitle">Normalized 0–100 metrics</span>
+        </div>
+        <div class="progress-list">
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Detection Frequency</span>
+              <span id="valFreq" class="progress-val">0 / 100</span>
+            </div>
+            <div class="progress-track"><div id="barFreq" class="progress-fill cyan" style="width: 0%;"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Growth Rate (Velocity)</span>
+              <span id="valGrowth" class="progress-val">0 / 100</span>
+            </div>
+            <div class="progress-track"><div id="barGrowth" class="progress-fill purple" style="width: 0%;"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Source Diversity</span>
+              <span id="valDiv" class="progress-val">0 / 100</span>
+            </div>
+            <div class="progress-track"><div id="barDiv" class="progress-fill blue" style="width: 0%;"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Exploit Availability</span>
+              <span id="valExploit" class="progress-val">0 / 100</span>
+            </div>
+            <div class="progress-track"><div id="barExploit" class="progress-fill red" style="width: 0%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Explainable Model Reasoning (col-7) -->
+      <div class="card col-7">
+        <div class="section-header">
+          <span class="section-title">🧠 Explainable Model Reasoning</span>
+          <span class="section-subtitle">Automated score diagnostic</span>
+        </div>
+        <div class="reasoning-list" id="reasoningList">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- 5. Recommended Countermeasures (col-5) -->
+      <div class="card col-5">
+        <div class="section-header">
+          <span class="section-title">🛡️ Actionable Countermeasures</span>
+          <span class="section-subtitle">Prioritized SOC response</span>
+        </div>
+        <ul class="recs-list" id="recommendationsList">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+
+      <!-- 6. Source Distribution Timeline Chart (col-7) -->
+      <div class="card col-7">
+        <div class="section-header">
+          <span class="section-title">📈 Source Distribution & Intel Volume</span>
+          <span class="section-subtitle">Cross-platform report counts</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="trendChartCtx"></canvas>
+        </div>
+      </div>
+
+      <!-- 7. Baseline Comparison Panel (col-12) -->
+      <div class="card col-12 baseline-card">
+        <div class="section-header flex-between">
+          <div>
+            <span class="section-title">⏱️ Retrospective Baseline Comparison</span>
+            <span class="section-subtitle">Evaluating DTEM early warning lead time against traditional security metrics (30-Day Window)</span>
+          </div>
+          <div class="lead-time-badge" id="leadTimeContainer">
+            <span class="lead-label">Early Warning Lead-Time:</span>
+            <span class="lead-value" id="leadTimeValue">0 Days</span>
+          </div>
+        </div>
+
+        <div class="baseline-grid">
+          <!-- Timeline Chart (Left side) -->
+          <div class="baseline-chart-box">
+            <div class="chart-container-large">
+              <canvas id="baselineChartCtx"></canvas>
+            </div>
+          </div>
+
+          <!-- Baseline Snapshot Table & Method Legend (Right side) -->
+          <div class="baseline-table-box">
+            <h4 class="subcard-title">Metric Comparison Snapshot (Current T-0)</h4>
+            <table class="baseline-table">
+              <thead>
+                <tr>
+                  <th>Model / Metric</th>
+                  <th>Type</th>
+                  <th>Value</th>
+                  <th>Detection Speed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: #00f2fe;">DTEM Emergence Score</strong></td>
+                  <td><span class="mono-tag cyan">Dynamic CTI</span></td>
+                  <td><strong id="snapDtem" class="mono text-cyan">0</strong> / 100</td>
+                  <td><span class="status-pill fast">Proactive / Early</span></td>
+                </tr>
+                <tr>
+                  <td><strong>EPSS Exploit Prob.</strong></td>
+                  <td><span class="mono-tag purple">Statistical</span></td>
+                  <td><span id="snapEpss" class="mono">0%</span></td>
+                  <td><span class="status-pill medium">Lagging</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CVSS Base Score</strong></td>
+                  <td><span class="mono-tag gray">Static</span></td>
+                  <td><span id="snapCvss" class="mono">0</span> / 10</td>
+                  <td><span class="status-pill slow">Static Baseline</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CISA KEV Catalog</strong></td>
+                  <td><span class="mono-tag red">Regulatory</span></td>
+                  <td><span id="snapKev" class="mono">Not Listed</span></td>
+                  <td><span class="status-pill reactive">Reactive</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="baseline-insights" id="baselineInsights">
+              <p>💡 <strong>Key Finding:</strong> DTEM incorporates dark web chatter volume, velocity, and exploit mentions to identify emerging threats before official EPSS surge or CISA KEV listing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Collected Intelligence Feed Table (col-12) -->
+      <div class="card col-12">
+        <div class="section-header">
+          <span class="section-title">📡 Collected Threat Intelligence Feed</span>
+          <span class="section-subtitle">Structured CTI document repository</span>
+        </div>
+        <div class="table-container">
+          <table class="intel-table">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Type</th>
+                <th>Title / Summary</th>
+                <th>Published Date</th>
+                <th>Severity</th>
+                <th>Exploit Status</th>
+              </tr>
+            </thead>
+            <tbody id="intelTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

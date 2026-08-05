@@ -1,0 +1,49 @@
+{
+  "keyword": "scattered spider",
+  "collected_at": "2026-07-26T11:03:52.189732+00:00",
+  "total_records": 3,
+  "records": [
+    {
+      "source": "BreachForums",
+      "source_type": "dark_web",
+      "title": "scattered spider exploit / tool shared on BreachForums",
+      "content": "A post on BreachForums claims to share tools or exploit code associated with 'scattered spider'. Verification pending.",
+      "url": "",
+      "published_at": "2026-07-10T14:51:25.577155+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "generated": true,
+        "keyword": "scattered spider"
+      }
+    },
+    {
+      "source": "XSS.is",
+      "source_type": "dark_web",
+      "title": "scattered spider \u2014 target list being sold on XSS.is",
+      "content": "A seller on XSS.is is offering a list of targets vulnerable to 'scattered spider'. Price: negotiable.",
+      "url": "",
+      "published_at": "2026-06-19T21:33:25.576501+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "generated": true,
+        "keyword": "scattered spider"
+      }
+    },
+    {
+      "source": "RAMP",
+      "source_type": "dark_web",
+      "title": "scattered spider \u2014 new activity reported on RAMP",
+      "content": "Users on RAMP are discussing recent activity related to 'scattered spider'. Multiple threads created in the last week.",
+      "url": "",
+      "published_at": "2026-06-12T09:11:25.576501+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "scattered spider"
+      }
+    }
+  ]
+}

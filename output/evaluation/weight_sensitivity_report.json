@@ -1,0 +1,162 @@
+{
+  "summary": {
+    "total_combinations_tested": 1771,
+    "score_threshold": 50.0,
+    "optimal_weights": {
+      "frequency": 0.0,
+      "growth": 0.0,
+      "diversity": 0.7,
+      "exploit": 0.3,
+      "f1_score": 1.0
+    },
+    "default_configured_weights": {
+      "frequency": 0.25,
+      "growth": 0.3,
+      "diversity": 0.2,
+      "exploit": 0.25,
+      "f1_score": 1.0
+    }
+  },
+  "top_performing_combinations": [
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.7,
+        "exploit": 0.3
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.75,
+        "exploit": 0.25
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.8,
+        "exploit": 0.2
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.85,
+        "exploit": 0.15
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.9,
+        "exploit": 0.1
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 0.95,
+        "exploit": 0.05
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.0,
+        "diversity": 1.0,
+        "exploit": 0.0
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.05,
+        "diversity": 0.65,
+        "exploit": 0.3
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.05,
+        "diversity": 0.7,
+        "exploit": 0.25
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    },
+    {
+      "weights": {
+        "frequency": 0.0,
+        "growth": 0.05,
+        "diversity": 0.75,
+        "exploit": 0.2
+      },
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0
+      }
+    }
+  ]
+}

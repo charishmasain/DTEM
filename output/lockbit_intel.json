@@ -1,0 +1,77 @@
+{
+  "keyword": "lockbit",
+  "collected_at": "2026-08-05T13:04:54.981865+00:00",
+  "total_records": 5,
+  "records": [
+    {
+      "source": "BreachForums",
+      "source_type": "dark_web",
+      "title": "LockBit 4.0 builder leaked \u2014 download link inside",
+      "content": "New builder for LockBit 4.0 has been posted. Includes updated encryption module and configurable C2 callbacks. Link below.",
+      "url": "",
+      "published_at": "2026-07-25T10:16:49.561231+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "seeded": true,
+        "template_title": "LockBit 4.0 builder leaked \u2014 download link inside"
+      }
+    },
+    {
+      "source": "Exploit.in",
+      "source_type": "dark_web",
+      "title": "LockBit affiliate recruitment thread",
+      "content": "LockBit gang is recruiting new affiliates. Payment is 80/20 split. Targets: healthcare and finance.",
+      "url": "",
+      "published_at": "2026-07-22T04:49:49.561231+00:00",
+      "severity": "high",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "seeded": true,
+        "template_title": "LockBit affiliate recruitment thread"
+      }
+    },
+    {
+      "source": "Dread",
+      "source_type": "dark_web",
+      "title": "LockBit targeting critical infrastructure \u2014 warning",
+      "content": "Multiple reports of LockBit targeting water utilities and power grids in EU region.",
+      "url": "",
+      "published_at": "2026-07-21T02:12:49.561231+00:00",
+      "severity": "critical",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "seeded": true,
+        "template_title": "LockBit targeting critical infrastructure \u2014 warning"
+      }
+    },
+    {
+      "source": "RAMP",
+      "source_type": "dark_web",
+      "title": "LockBit decryptor \u2014 is it legit?",
+      "content": "Someone claims to have a working LockBit decryptor. Asking $5K BTC. Likely scam but discussion is active.",
+      "url": "",
+      "published_at": "2026-07-03T03:35:49.561231+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "seeded": true,
+        "template_title": "LockBit decryptor \u2014 is it legit?"
+      }
+    },
+    {
+      "source": "XSS.is",
+      "source_type": "dark_web",
+      "title": "LockBit RaaS infrastructure analysis",
+      "content": "Thread documenting LockBit C2 infrastructure. IP ranges and Tor hidden services catalogued.",
+      "url": "",
+      "published_at": "2026-07-02T16:02:49.561231+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "seeded": true,
+        "template_title": "LockBit RaaS infrastructure analysis"
+      }
+    }
+  ]
+}

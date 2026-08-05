@@ -1,0 +1,67 @@
+{
+  "keyword": "cve",
+  "collected_at": "2026-07-26T07:21:19.687485+00:00",
+  "total_records": 4,
+  "records": [
+    {
+      "query_id": 6,
+      "source": "Dread",
+      "source_type": "dark_web",
+      "title": "cve \u2014 new activity reported on Dread",
+      "content": "Users on Dread are discussing recent activity related to 'cve'. Multiple threads created in the last week.",
+      "url": "",
+      "published_at": "2026-06-06T17:58:19.672488+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "cve"
+      }
+    },
+    {
+      "query_id": 6,
+      "source": "BreachForums",
+      "source_type": "dark_web",
+      "title": "cve exploit / tool shared on BreachForums",
+      "content": "A post on BreachForums claims to share tools or exploit code associated with 'cve'. Verification pending.",
+      "url": "",
+      "published_at": "2026-06-02T03:03:19.672488+00:00",
+      "severity": "high",
+      "exploit_mentioned": 1,
+      "raw_data": {
+        "generated": true,
+        "keyword": "cve"
+      }
+    },
+    {
+      "query_id": 6,
+      "source": "RAMP",
+      "source_type": "dark_web",
+      "title": "cve \u2014 IOC and hash dump on RAMP",
+      "content": "Thread on RAMP contains indicators of compromise believed to be linked to 'cve' operations.",
+      "url": "",
+      "published_at": "2026-05-29T15:05:19.672488+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "cve"
+      }
+    },
+    {
+      "query_id": 6,
+      "source": "Exploit.in",
+      "source_type": "dark_web",
+      "title": "cve \u2014 IOC and hash dump on Exploit.in",
+      "content": "Thread on Exploit.in contains indicators of compromise believed to be linked to 'cve' operations.",
+      "url": "",
+      "published_at": "2026-06-18T19:18:19.672488+00:00",
+      "severity": "medium",
+      "exploit_mentioned": 0,
+      "raw_data": {
+        "generated": true,
+        "keyword": "cve"
+      }
+    }
+  ]
+}

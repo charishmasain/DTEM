@@ -1,0 +1,65 @@
+{
+    "project": "DTEM - Dynamic Threat Emergence Model",
+    "version": "0.1.0",
+
+    "database": {
+        "path": "dtem_database.db"
+    },
+
+    "collectors": {
+        "nvd": {
+            "enabled": true,
+            "base_url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+            "timeout_seconds": 15,
+            "max_results": 50
+        },
+        "otx": {
+            "enabled": true,
+            "base_url": "https://otx.alienvault.com/api/v1/search/pulses",
+            "timeout_seconds": 15,
+            "max_results": 50,
+            "api_key": ""
+        },
+        "darkweb_simulator": {
+            "enabled": true,
+            "sources": [
+                "BreachForums",
+                "Exploit.in",
+                "XSS.is",
+                "RAMP",
+                "Dread"
+            ]
+        }
+    },
+
+    "emergence_model": {
+        "weights": {
+            "detection_frequency": 0.25,
+            "growth_rate": 0.30,
+            "source_diversity": 0.20,
+            "exploit_availability": 0.25
+        },
+        "stages": {
+            "dormant":    { "min": 0,  "max": 25  },
+            "growing":    { "min": 26, "max": 50  },
+            "emerging":   { "min": 51, "max": 75  },
+            "escalating": { "min": 76, "max": 100 }
+        }
+    },
+
+    "risk_assessment": {
+        "severity_weight": 0.40,
+        "emergence_weight": 0.60,
+        "levels": {
+            "low":      { "min": 0,  "max": 25  },
+            "medium":   { "min": 26, "max": 50  },
+            "high":     { "min": 51, "max": 75  },
+            "critical": { "min": 76, "max": 100 }
+        }
+    },
+
+    "output": {
+        "json_dir": "output",
+        "chart_dir": "output/charts"
+    }
+}
