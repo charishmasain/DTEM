@@ -1,0 +1,17 @@
+{
+  "source": "FIRST.org EPSS historical API",
+  "source_url": "https://api.first.org/data/v1/epss",
+  "retrieved_at": "2026-10-24T09:45:31.358156+00:00",
+  "status": "ok",
+  "requested_cves": 1,
+  "requested_days": 3,
+  "requested_start_inclusive": "2024-01-01",
+  "requested_end_inclusive": "2024-01-03",
+  "observation_count": 3,
+  "distinct_cves": 1,
+  "distinct_score_dates": 3,
+  "file": "epss_history_2024-01-01_2024-01-03_20261024T094531Z.jsonl",
+  "errors": [],
+  "availability_semantics": "FIRST historical API score_date is retained as a date, not an invented timestamp; a score is eligible only for a cutoff on a later UTC calendar date",
+  "model_version_caveat": "EPSS model versions change over time; scores across version transitions are not a stationary series."
+}

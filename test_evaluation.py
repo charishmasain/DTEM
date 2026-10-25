@@ -2,8 +2,8 @@
 test_evaluation.py
 ~~~~~~~~~~~~~~~~~~
 
-Verification and test runner for the DTEM Evaluation & Validation framework.
-Executes grid search weight sensitivity and timeline backtesting comparisons.
+Runner for the seven-scenario curated prototype evaluation.
+It does not perform historical predictive validation.
 
 Run:
     python test_evaluation.py
@@ -14,15 +14,6 @@ import logging
 import sys
 import io
 from pathlib import Path
-
-# Force UTF-8 on Windows console
-if sys.platform == "win32":
-    sys.stdout = io.TextIOWrapper(
-        sys.stdout.buffer, encoding="utf-8", errors="replace"
-    )
-    sys.stderr = io.TextIOWrapper(
-        sys.stderr.buffer, encoding="utf-8", errors="replace"
-    )
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -51,7 +42,7 @@ def main() -> None:
     # 1. Setup DB
     separator("TEST 1 -- Database Validation Seeding")
     ground_truth = setup_validation_db()
-    print(f"Loaded ground-truth validation set ({len(ground_truth)} cases):")
+    print(f"Loaded curated prototype labels ({len(ground_truth)} cases):")
     for kw, val in ground_truth.items():
         print(f"  {kw:>25s} -> Escalated: {val}")
     
@@ -68,20 +59,28 @@ def main() -> None:
     print("\n  [PASS] Weight sensitivity analysis verified.")
 
     # 3. Run Timeline Backtest
-    separator("TEST 3 -- Retrospective Timeline Backtesting")
+    separator("TEST 3 -- Curated Prototype Timeline")
     backtest_res = run_timeline_backtest(keyword="eval_lockbit")
     
     print("\nTimeline Backtest Completed:")
-    print(f"  Early Warning Lead Window : {backtest_res['early_warning_lead_days']} days")
+    print(f"  Historical lead time      : {backtest_res['early_warning_lead_days'] or 'Not estimable'}")
     print("\nTimeline values (sample points):")
     for row in backtest_res["timeline"][::3]: # Print every 3rd point
-        print(f"  Day {row['day']:>3d}: DTEM={row['dtem']:>5.1f} | CVSS={row['cvss']:>5.1f} | EPSS={row['epss']:>5.1f} | CISA KEV={row['cisa_kev']:>5.1f}")
+        print(f"  Day {row['day']:>3d}: DTEM={row['dtem']:>5.1f} | CVSS/EPSS/KEV=unavailable for curated prototype data")
         
     assert PLOT_PATH.exists(), f"Backtest chart plot not found at {PLOT_PATH}"
-    print("\n  [PASS] Retrospective backtesting verified.")
+    print("\n  [PASS] Curated prototype timeline generated; this is not historical backtesting.")
 
-    separator("ALL EVALUATION TESTS PASSED")
-    print("DTEM Research Evaluation Framework is fully verified and functional.\n")
+    separator("PROTOTYPE EVALUATION RUN COMPLETED")
+    print("Seven curated scenarios evaluated; no historical predictive validation was performed.\n")
 
 if __name__ == "__main__":
+    # Avoid replacing pytest's captured streams when this module is collected.
+    if sys.platform == "win32":
+        sys.stdout = io.TextIOWrapper(
+            sys.stdout.buffer, encoding="utf-8", errors="replace", write_through=True
+        )
+        sys.stderr = io.TextIOWrapper(
+            sys.stderr.buffer, encoding="utf-8", errors="replace", write_through=True
+        )
     main()

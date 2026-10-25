@@ -1,0 +1,15 @@
+{
+  "source": "NVD CVE Change History API v2.0",
+  "source_url": "https://services.nvd.nist.gov/rest/json/cvehistory/2.0",
+  "retrieved_at": "2026-10-24T09:53:30.895229+00:00",
+  "status": "ok",
+  "requested_start_inclusive": "2024-01-01",
+  "requested_end_inclusive": "2024-03-30",
+  "request_count": 6,
+  "unique_event_count": 0,
+  "distinct_cves": 0,
+  "file": "nvd_history_2024-01-01_2024-03-30_20261024T095330Z.jsonl",
+  "errors": [],
+  "timestamp_policy": "NVD event created timestamp is used as the event and source availability time; no current record fields are retroactively assigned to the event",
+  "unit_limit": "NVD change events are a single-source record-history signal, not independent CTI reports; source diversity remains one, and event counts reflect NVD workflow updates"
+}

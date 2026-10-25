@@ -17,11 +17,11 @@
         <div class="brand-icon">⚡</div>
         <div class="brand-title">
           <h1>Dynamic Threat Emergence Model (DTEM)</h1>
-          <div class="brand-subtitle">Early Cyber Threat Identification & Dark Web Intelligence Research Prototype</div>
+          <div class="brand-subtitle">CVE-focused vulnerability emergence research prototype</div>
         </div>
       </div>
       <div class="header-right">
-        <span class="badge-research">UROP Prototype v0.1</span>
+        <span class="badge-research">Research demo · v0.1</span>
       </div>
     </header>
 
@@ -34,8 +34,8 @@
             type="text" 
             id="searchInput" 
             class="search-input" 
-            placeholder="Enter threat search keyword (e.g. LockBit, BlackLock, CVE-2025-12345, APT29)..."
-            value="APT29"
+            placeholder="Enter a CVE identifier or prototype threat query (e.g. CVE-2021-44228)..."
+            value="CVE-2021-44228"
             required
           />
           <button type="submit" class="search-btn">
@@ -47,9 +47,62 @@
         <span class="quick-label">Quick Suggestions:</span>
         <button class="quick-chip" data-kw="LockBit">LockBit</button>
         <button class="quick-chip" data-kw="BlackLock">BlackLock</button>
-        <button class="quick-chip" data-kw="CVE-2025-12345">CVE-2025-12345</button>
+        <button class="quick-chip" data-kw="CVE-2021-44228">CVE-2021-44228</button>
         <button class="quick-chip" data-kw="APT29">APT29</button>
         <button class="quick-chip" data-kw="Scattered Spider">Scattered Spider</button>
+      </div>
+      <p class="section-subtitle research-note">Demonstration interface: scores summarize currently available records and are not validated forecasts. Simulated scenario records are excluded from normal scores.</p>
+    </section>
+
+    <section class="card col-12" id="operationsDashboard">
+      <div class="section-header flex-between">
+        <div><span class="section-title">Threat Monitoring Overview</span>
+          <span class="section-subtitle" id="monitoringStatusText">Stored analyses and watchlist activity</span></div>
+        <div class="monitor-controls">
+          <button type="button" class="search-btn" id="monitorStart">Start monitoring</button>
+          <button type="button" class="search-btn" id="monitorStop">Stop</button>
+          <button type="button" class="search-btn" id="monitorRun">Run once</button>
+          <a href="/api/export?kind=alerts&amp;format=csv">Export alerts CSV</a>
+          <a href="/api/export?kind=watchlist&amp;format=json">Export watchlist JSON</a>
+        </div>
+      </div>
+      <div class="overview-kpis" id="overviewKpis">
+        <div><strong id="trackedCount">0</strong><span>Tracked</span></div>
+        <div><strong id="analyzedCount">0</strong><span>With stored analysis</span></div>
+        <div><strong id="meanEmergence">—</strong><span>Mean emergence</span></div>
+        <div><strong id="openAlertsCount">0</strong><span>Open alerts</span></div>
+      </div>
+      <div class="monitor-settings">
+        <label>Alert threshold <input id="alertThresholdInput" type="number" min="0" max="100" value="65"></label>
+        <label>Significant rise <input id="increaseThresholdInput" type="number" min="0.1" max="100" value="10"></label>
+        <label>Minimum alert risk <select id="minimumRiskInput"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></label>
+        <label>Poll seconds <input id="intervalInput" type="number" min="60" max="86400" value="900"></label>
+        <label>Public sources <select id="sourceInput" multiple size="2"><option value="NVD">NVD</option><option value="AlienVault OTX">AlienVault OTX</option></select></label>
+        <button type="button" class="search-btn" id="saveSettings">Save settings</button>
+        <span id="lastRunLabel">No monitoring run recorded</span>
+      </div>
+      <form id="watchlistForm" class="watchlist-form">
+        <input id="watchKeyword" maxlength="200" placeholder="CVE-2025-12345 or tracked threat" required>
+        <select id="watchCategory"><option value="vulnerability">Vulnerability</option><option value="malware">Malware</option><option value="threat_actor">Threat actor</option><option value="other">Other</option></select>
+        <button class="search-btn" type="submit">Add to watchlist</button>
+      </form>
+      <div class="monitor-filters">
+        <input id="filterCve" placeholder="Filter CVE / keyword">
+        <select id="filterRisk"><option value="">All risk levels</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+        <select id="filterCategory"><option value="">All categories</option><option value="vulnerability">Vulnerability</option><option value="malware">Malware</option><option value="threat_actor">Threat actor</option><option value="other">Other</option></select>
+        <select id="filterSource"><option value="">All sources</option></select>
+        <select id="filterDays"><option value="">Any analysis date</option><option value="1">24 hours</option><option value="7">7 days</option><option value="30">30 days</option><option value="90">90 days</option></select>
+        <select id="threatSort"><option value="risk">Sort: Composite risk</option><option value="emergence">Sort: Emergence</option><option value="name">Sort: Name</option></select>
+        <button type="button" class="search-btn" id="refreshOverview">Refresh</button>
+      </div>
+      <p class="section-subtitle">Seeded/simulated records are labeled in the evidence table and excluded from normal emergence scores, timelines, and public-feed monitoring.</p>
+      <div class="operations-columns">
+        <div><h3>Tracked threats</h3><div class="table-container"><table class="intel-table"><thead><tr><th>Threat</th><th>Category</th><th>Emergence</th><th>Composite risk</th><th>Risk level</th><th>Change</th><th>Latest analysis</th><th>Actions</th></tr></thead><tbody id="watchlistRows"><tr><td colspan="8">No tracked threats yet.</td></tr></tbody></table></div></div>
+        <div><h3>Recent alerts</h3><div id="alertHistoryPanel" class="operations-list">No alerts recorded.</div></div>
+        <div><h3>Recent public-feed activity</h3><div id="recentActivityPanel" class="operations-list">No collection activity recorded.</div></div>
+        <div><h3>Collector health</h3><div id="collectorHealthPanel" class="operations-list">No monitoring run recorded.</div></div>
+        <div><h3>Risk distribution</h3><div id="riskDistributionPanel" class="operations-list">No stored analyses yet.</div><h3>Rapid increases</h3><div id="rapidThreatPanel" class="operations-list">No significant stored increases yet.</div></div>
+        <div><h3>Exploit evidence summaries</h3><div id="exploitSummaryPanel" class="operations-list">No exploit evidence recorded.</div></div>
       </div>
     </section>
 
@@ -212,8 +265,8 @@
       <div class="card col-12 baseline-card">
         <div class="section-header flex-between">
           <div>
-            <span class="section-title">⏱️ Retrospective Baseline Comparison</span>
-            <span class="section-subtitle">Evaluating DTEM early warning lead time against traditional security metrics (30-Day Window)</span>
+            <span class="section-title">⏱️ Prototype Score Timeline and Baselines</span>
+            <span class="section-subtitle">Prototype score timeline; historical lead time requires timestamped future outcomes</span>
           </div>
           <div class="lead-time-badge" id="leadTimeContainer">
             <span class="lead-label">Early Warning Lead-Time:</span>
@@ -246,13 +299,13 @@
                   <td><strong style="color: #00f2fe;">DTEM Emergence Score</strong></td>
                   <td><span class="mono-tag cyan">Dynamic CTI</span></td>
                   <td><strong id="snapDtem" class="mono text-cyan">0</strong> / 100</td>
-                  <td><span class="status-pill fast">Proactive / Early</span></td>
+                  <td><span class="status-pill fast">Prototype score</span></td>
                 </tr>
                 <tr>
                   <td><strong>EPSS Exploit Prob.</strong></td>
                   <td><span class="mono-tag purple">Statistical</span></td>
                   <td><span id="snapEpss" class="mono">0%</span></td>
-                  <td><span class="status-pill medium">Lagging</span></td>
+                  <td><span class="status-pill medium">Date-matched only</span></td>
                 </tr>
                 <tr>
                   <td><strong>CVSS Base Score</strong></td>
@@ -264,13 +317,13 @@
                   <td><strong>CISA KEV Catalog</strong></td>
                   <td><span class="mono-tag red">Regulatory</span></td>
                   <td><span id="snapKev" class="mono">Not Listed</span></td>
-                  <td><span class="status-pill reactive">Reactive</span></td>
+                  <td><span class="status-pill reactive">Outcome reference</span></td>
                 </tr>
               </tbody>
             </table>
 
             <div class="baseline-insights" id="baselineInsights">
-              <p>💡 <strong>Key Finding:</strong> DTEM incorporates dark web chatter volume, velocity, and exploit mentions to identify emerging threats before official EPSS surge or CISA KEV listing.</p>
+              <p>💡 EPSS, CVSS, KEV, and lead-time values are shown only when timestamped observations are available. Curated prototype timelines do not establish predictive performance.</p>
             </div>
           </div>
         </div>

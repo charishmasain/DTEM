@@ -32,6 +32,14 @@
         }
     },
 
+    "monitoring": {
+        "interval_seconds": 900,
+        "alert_threshold": 65,
+        "minimum_alert_risk": "Low",
+        "significant_score_increase": 10,
+        "sources": ["NVD", "AlienVault OTX"]
+    },
+
     "emergence_model": {
         "weights": {
             "detection_frequency": 0.25,
@@ -39,6 +47,8 @@
             "source_diversity": 0.20,
             "exploit_availability": 0.25
         },
+        "growth_mode": "legacy",
+        "log_growth_scale": 1.3862943611198906,
         "stages": {
             "dormant":    { "min": 0,  "max": 25  },
             "growing":    { "min": 26, "max": 50  },

@@ -1,0 +1,188 @@
+{
+  "source": "CISA official kev-data Git mirror",
+  "repository": "https://github.com/cisagov/kev-data",
+  "source_file": "known_exploited_vulnerabilities.json",
+  "retrieved_at": "2026-10-24T10:04:16.203716+00:00",
+  "status": "partial_error",
+  "snapshot_count": 23,
+  "commit_count": 331,
+  "event_count": 1280,
+  "added_events": 1280,
+  "removed_events": 0,
+  "date_revisions": 0,
+  "history_start": "2025-01-24T15:00:57.528200+00:00",
+  "complete_through": "2025-02-25T20:33:53.367600+00:00",
+  "first_commit": "2dd57cfafb7bfc237b22d9cb0749fe44923d8c3f",
+  "last_commit": "46f0b83e721e21bd581a3067cf00536265e57134",
+  "file": "kev_history_2025-01-24_2025-02-25_20261024T100416Z.jsonl",
+  "snapshots": [
+    {
+      "commit": "2dd57cfafb7bfc237b22d9cb0749fe44923d8c3f",
+      "committed_at": "2025-01-27T22:38:50+00:00",
+      "date_released": "2025-01-24T15:00:57.528200+00:00",
+      "catalog_version": "2025.01.24",
+      "count": 1252
+    },
+    {
+      "commit": "49c9495366c4e9b9abc9db85f91657d8bb9a0be2",
+      "committed_at": "2025-01-29T17:59:10+00:00",
+      "date_released": "2025-01-29T17:02:51.976900+00:00",
+      "catalog_version": "2025.01.29",
+      "count": 1253
+    },
+    {
+      "commit": "85e0d86c8c7254d4d65ab5b32be2361163e2dd19",
+      "committed_at": "2025-02-04T15:53:42+00:00",
+      "date_released": "2025-02-04T15:00:47.717000+00:00",
+      "catalog_version": "2025.02.04",
+      "count": 1257
+    },
+    {
+      "commit": "10e017fa282a68cbdf5ceded0f0abd7d015bd574",
+      "committed_at": "2025-02-05T15:55:29+00:00",
+      "date_released": "2025-02-05T15:00:41.575400+00:00",
+      "catalog_version": "2025.02.05",
+      "count": 1258
+    },
+    {
+      "commit": "11b9ef98d6fc6fbd2340e05437df896d928cc45d",
+      "committed_at": "2025-02-05T18:30:51+00:00",
+      "date_released": "2025-02-05T18:21:14.676400+00:00",
+      "catalog_version": "2025.02.05",
+      "count": 1258
+    },
+    {
+      "commit": "3cba71bb87a59ecf6338c2bd24f7cb75c2d41fea",
+      "committed_at": "2025-02-07T18:58:19+00:00",
+      "date_released": "2025-02-07T18:02:47.830200+00:00",
+      "catalog_version": "2025.02.07",
+      "count": 1264
+    },
+    {
+      "commit": "d8b066857891b52e40b8851c19b2493cba163384",
+      "committed_at": "2025-02-11T19:09:20+00:00",
+      "date_released": "2025-02-11T18:20:55.267500+00:00",
+      "catalog_version": "2025.02.11",
+      "count": 1268
+    },
+    {
+      "commit": "70df51e20dc768db800fd85f0833c3865a5a4963",
+      "committed_at": "2025-02-12T14:09:57+00:00",
+      "date_released": "2025-02-11T19:20:49.456700+00:00",
+      "catalog_version": "2025.02.11",
+      "count": 1268
+    },
+    {
+      "commit": "26ebddcd03da2255e83ce89e6943a923b0c6f246",
+      "committed_at": "2025-02-12T17:08:25+00:00",
+      "date_released": "2025-02-12T15:00:15.301700+00:00",
+      "catalog_version": "2025.02.12",
+      "count": 1270
+    },
+    {
+      "commit": "476945e0992ad6d4861f51b26856c9485d7afb75",
+      "committed_at": "2025-02-13T18:54:05+00:00",
+      "date_released": "2025-02-13T17:59:30.363800+00:00",
+      "catalog_version": "2025.02.13",
+      "count": 1271
+    },
+    {
+      "commit": "a3d9941e9858f3a340dd4aa4d63f43fb8eabc3b0",
+      "committed_at": "2025-02-17T23:45:27+00:00",
+      "date_released": "2025-02-15T19:28:17.883200+00:00",
+      "catalog_version": "2025.02.15",
+      "count": 1271
+    },
+    {
+      "commit": "d7481c5ce0ca9155666920b77f819c90d2c8b858",
+      "committed_at": "2025-02-18T14:53:30+00:00",
+      "date_released": "2025-02-18T13:47:33.365600+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1271
+    },
+    {
+      "commit": "aabf332a06bbd37d37dec16f4810b444851339fa",
+      "committed_at": "2025-02-18T18:43:38+00:00",
+      "date_released": "2025-02-18T17:59:12.446400+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1273
+    },
+    {
+      "commit": "c1a93886cde8e504ce8c648fbfb0ea4bbe629937",
+      "committed_at": "2025-02-18T21:17:47+00:00",
+      "date_released": "2025-02-18T20:08:26.654300+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1273
+    },
+    {
+      "commit": "a8bfcf7ff8d03dd811cf45d306f8c31ecf41428a",
+      "committed_at": "2025-02-19T17:39:07+00:00",
+      "date_released": "2025-02-19T14:08:44.502100+00:00",
+      "catalog_version": "2025.02.19",
+      "count": 1273
+    },
+    {
+      "commit": "0389dfdfd7c185b25ae594ddf71974f82a20bb40",
+      "committed_at": "2025-02-20T15:43:10+00:00",
+      "date_released": "2025-02-20T15:00:28.983400+00:00",
+      "catalog_version": "2025.02.20",
+      "count": 1275
+    },
+    {
+      "commit": "dd0172782cbb8fc6dd452b0f69d3b7b78fb2c26d",
+      "committed_at": "2025-02-20T16:59:36+00:00",
+      "date_released": "2025-02-20T15:56:17.994500+00:00",
+      "catalog_version": "2025.02.20",
+      "count": 1275
+    },
+    {
+      "commit": "d86a5b0127e6d10d9b6436adaf8ea0b1c9929c3b",
+      "committed_at": "2025-02-21T15:34:12+00:00",
+      "date_released": "2025-02-21T15:00:27.572000+00:00",
+      "catalog_version": "2025.02.21",
+      "count": 1276
+    },
+    {
+      "commit": "93131449759537f30678e005ba6e4f6adf757b1c",
+      "committed_at": "2025-02-21T17:35:17+00:00",
+      "date_released": "2025-02-21T17:07:48.489600+00:00",
+      "catalog_version": "2025.02.21",
+      "count": 1276
+    },
+    {
+      "commit": "a20c0f52af3b419992a28ba97cc638abb0a8359f",
+      "committed_at": "2025-02-24T15:48:47+00:00",
+      "date_released": "2025-02-24T15:00:37.229600+00:00",
+      "catalog_version": "2025.02.24",
+      "count": 1278
+    },
+    {
+      "commit": "e611a64423bdf04c1633e29ce329df5c4bcb1057",
+      "committed_at": "2025-02-24T18:26:27+00:00",
+      "date_released": "2025-02-24T17:55:31.636500+00:00",
+      "catalog_version": "2025.02.24",
+      "count": 1278
+    },
+    {
+      "commit": "5d9b466b535e85aa00032764f7b8ecc93a302f41",
+      "committed_at": "2025-02-25T15:54:19+00:00",
+      "date_released": "2025-02-25T15:01:13.140200+00:00",
+      "catalog_version": "2025.02.25",
+      "count": 1280
+    },
+    {
+      "commit": "46f0b83e721e21bd581a3067cf00536265e57134",
+      "committed_at": "2025-02-25T21:41:01+00:00",
+      "date_released": "2025-02-25T20:33:53.367600+00:00",
+      "catalog_version": "2025.02.25",
+      "count": 1280
+    }
+  ],
+  "errors": [
+    {
+      "commit": "15200f913fd2502d9908827913862b3d8dda49c4",
+      "error": "Unterminated string starting at: line 4003 column 13 (char 276037)"
+    }
+  ],
+  "coverage_policy": "Each repository snapshot is the CISA catalog mirrored at that release; history is treated as complete only from the first recorded snapshot through the last. CISA may rarely remove entries, so removals are retained as events."
+}

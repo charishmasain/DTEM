@@ -1,0 +1,20 @@
+{
+  "retrieved_at": "2026-10-24T07:26:23.109482+00:00",
+  "snapshot_semantics": "current response as retrieved; not a historical availability archive",
+  "sources": {
+    "nvd": {
+      "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "retrieved_at": "2026-10-24T07:26:23.110497+00:00",
+      "status": "error",
+      "record_count": 0,
+      "error": "ConnectionError: HTTPSConnectionPool(host='services.nvd.nist.gov', port=443): Max retries exceeded with url: /rest/json/cves/2.0?resultsPerPage=2000 (Caused by NameResolutionError(\"HTTPSConnection(host='services.nvd.nist.gov', port=443): Failed to resolve 'services.nvd.nist.gov' ([Errno 11001] getaddrinfo failed)\"))"
+    },
+    "kev": {
+      "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "retrieved_at": "2026-10-24T07:26:23.125641+00:00",
+      "status": "error",
+      "record_count": 0,
+      "error": "ConnectionError: HTTPSConnectionPool(host='www.cisa.gov', port=443): Max retries exceeded with url: /sites/default/files/feeds/known_exploited_vulnerabilities.json (Caused by NameResolutionError(\"HTTPSConnection(host='www.cisa.gov', port=443): Failed to resolve 'www.cisa.gov' ([Errno 11001] getaddrinfo failed)\"))"
+    }
+  }
+}

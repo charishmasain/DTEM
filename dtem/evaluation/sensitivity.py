@@ -2,8 +2,8 @@
 dtem.evaluation.sensitivity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Evaluates DTEM classification accuracy over a grid search of different weight configurations,
-identifying the optimal weights that maximize the F1-Score against ground truth.
+Evaluates DTEM on the seven curated prototype scenarios over a grid of weights.
+These in-sample results are not historical predictive-performance estimates.
 """
 
 import json
@@ -58,16 +58,21 @@ def run_sensitivity_analysis(score_threshold: float = 50.0) -> dict[str, Any]:
     for keyword in ground_truth.keys():
         feats = extractor.extract_features(keyword, auto_collect=False)
         features_cache[keyword] = feats
-        
-        # Calculate sub-scores using production scoring functions
-        f_sub = engine._normalize_frequency(feats.get("detection_frequency", 0))
-        g_sub = engine._normalize_growth_rate(feats.get("growth_rate", 0.0))
-        d_sub = engine._normalize_source_diversity(feats.get("source_diversity", 0))
-        
-        has_exploit = feats.get("exploit_availability", False)
-        exploit_ratio = feats.get("breakdown", {}).get("exploit_ratio", 0.0)
-        e_sub = engine._normalize_exploit_availability(has_exploit, exploit_ratio)
-        
+
+        # Derive the four normalized sub-scores through the production scoring
+        # engine itself, so this grid uses exactly the model defined by
+        # Eqs. (3)-(6) of the manuscript -- including the exploit-evidence
+        # hierarchy (0/25/50/75/100) via exploit_evidence_score, the active
+        # growth_mode transform, and the no-evidence gating. Re-implementing
+        # the normalization here previously drifted from the model (it used the
+        # legacy 0/70-100 exploit fallback), which broke the reported-result
+        # <-> specification correspondence.
+        sub_scores = engine.calculate_emergence(feats)["sub_scores"]
+        f_sub = sub_scores["detection_frequency"]
+        g_sub = sub_scores["growth_rate"]
+        d_sub = sub_scores["source_diversity"]
+        e_sub = sub_scores["exploit_availability"]
+
         normalized_subscores[keyword] = (f_sub, g_sub, d_sub, e_sub)
 
     # 2. Perform Grid Search
@@ -137,7 +142,15 @@ def run_sensitivity_analysis(score_threshold: float = 50.0) -> dict[str, Any]:
 
     # 4. Prepare Report
     report = {
+        "evaluation_type": "curated_prototype_only",
+        "empirical_historical_evaluation": False,
         "summary": {
+            "sample_size": len(ground_truth),
+            "class_balance": {
+                "positive": sum(bool(value) for value in ground_truth.values()),
+                "negative": sum(not bool(value) for value in ground_truth.values()),
+            },
+            "warning": "Manually curated prototype labels; these metrics are not historical predictive-performance estimates.",
             "total_combinations_tested": len(weight_combinations),
             "score_threshold": score_threshold,
             "optimal_weights": {

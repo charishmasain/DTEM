@@ -1,0 +1,326 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{DTEM: A Dynamic Threat Emergence Model for Prioritizing Emerging Vulnerabilities Using Public Threat Intelligence}
+\author{
+\IEEEauthorblockN{N Sai Charishma}
+\IEEEauthorblockA{\textit{Department of CyberSecurity} \\
+\textit{SRM IST}\\
+Chennai, India \\
+nn2371@srmist.edu.in}
+\and
+\IEEEauthorblockN{Roopa Ravi}
+\IEEEauthorblockA{\textit{Department of CyberSecurity} \\
+\textit{SRM IST}\\
+Chennai, India \\
+rr4521@srmist.edu.in}
+\and
+\IEEEauthorblockN{Sowmiya Sree C}
+\IEEEauthorblockA{\textit{Department of CyberSecurity} \\
+\textit{SRM IST}\\
+Chennai, India \\
+sowmiyasree1@gmail.com}
+}
+
+\maketitle
+\begin{abstract}
+When we think about keeping our computers and networks safe we usually look at how bad a problem is and how likely it is to be used by hackers, using systems like the Common Vulnerability Scoring System and the CISA Known Exploited Vulnerabilities Catalog. These systems do not really look at how threats change over time before they are used. This paper presents the Dynamic Threat Emergence Model, a framework that understands cyber threats by looking at patterns over time, where the information comes from, and whether it is being used to hack into systems. DTEM looks at individual CVEs and uses the National Vulnerability Database and community threat intelligence from AlienVault Open Threat Exchange, with the underground-intelligence layer simulated rather than live. It combines four things, how often something is detected, how fast it is growing, where the information comes from, and whether it is being exploited, into an Emergence Score, then into a Composite Risk Score with technical severity. Our main contribution is a fully written-down scoring model together with an evaluation procedure that uses only information available at each point in time, so later data cannot leak into an earlier score. On seven hand-made scenarios the engine simply behaves as we expect, which is a check rather than proof that it predicts real threats. On a real historical batch of CVE records labelled by later addition to the KEV Catalog the model did not clearly separate the added items from the rest, so we report no early-warning lead time. We present these results honestly as prototype verification and a first look at the method, and we set out the larger, time-stamped, multi-source dataset still needed before any performance claim can be made.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Cyber Threat Intelligence, Threat Emergence Modeling, Vulnerability Prioritization, Common Vulnerability Scoring System, Exploit Prediction Scoring System, CISA Known Exploited Vulnerabilities, Explainable Security Analytics, Temporal Threat Analysis, Leakage-Safe Retrospective Evaluation.
+\end{IEEEkeywords}
+
+
+\section{Introduction}
+
+An increasing number and sophistication of cyber threats pose the challenge of early detection and prioritization of emerging threats. Cyber threat intelligence (CTI) transforms vulnerability, adversary and malicious-activity data into actionable security knowledge \cite{iot_security, chismon_ruks} through structured formats such as STIX \cite{stix}, transport via TAXII \cite{taxii}, dark-web sourcing \cite{darknet_mining, portnoff, threatcrawl, darkweb_evolution}, and temporal analysis of indicator dynamics \cite{dgef, temporal_cti}. However, simply by having a threat in intelligence sources is not enough to show that the threat is becoming more relevant. Increasing activity, increasing over time, source triangulation, and exploit availability can be strong indicators of threat emergence. The current vulnerability ranking frameworks tackle different parts of the above problem: CVSS addresses the technical severity of vulnerabilities \cite{cvss}, EPSS tries to assess the chances of the vulnerability being exploited \cite{epss}, and the CISA Known Exploited Vulnerabilities (KEV) Catalog provides the list of vulnerabilities with known exploits \cite{kev_catalog}. However, few of these approaches combine several dynamic CTI signals into a single time-aware score, and even fewer evaluate such a score with a leakage-safe, reproducible protocol; the goal here is therefore not a new indicator but a precisely specified scoring model paired with an honest evaluation. In order to solve this problem, we introduce the Dynamic Threat Emergence Model (DTEM). The score is then integrated with technical severity to calculate the Composite Risk Score. The suggested solution is realized as a prototype in research with the help of vulnerability intelligence, community intelligence on threats, and simulation-based underground intelligence. Evaluation of the solution involves weight sensitivity testing as well as a leakage-safe retrospective evaluation that only looks at what was available at each point in time, in order to find out whether dynamic threat activity can form the basis for threat prioritization.
+
+In doing so, we make the evaluation methodology itself a central contribution rather than an afterthought. Many threat-intelligence scoring models are validated on small, hand-labelled scenario sets against simulated baselines, which makes their reported accuracy hard to trust; this work takes the opposite stance. We specify the model completely enough to reproduce, reconstruct what was publicly available at every historical cutoff so no future information leaks into a past score, define each outcome against a verifiable event (a later CISA KEV addition) rather than an author's judgement, and compare against real date-matched baselines on identical rows. The protocol is designed to fail closed: when the archived evidence does not cover the required window it returns no prediction instead of an inflated one, and such negative results are reported openly. Our contributions are threefold: (i) a leakage-safe, reproducible evaluation protocol for retrospective threat-emergence scoring --- per-cutoff feature availability, a fixed 30-day KEV outcome, a fail-closed horizon guard, deterministic re-execution from archived snapshots, and a fully specified scoring model to run against it; (ii) an implementation of the DTEM scoring path over public and simulated CTI, with the underground channel explicitly labelled as a simulator; and (iii) an honest empirical assessment on real CVE records showing that the protocol runs end to end and surfaces negative results --- including a frequency baseline that out-ranks the model and a source-diversity indicator that is untestable on single-source data --- rather than asserting predictive performance.
+
+\section{Related Work}
+
+Prior work on proactive threat intelligence spans underground sources, emerging-threat detection, temporal methods, structured representation, automation, and vulnerability prioritization; these give a strong foundation but differ in how they detect threat development and turn dynamic intelligence into priority.
+
+\subsection{Dark-Web Threat Intelligence}
+
+Nunes et al. showed the promise of darknet and deepnet sources for proactive threat intelligence \cite{darknet_mining}. Portnoff et al. automated analysis of cybercriminal markets \cite{portnoff}, and Campobasso and Allodi built a framework for collecting CTI from underground forums \cite{threatcrawl}. Reviews stress the recurring problems of anonymity, scale, volatility and data quality \cite{darkweb_evolution, basheer_darkweb_review}, alongside work categorising hacker assets \cite{samtani_hacker_assets} and collecting forum exploits incrementally \cite{williams_incremental}.
+
+\subsection{Emerging Threat Identification}
+Samtani et al.'s Diachronic Graph Embedding Framework (D-GEF) detects new threats from dark-web forum discussion by tracking how shared information changes over time \cite{dgef}, underscoring the temporal signal in emergence. Other work confirms that CTI indicators shift considerably across a threat's life cycle \cite{temporal_cti}.
+\subsection{Structured Cyber Threat Intelligence}
+
+Wagner et al. studied CTI sharing and automated ingestion \cite{cti_sharing}, Mavroeidis and Bromander surveyed taxonomies and standards \cite{cti_taxonomies}, Rastogi et al. introduced the TINKER knowledge graph \cite{tinker}, and NIST formalised sharing practice \cite{nist_sp800150}; these aid organisation and interoperability but do not quantify emergence.
+
+\subsection{AI-Based Dark-Web CTI Analysis}
+
+Machine learning and NLP extract CTI from hacker forums \cite{ml_hacker_forums}, security reports \cite{automated_extraction} and dark-web data \cite{kadoguchi_darkweb_ml}, and MAD-CTI applies LLM-based multi-agent reasoning to underground sources \cite{madcti}; these show the value of automated extraction but not whether threats are sustainably emerging.
+\subsection{Research Gap}
+
+The existing literature emphasizes the benefits of utilizing underground intelligence, temporal analysis, CTI structure, and automation of intelligence processes. However, there is still a gap in developing a simple and intuitive approach that will account for the threat observation frequency, the rate of growth, cross-source validation, and the presence of exploits. Vulnerability prioritization schemes such as CVSS, EPSS, and the CISA KEV Catalog account for technical severity, exploitation probability, and confirmed exploitation respectively . EPSS in particular is already temporal and probability-based \cite{epss}, and temporal emergence has been studied directly \cite{dgef, temporal_cti}; what these solutions do not provide is a single score that fuses several dynamic signals \emph{and} is validated by a leakage-safe, reproducible protocol -- the gap this work targets. Earlier work by Edkrantz et al. explored predicting vulnerability exploitation from open intelligence signals, foreshadowing the exploit-prediction direction later formalized by EPSS \cite{edkrantz_predicting}. The Dynamic Threat Emergence Model (DTEM) will cover this gap through the integration of four components into a single metric – Detection Frequency, Growth Rate, Source Diversity, and Exploit Availability (the Emergence Score).
+
+\section{Proposed Framework}
+
+\subsection{System Architecture Overview}
+
+The Dynamic Threat Emergence Model (DTEM) has been formulated as a five-step pipeline that converts multi-source cyber threat intelligence into a useful threat emergence and prioritization assessment (Fig.~\ref{fig:architecture}). Starting from a threat keyword such as a malware family, threat actor alias, or CVE ID, the DTEM accomplishes the following five consecutive tasks: (1) Collection of multi-source CTI; (2) Data normalization and persistent storage; (3) Extraction of quantitative indicators; (4) Calculation of Emergence and Risk Scores; and (5) Early warning advisory creation. The output of this process is provided via an interactive dashboard for analysis purposes. For the interactive prototype the query can be any keyword, but the historical \emph{evaluation} described in Section~IV is carried out on individual CVEs, since only a CVE has a single matching CVSS score and a single, checkable record in the KEV Catalog.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.0\columnwidth]{fig2.png}
+\caption{Overall Architecture of the Proposed DTEM. The underground-intelligence source is simulated and is not a live dark-web feed.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Multi-Source CTI Collection}
+
+The DTEM incorporates intelligence from three different sources. Information about public vulnerabilities is collected from the NVD \cite{nvd_database} sources, which include CVEs, descriptions of the vulnerabilities, and related CVSS information \cite{cvss}. Open threats intelligence is collected from AlienVault OTX \cite{alienvault_otx}, which supplies community intelligence and observables regarding threats. The underground intelligence layer is simulated by using a DarkWebSimulator component, which creates a representative sample of underground intelligence reports in the style of dark-web sources. Currently, the prototype does not collect data from the live dark web infrastructure, but instead, the simulator provides simulated underground intelligence reports, and these simulated records are not used in the historical evaluation. The collected data are then unified in a SQLite backed storage, making it possible to keep the historical data for further analysis.
+
+\subsection{Emergence Indicators}
+
+Based on the consolidated CTI records, the feature extraction engine generates four attributes per queried threat.
+
+\textit{1) Detection Frequency (F):} Detection Frequency is the total number of CTI records that belong to the queried threat:
+\begin{equation}
+F = |R|
+\tag{1}
+\end{equation}
+where $R$ is the set of matched CTI records.
+
+\textit{2) Growth Rate (G):} Growth Rate measures how the number of records about a threat changed between a recent 14-day window and the previous 14-day window. The deployed model uses the percentage change
+\begin{equation}
+G = \frac{R_{recent}-R_{previous}}{R_{previous}}\times 100
+\tag{2}
+\end{equation}
+where $R_{recent}$ and $R_{previous}$ are the matching-record counts in the two windows. The ratio is undefined when $R_{previous}=0$, so the implementation defines it explicitly: $G=+100$ when $R_{recent}>0$ and $R_{previous}=0$, and $G=0$ when both are zero. The resulting trend is labelled \textit{Surging} (above $+50\%$), \textit{Growing} ($+15\%$ to $+50\%$), \textit{Stable} ($-15\%$ to $+15\%$) and \textit{Declining} (below $-15\%$). Section~III-B also specifies a smoothed log-growth alternative, but every number reported in this paper is produced by this percentage form, so the specification and the released code describe one and the same model.
+
+\textit{3) Source Diversity (D):} Source Diversity is the number of independent CTI sources that report the queried threat. We treat this as a count of distinct source labels; we do not claim that these labels are statistically independent, and we check its real contribution with the ablation study in Section~IV.
+
+\textit{4) Exploit Availability (E):} Exploit Availability is the strength of exploit-related evidence in the matched records. Rather than treating any single keyword match as proof that an exploit exists, the indicator follows an evidence hierarchy with an ordered level for each record: a bare mention, a public proof-of-concept, verified working exploit code, and confirmed exploitation in the wild. A keyword such as ``exploit'' on its own can only reach the \textit{mention} level, and negative phrasing (for example ``no exploit available'') is filtered out. The record with the strongest evidence sets the level for the threat.
+
+\subsection{Indicator Normalization}
+
+Because each of the four indicators uses a different scale and has a different meaning, DTEM first normalizes them into sub-scores between 0 and 100. Detection frequency is logarithmically normalized to avoid excessive influence of large numbers of reports on the score:
+
+\begin{equation}
+S_F =
+\operatorname{clip}
+\left(
+\frac{\ln(1+F)}{\ln(1+30)}\times100,\;0,\;100
+\right)
+\tag{3}
+\end{equation}
+
+The formula above approaches saturation when $F$ gets close to 30.
+
+Source diversity is normalized linearly. The maximum contribution is obtained from four or more independent sources:
+
+\begin{equation}
+S_D =
+\operatorname{clip}
+\left(
+\frac{D}{4}\times100,\;0,\;100
+\right)
+\tag{4}
+\end{equation}
+
+The exploit-availability indicator maps the evidence hierarchy directly onto an ordered sub-score, so a passing mention can never jump to the same value as a confirmed in-the-wild exploit:
+
+\begin{equation}
+S_E =
+\begin{cases}
+0,   & \text{no exploit evidence}\\
+25,  & \text{mention only}\\
+50,  & \text{public proof-of-concept}\\
+75,  & \text{verified exploit code}\\
+100, & \text{confirmed in-the-wild}
+\end{cases}
+\tag{5}
+\end{equation}
+
+The growth-rate sub-score is obtained from $G$ by an explicit piecewise-linear transform, so every input has a single defined output:
+
+\begin{equation}
+S_G =
+\begin{cases}
+0, & G \le -100\\[2pt]
+\dfrac{G+100}{100}\times 35, & -100 < G \le 0\\[4pt]
+35 + \dfrac{G}{150}\times 55, & 0 < G \le 150\\[4pt]
+\min\!\left(90 + \dfrac{G-150}{150}\times 10,\;100\right), & G > 150
+\end{cases}
+\tag{6}
+\end{equation}
+
+No net change ($G=0$) maps to 35, strong growth saturates towards 100 and a full collapse maps to 0. As a fully specified alternative that the prototype can select through a single documented configuration flag, the model can instead score a smoothed log-growth $G_{\log}=\ln\!\big((R_{recent}+a)/(R_{previous}+a)\big)$ with $a=1$ and map it by the bounded transform $S_G^{\log}=50\,(1+\tanh(G_{\log}/s))$ with $s=\ln 4$, which stays finite even when both counts are zero. The two forms are compared for agreement in the sensitivity analysis, and all reported results use the piecewise default of Eq.~(6).
+
+\subsection{Emergence Scoring Engine}
+
+The normalized measures are then aggregated through a linear scoring function with the weights for calculating the Emergence Score:
+
+\begin{equation}
+S_{\mathrm{emergence}} =
+w_F S_F +
+w_G S_G +
+w_D S_D +
+w_E S_E
+\tag{7}
+\end{equation}
+
+The values used by default in the DTEM algorithm include $w_F = 0.25$, $w_G = 0.30$, $w_D = 0.20$, and $w_E = 0.25$. These weights are a stated design choice rather than a value learned from data, and we back that up in two ways: the weight-sensitivity grid in Section~IV shows the outcome is not tied to one narrow setting, and a leave-one-out ablation shows how the score moves when each indicator is removed on its own. The final Emergence Score ranges from 0 to 100 and is read against four qualitative phases: \textit{Dormant} ($0$--$25$), \textit{Growing} ($26$--$50$), \textit{Emerging} ($51$--$75$) and \textit{Escalating} ($76$--$100$). When no eligible record is available the score is left \textit{Unavailable} instead of being reported as zero.
+
+\subsection{Risk Assessment and Priority Engine}
+
+In order to factor in technical vulnerability severity in the dynamic assessment, the DTEM uses the Emergence Score along with the normalized severity score using CVSS \cite{cvss}:
+
+\begin{equation}
+Risk =
+0.60 \times S_{\mathrm{emergence}}
++
+0.40 \times S_{\mathrm{severity}}
+\tag{8}
+\end{equation}
+
+In the equation above, 60\% weightage is given to dynamic emergence as opposed to static technical severity. This split is a design choice made because the goal of the framework is proactive in nature; until it is tested against data we do not present the 60:40 balance as an empirically optimal value. The severity term $S_{\mathrm{severity}}$ is the CVSS base score rescaled to $[0,100]$. The resultant Composite Risk Score is categorized into five operation priorities, which include P1 (Critical) through to P5 (Informational). The alert cut-off of 50 that is used later in the evaluation is the boundary between the \textit{Growing} and \textit{Emerging} phases, and we report how sensitive the result is to that choice rather than treating 50 as a fixed optimum. Along with the composite risk score, the framework also produces a natural language warning advisory on the basis of the contributing indicators. The scoring-and-advisory flow is summarised in Fig.~\ref{fig:workflow}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.0\columnwidth]{fig3.png}
+\caption{Workflow of the proposed Dynamic Threat Emergence Model (DTEM) for threat emergence scoring and early warning generation.}
+\label{fig:workflow}
+\end{figure}
+
+\section{Experimental Setup and Evaluation}
+
+This section describes the experimental evaluation of the Dynamic Threat Emergence Model. Three aspects are examined: the sensitivity of the Emergence Score to changes in indicator weighting, the behaviour of the model when it is replayed so that only information available up to each point is used, and a first run of the same evaluation procedure over real historical CVE records. Two of these use a set of threat intelligence records that were written by hand for this experiment, including threat activity patterns such as escalation, stabilization, and de-escalation; these curated records are used to check that the scoring engine works, not to measure how well it predicts real threats. The third uses genuine archived records from the NVD change history, with each CVE marked as a positive if it was later added to the CISA KEV Catalog within a fixed window. Two controlled experiments are reported first. In the first, the weights given to the Emergence Score are changed across 1{,}771 combinations to see how the weights affect the classification. In the second, the Emergence Score is recomputed over a 30-day window to confirm the replay is free of leakage. We then run the full evaluation procedure on the real CVE cohort and compare DTEM against CVSS, EPSS, and simple baselines on the same records. Overall, these experiments test the consistency of the scoring system and the honesty of the evaluation procedure in controlled settings.
+
+\subsection{Evaluation Dataset and Unit of Analysis}
+
+For the sensitivity analysis, there is a curated evaluation set of seven threat scenarios with pre-specified ground truth labels on whether each of the scenarios represents escalating threat activity. There are four scenarios that are classified as escalating: LockBit, which includes threat intelligence records on ransomware activity detected in multiple sources, where exploitation is confirmed; CVE-2025-RCE, which includes discussion of exploitation in multiple sources and the presence of multiple attack vectors; BlackLock, which is a developing ransomware campaign; and APT29, which is a persistent threat and a threat intelligence target. There are three scenarios classified as non-escalating: Dormant CVE, which includes stale threat intelligence data without any signs of exploitation; Low Chatter, which includes a single low significance record; and Stable Medium, which has steady activity but with no indication of exploitation. This set is balanced at four positives and three negatives, and because the labels were assigned by the authors the results on it are read only as a check that the scoring engine behaves as intended.
+
+For the real historical evaluation, the unit of analysis is a single exact CVE. Each CVE is scored at every observation cutoff taken from the archived NVD change history, and it is labelled positive for a cutoff if the CISA KEV Catalog later adds that CVE within a 30-day horizon after the cutoff. KEV inclusion is used as a catalogue proxy for exploitation, and a CVE that is not added is left unlabelled rather than treated as a proven negative. An observation is only eligible at a cutoff when its own timestamps are on or before that cutoff, and a dated baseline such as EPSS is only used if its score date is also before the cutoff. This is the rule that keeps the retrospective evaluation free of leakage.
+
+\subsection{Baseline Threat Prioritization Methods}
+
+The following framework is benchmarked against three of the most popular vulnerability and threat prioritization techniques: the Common Vulnerability Scoring System (CVSS), the Exploit Prediction Scoring System (EPSS), and the CISA Known Exploited Vulnerabilities (KEV) Catalog. CVSS scores technical severity of vulnerabilities and remains static. EPSS calculates the probability of the vulnerability being exploited and updates scores accordingly to newly available data; in the evaluation we use the date-matched EPSS score that was available at each cutoff rather than a single present-day value. The CISA KEV Catalog includes vulnerabilities known to have been exploited and acts as a retrospective indicator, not a predictive one. We also add two deliberately simple references: a frequency baseline that ranks by record count, and a growth baseline that ranks by the raw growth rate, so that any gain claimed by the full model can be checked against these easy alternatives.
+
+Each individual signal that DTEM uses has clear precedent: temporal emergence scoring is well studied \cite{dgef, temporal_cti}, EPSS already provides a time-updated exploitation probability \cite{epss}, and the KEV Catalog already records confirmed exploitation \cite{kev_catalog}. DTEM therefore does not claim a novel indicator; its intended difference is to combine these signals into a single time-aware score and, more importantly, to evaluate that score with a leakage-safe and reproducible protocol. We make no superiority claim over CVSS, EPSS or KEV, and the empirical section reports where the combined score currently under-performs a simple baseline.
+
+Structurally, CVSS is severity-only and static; EPSS adds a time-updated exploitation probability; KEV records confirmed exploitation retrospectively; DTEM is temporal, partially multi-source (with the underground input simulated), and is designed to be fully explainable.
+
+\subsection{Weight Sensitivity Analysis}
+The four emergence indicators are combined using configurable weights, with default values of 0.25 for Detection Frequency, 0.30 for Growth Rate, 0.20 for Source Diversity, and 0.25 for Exploit Availability. To assess the sensitivity of the model to this configuration, weight combinations were varied systematically in increments of 0.05, subject to the constraint that the four weights sum to one:
+\begin{equation}
+w_F + w_G + w_D + w_E = 1,
+\tag{9}
+\end{equation}
+producing 1{,}771 valid weight combinations. For every configuration, the Emergence Score was computed for all seven evaluation scenarios, and a threshold of 50 was used to classify a scenario as escalated. Predictions were compared with the predefined ground-truth labels using Accuracy, Precision, Recall, and F1-score:
+\begin{equation}
+Precision = \frac{TP}{TP+FP}, \quad Recall = \frac{TP}{TP+FN}
+\tag{10}
+\end{equation}
+\begin{equation}
+F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}
+\tag{11}
+\end{equation}
+where $TP$, $FP$, and $FN$ denote true positives, false positives, and false negatives, respectively, relative to the ground-truth labels.
+
+Across the 1{,}771 tested configurations, observed F1-scores ranged from 0.40 to 1.00. The default configuration (0.25 / 0.30 / 0.20 / 0.25) achieved an F1-score of 1.00 on the curated evaluation set, and the highest-performing configuration identified by the grid search (0.00 / 0.00 / 0.70 / 0.30) also achieved an F1-score of 1.00. This degenerate optimum, which assigns no weight to Detection Frequency or Growth Rate, is likely an artifact of the small (n=7) evaluation set rather than evidence that these indicators are unimportant. Because the grid is evaluated on only seven author-labelled scenarios, we do not treat it as evidence of weight robustness: with n=7 the F1 surface is coarse and many distinct weight vectors reach the same score, so this search shows only that the implementation is not numerically fragile around the defaults. Any claim that DTEM's performance is robust to its weights would require repeating the search on the held-out real cohort, which this paper does not do.
+
+
+
+\subsection{Time-Clamped Replay as a Leakage-Safety Check}
+
+Using the curated LockBit scenario, CTI records were replayed over a 30-day window in 2-day steps, with each point recomputing all four indicators and the Emergence Score from only records published on or before that time. This way, later observations do not affect past metrics, which is the property the real historical evaluation relies on.
+
+This replay is reported only to show that recomputation is leakage-free and consistent over time; the CVSS, EPSS and KEV curves here are simulated, and the fixed lead time quoted in an earlier version is no longer claimed. A real lead-time comparison requires genuine historical CTI with date-matched EPSS and KEV timestamps, which the next subsection begins to assemble.
+
+\subsection{Historical Evaluation on Real CVE Records}
+
+We ran the full evaluation procedure on a genuine cohort built from the archived NVD change history and labelled by the versioned CISA KEV Catalog. The run produced 25{,}280 CVE-cutoff predictions across 9{,}591 distinct CVEs, with 17 positive instances (12 unique CVEs) whose KEV addition fell inside a fully covered 30-day horizon, giving a base rate of about 0.067\%. Using the Emergence threshold of 50, the outcome was TP $=0$, FP $=6$, FN $=17$, TN $=25{,}257$. As a ranking measure, average precision was 0.0015 with a bootstrap 95\% confidence interval of 0.0005 to 0.0080, against a random (prevalence) baseline of 0.0007; the interval overlaps the base rate, so no clear separation is demonstrated.
+
+We read this honestly. The only time-stamped public stream we could archive at scale here is NVD change activity, which reflects database-workflow edits rather than independent threat detections, and the same CVEs reappear at neighbouring cutoffs. So this run confirms that the end-to-end evaluation pipeline executes correctly and resists leakage; it does not show that DTEM predicts exploitation, and we label it as exploratory. As a further check on the guardrails, two backtests run over archives that do not fully cover the required horizons return zero predictions and no metrics instead of inventing numbers from partial data, which is the intended fail-closed behaviour.
+
+\subsection{Baselines, Fair Comparison, and Ablation}
+
+Every method is scored on identical CVE-cutoff rows with identical KEV-derived labels, seeing only information available at that timestamp; a leave-one-out ablation drops each indicator and renormalises the remaining weights, and the evaluation additionally runs on a chronological development / validation / test split by cutoff time. All three components executed on the real cohort and are reported as they came out.
+
+On the split, DTEM's PR-AUC was 0.0196 on development (7{,}584 rows, 2 cutoffs, 4 positives), 0.0013 on validation (8{,}105 rows, 1 cutoff, 7 positives) and 0.0009 on test (9{,}591 rows, 1 cutoff, 6 positives); recall at the fixed threshold stayed 0 in every period because no positive crossed it, mirroring the full-cohort result. The leave-one-out ablation moved PR-AUC by less than 0.0007 in every direction, and dropping Source Diversity changed it by exactly 0.0 -- unsurprising on a single-source stream, and direct confirmation that the source-independence assumption is not testable on this data. On the same rows a naive historical-frequency baseline ranked at PR-AUC 0.0019, \emph{above} the full DTEM model at 0.0015, while the growth, source-diversity and exploit-only baselines landed at or below the 0.0007 prevalence level. The date-matched EPSS comparison could not be run at all: no archived EPSS score predated any cutoff, so that cell is empty rather than favourable.
+
+Two points follow, and we state them rather than paper over them. First, the split above is descriptive: this runner keeps the weights and threshold of Section~III fixed as design choices and does not fit or select them on development data, so it shows that the leakage-safe protocol executes end to end and how the metrics decompose over time, but it is not a tuned, confirmatory evaluation and no held-out performance is claimed. Second, on this cohort the full model does not beat a frequency-only baseline and its diversity indicator adds nothing, which is exactly the kind of result a leakage-safe protocol is meant to expose rather than hide; establishing genuine added value over these baselines on multi-source data remains an open empirical question, not a finding of this paper.
+
+\subsection{Reproducibility and Evaluation Protocol}
+
+Because the evaluation protocol is the paper's central contribution, we state its steps and artifacts precisely enough to be re-executed. \textit{Procedure:} (1)~archive public snapshots (NVD, EPSS, KEV), recording each retrieval time in a per-fetch manifest; (2)~archive timestamped NVD change events and convert the CISA \texttt{kev-data} Git history into versioned state events (added / removed / date-revised) with coverage intervals; (3)~at each cutoff keep only observations whose \texttt{published\_at} and \texttt{available\_at} are both at or before the cutoff, and admit a dated baseline such as EPSS only if its score date strictly precedes the cutoff; (4)~compute the four indicators and the Emergence Score from cutoff-eligible records alone; (5)~label a CVE-cutoff positive if KEV adds the CVE within the fixed 30-day horizon, and drop the row entirely if that horizon is not fully covered by a recorded KEV interval; (6)~report Precision/Recall/F1 at the fixed threshold and PR-AUC as a ranking measure, with a CVE-clustered bootstrap (1{,}000 resamples, fixed seed 0); and (7)~run the chronological split, the leave-one-out ablation, and the baselines on the identical rows. If no cutoff's horizon is fully covered, the pipeline returns zero predictions and no metrics rather than estimating from partial data; this fail-closed behaviour is itself part of the specification.
+
+\textit{Artifacts and determinism:} every archived file under \texttt{data/historical/} ships with a manifest recording its source URL, retrieval time and event counts, and the KEV archive additionally records its first and last Git commit hashes, so data lineage is externally checkable. Feature extraction, scoring, splitting and ablation are deterministic; the only stochastic step is the bootstrap, which uses a fixed seed. The fixed parameters are the 30-day horizon, the 7-day cutoff step, the emergence threshold of 50, the Section~III weights, and the seed above. The full evaluation re-runs from the released snapshots with a single command, \texttt{python -m dtem.evaluation.research\_pipeline backtest --observations <archive.jsonl> --kev <kev.jsonl> --start <date> --end <date>}, and needs no network access, so every reported number can be reproduced offline directly from the archived data. Concretely, the 25{,}280-run uses the archived pair \texttt{nvd\_history\_2025-01-24\_2025-02-25\_20261024T100459Z.jsonl} (13{,}475 events, 10{,}343 CVEs) and the coverage-complete \texttt{kev\_history\_2025-01-24\_2026-10-23\_20261024T102753Z.jsonl} (contiguous through 2026-10-23); KEV re-imports whose recorded intervals do not span the 30-day horizons return zero predictions under the same fail-closed guard.
+
+\section{Prototype Implementation}
+
+To validate the proposed framework beyond a theoretical model, DTEM was implemented as a complete, working end-to-end prototype covering CTI collection, indicator extraction, scoring, risk assessment, and an interactive dashboard. It is built in Python 3.10+ with a FastAPI backend, a SQLite store, Pandas/NumPy feature extraction, an HTML/Jinja2/Chart.js dashboard, and Matplotlib for the timeline plots; the Collector Manager draws on the NVD, AlienVault OTX and the simulated DarkWebSimulator, and records are processed by the modules of Section~III.
+
+\subsection{Dashboard}
+
+Fig.~\ref{fig:dashboard} shows the dashboard for the keyword ``LOCKBIT''; its panels present the Emergence and Composite Risk Scores, the four sub-indicators, an explainable reasoning panel, a source distribution graph and the raw feed. A test suite underpins every pipeline stage (collection and normalisation, indicator extraction, scoring and stage transitions, risk mapping, and the leakage-safe backtest, ablation, baselines and sensitivity of Section~IV).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\columnwidth]{fig4.png}
+\caption{DTEM dashboard displaying Emergence Score, Composite Risk Score, Detection volume, and Exploit and sources for the threat keyword ``LOCKBIT''. This is the interactive prototype, which accepts any keyword; the historical evaluation in Section~IV works on individual CVEs.}
+\label{fig:dashboard}
+\end{figure}
+
+\section{Limitations and Future Work}
+
+\subsection{Limitations}
+
+Several restrictions qualify the results. The underground layer is a simulator whose records are excluded from the historical evaluation. The weight-sensitivity analysis uses only seven curated scenarios -- enough to show the scoring is not tied to the default weights, but its perfect F1 is a behaviour check, not a performance measure. The replay baselines were produced artificially, so no real early-warning lead time is measured there (the earlier 12-day figure came from those simulated curves and is no longer claimed). The only genuine stream we could archive at scale is NVD change activity, which is single-source database-workflow data rather than independent threat intelligence, so that evaluation is exploratory and shows no separation from the base rate. The default weights and the 60:40 split remain designers' choices pending a real cohort. Finally, ground truth is imperfect: KEV inclusion is a catalogue proxy rather than proof of exploitation, a CVE never added cannot be treated as safely negative.
+
+\subsection{Future Work}
+The foremost tasks are replacing the dark-web simulator with real-time underground access under proper ethical, legal and organisational safeguards, and growing the evaluation from seven curated examples to a large set of time-stamped historical CVEs drawn from several sources with first-availability times and date-matched EPSS and KEV records; only then can the sensitivity, ablation and backtesting of Section~IV yield a real empirical lead-time estimate rather than an illustrative one.
+
+The scoring itself also merits study: the pre-configured weights could be learned from a large labelled dataset, the log-growth smoothing and scale could be fitted on development data and swept for sensitivity, keyword-based exploit matching could give way to NLP or transformer methods, threat relationships could be modelled as a graph so emergence propagates to related nodes, and explainability together with SIEM or ticketing integration could turn the score into an operational workflow.
+
+\section{Conclusion}
+The Dynamic Threat Emergence Model computes Detection Frequency, Growth Rate, Source Diversity and Exploit Availability from public feeds, open-source and simulated underground intelligence, folds them into a single Emergence Score, and combines it with severity into an explained Composite Risk Score. We contribute a working prototype (Python, FastAPI, SQLite) backed by a test suite at each stage, and --- the contribution we stress --- an evaluation procedure that reconstructs what was available at each cutoff, labels each CVE by a later KEV addition, and refuses to publish a number without sufficient coverage, so a retrospective result cannot be inflated by leakage. This evaluation is deliberately transparent about its limits: the curated weight run, the leakage-safe replay and the first real NVD-and-KEV run all execute end to end without leakage, yet on that single public source the model does not separate future KEV items, so no early-warning lead time or predictive-power claim is made. The results confirm the method, protocol and prototype behave as intended; with a time-stamped multi-source dataset and the further work of Section~VI, the framework can become a practical prioritisation tool.
+
+\begin{thebibliography}{00}
+\bibitem{iot_security} M. Abomhara and G. M. Køien, ``Cyber security and the internet of things: Vulnerabilities, threats, intruders and attacks,'' \textit{Journal of Cyber Security and Mobility}, vol. 4, no. 1, pp. 65--88, 2015.
+\bibitem{stix} OASIS Open, \textit{STIX Version 2.1}, OASIS Standard, 2021.
+\bibitem{taxii} OASIS Open, \textit{TAXII Version 2.1}, OASIS Standard, 2021.
+\bibitem{darknet_mining} E. Nunes, A. Diab, A. Gunn, E. Marin, V. Mishra, V. Paliath, J. Robertson, J. Shakarian, A. Thart, and P. Shakarian, ``Darknet and deepnet mining for proactive cybersecurity threat intelligence,'' in \textit{Proc. IEEE Conf. Intelligence and Security Informatics (ISI)}, 2016, pp. 7--12.
+\bibitem{portnoff} R. S. Portnoff, S. Afroz, G. Durrett, J. K. Kummerfeld, T. Berg-Kirkpatrick, D. McCoy, K. Levchenko, and V. Paxson, ``Tools for automated analysis of cybercriminal markets,'' in \textit{Proc. Int. World Wide Web Conf. (WWW)}, 2017.
+\bibitem{threatcrawl} M. Campobasso and L. Allodi, ``THREAT/crawl: A trainable, highly-reusable, and extensible automated method and tool to crawl criminal underground forums,'' in \textit{Proc. APWG Symp. Electronic Crime Research (eCrime)}, 2022, pp. 1--13.
+\bibitem{darkweb_evolution} S. Nazah, S. Huda, J. Abawajy, and M. M. Hassan, ``Evolution of dark web threat analysis and detection: A systematic approach,'' \textit{IEEE Access}, vol. 8, pp. 171796--171819, 2020.
+\bibitem{dgef} S. Samtani, H. Zhu, and H. Chen, ``Proactively identifying emerging hacker threats from the dark web: A diachronic graph embedding framework (D-GEF),'' \textit{ACM Transactions on Privacy and Security}, vol. 23, no. 4, pp. 21:1--21:33, 2020.
+\bibitem{temporal_cti} A. Kodituwakku, C. Xu, D. Rogers, D. K. Ahn, and E. W. Fulp, ``Investigating the temporal dynamics of cyber threat intelligence,'' in \textit{Proc. IEEE Int. Conf. Big Data (BigData)}, 2024.
+\bibitem{cti_sharing} T. D. Wagner, K. Mahbub, E. Palomar, and A. E. Abdallah, ``Cyber threat intelligence sharing: Survey and research directions,'' \textit{Computers \& Security}, vol. 87, art. 101589, 2019.
+\bibitem{cti_taxonomies} V. Mavroeidis and S. Bromander, ``Cyber threat intelligence model: An evaluation of taxonomies, sharing standards, and ontologies within cyber threat intelligence,'' in \textit{Proc. European Intelligence and Security Informatics Conf. (EISIC)}, 2017, pp. 91--98.
+\bibitem{tinker} N. Rastogi, S. Dutta, M. J. Zaki, A. Gittens, and C. Aggarwal, ``TINKER: A framework for open source cyberthreat intelligence,'' in \textit{Proc. IEEE Int. Conf. Trust, Security and Privacy in Computing and Communications (TrustCom)}, 2022.
+\bibitem{ml_hacker_forums} I. Deliu, C. Leichter, and K. Franke, ``Extracting cyber threat intelligence from hacker forums: Support vector machines versus convolutional neural networks,'' in \textit{Proc. IEEE Int. Conf. Big Data (BigData)}, 2017, pp. 3648--3656.
+\bibitem{automated_extraction} X. Liao, K. Yuan, X. Wang, Z. Li, L. Xing, and R. Beyah, ``Acing the IOC game: Toward automatic discovery and analysis of open-source cyber threat intelligence,'' in \textit{Proc. ACM SIGSAC Conf. Computer and Communications Security (CCS)}, 2016, pp. 755--766.
+\bibitem{madcti} S. Shah and V. K. Madisetti, ``MAD-CTI: Cyber threat intelligence analysis of the dark web using a multi-agent framework,'' \textit{IEEE Access}, vol. 13, pp. 40158--40168, 2025.
+\bibitem{cvss} FIRST.org, \textit{Common Vulnerability Scoring System Version 4.0: Specification Document}, 2023.
+\bibitem{epss} J. Jacobs, S. Romanosky, B. Edwards, M. Roytman, and I. Adjerid, ``Exploit Prediction Scoring System (EPSS),'' \textit{Digital Threats: Research and Practice}, vol. 2, no. 3, 2021.
+\bibitem{kev_catalog} Cybersecurity and Infrastructure Security Agency (CISA), \textit{Known Exploited Vulnerabilities Catalog}. [Online]. Available: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+\bibitem{nvd_database} National Institute of Standards and Technology (NIST), \textit{National Vulnerability Database (NVD)}. [Online]. Available: https://nvd.nist.gov/
+\bibitem{alienvault_otx} AT\&T Cybersecurity, \textit{AlienVault Open Threat Exchange (OTX)}. [Online]. Available: https://otx.alienvault.com/
+\bibitem{samtani_hacker_assets} S. Samtani, R. Chinn, and H. Chen, ``Exploring hacker assets in underground forums,'' in \textit{Proc. IEEE Int. Conf. Intelligence and Security Informatics (ISI)}, 2015, pp. 31--36.
+\bibitem{williams_incremental} R. Williams, S. Samtani, M. Patton, and H. Chen, ``Incremental hacker forum exploit collection and classification for proactive cyber threat intelligence: An exploratory study,'' in \textit{Proc. IEEE Int. Conf. Intelligence and Security Informatics (ISI)}, 2018.
+\bibitem{kadoguchi_darkweb_ml} M. Kadoguchi, S. Hayashi, M. Hashimoto, and A. Otsuka, ``Exploring the dark web for cyber threat intelligence using machine learning,'' in \textit{Proc. IEEE Int. Conf. Intelligence and Security Informatics (ISI)}, 2019, pp. 200--202.
+\bibitem{basheer_darkweb_review} R. Basheer and B. Alkhatib, ``Threats from the dark: A review over dark web investigation research for cyber threat intelligence,'' \textit{Journal of Computer Networks and Communications}, vol. 2021, pp. 1--21, 2021.
+\bibitem{edkrantz_predicting} M. Edkrantz, S. Truvé, and A. Said, ``Predicting vulnerability exploits in the wild,'' in \textit{Proc. IEEE 2nd Int. Conf. Cyber Security and Cloud Computing}, 2015, pp. 513--514.
+\bibitem{chismon_ruks} D. Chismon and M. Ruks, ``Threat intelligence: Collecting, analysing, evaluating,'' MWR InfoSecurity Ltd., Tech. Rep., 2015.
+\bibitem{nist_sp800150} A. Johnson, K. Dempsey, R. Ross, S. Gupta, and D. Bailey, \textit{Guide to Cyber Threat Information Sharing}, NIST Special Publication 800-150, National Institute of Standards and Technology, Gaithersburg, MD, 2016.
+\end{thebibliography}
+\end{document}

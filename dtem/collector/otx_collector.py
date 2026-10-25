@@ -14,10 +14,13 @@ will be sent as the ``X-OTX-API-KEY`` header.
 
 import json
 import logging
+import os
 from pathlib import Path
 from typing import Any
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from dtem.collector.base import BaseCollector
 
@@ -53,7 +56,8 @@ class OTXCollector(BaseCollector):
         )
         self.timeout: int = cfg.get("timeout_seconds", 15)
         self.max_results: int = cfg.get("max_results", 50)
-        self.api_key: str = cfg.get("api_key", "")
+        self.api_key: str = os.environ.get("OTX_API_KEY", "")
+        self.last_error: str | None = None
 
     # ------------------------------------------------------------------ #
     # Core collection logic
@@ -68,6 +72,7 @@ class OTXCollector(BaseCollector):
         if not self.enabled:
             logger.info("OTX collector is disabled in config.")
             return []
+        self.last_error = None
 
         params: dict[str, Any] = {
             "q": keyword,
@@ -85,7 +90,12 @@ class OTXCollector(BaseCollector):
                 keyword,
                 self.base_url,
             )
-            response = requests.get(
+            session = requests.Session()
+            retry = Retry(total=2, connect=2, read=2, backoff_factor=0.5,
+                          status_forcelist=(429, 500, 502, 503, 504),
+                          allowed_methods=frozenset(["GET"]), respect_retry_after_header=True)
+            session.mount("https://", HTTPAdapter(max_retries=retry))
+            response = session.get(
                 self.base_url,
                 params=params,
                 headers=headers,
@@ -94,6 +104,7 @@ class OTXCollector(BaseCollector):
             response.raise_for_status()
             data = response.json()
         except requests.RequestException as exc:
+            self.last_error = f"{type(exc).__name__}: {exc}"
             logger.warning("OTX API request failed: %s", exc)
             return []
 

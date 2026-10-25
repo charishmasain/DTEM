@@ -64,7 +64,7 @@ class CollectorManager:
     # Public API
     # ------------------------------------------------------------------ #
 
-    def collect(self, keyword: str) -> list[dict[str, Any]]:
+    def collect(self, keyword: str, include_sources: set[str] | None = None) -> list[dict[str, Any]]:
         """
         Run every registered collector for *keyword*, de‑duplicate,
         persist to DB, save JSON, and return the unified list.
@@ -76,15 +76,25 @@ class CollectorManager:
 
         all_records: list[dict[str, Any]] = []
 
+        self.last_status: list[dict[str, Any]] = []
         for collector in self.collectors:
+            if include_sources is not None and collector.source_name.lower() not in {s.lower() for s in include_sources}:
+                continue
             try:
                 logger.info("Running %s …", collector)
+                if hasattr(collector, "last_error"):
+                    collector.last_error = None
                 records = collector.collect(keyword_lower)
+                collector_error = getattr(collector, "last_error", None)
+                self.last_status.append({"source": collector.source_name,
+                                         "status": "error" if collector_error else "records" if records else "empty",
+                                         "record_count": len(records), "error": collector_error})
                 logger.info(
                     "%s returned %d records.", collector, len(records)
                 )
                 all_records.extend(records)
             except Exception as exc:
+                self.last_status.append({"source": collector.source_name, "status": "error", "error": str(exc), "record_count": 0})
                 logger.error(
                     "%s raised an exception: %s", collector, exc, exc_info=True
                 )
@@ -98,7 +108,7 @@ class CollectorManager:
         )
 
         # Persist to database (skip dark web records — already saved)
-        self._persist(keyword_lower, unique)
+        self.last_inserted_count = self._persist(keyword_lower, unique)
 
         # Save JSON output
         self._save_json(keyword_lower, unique)
@@ -134,7 +144,7 @@ class CollectorManager:
         self,
         keyword: str,
         records: list[dict[str, Any]],
-    ) -> None:
+    ) -> int:
         """
         Insert records into the SQLite database.
 
@@ -154,6 +164,8 @@ class CollectorManager:
         if to_insert:
             count = insert_intel_records(to_insert)
             logger.info("Persisted %d non‑dark‑web records to DB.", count)
+            return count
+        return 0
 
     # ------------------------------------------------------------------ #
     # JSON output

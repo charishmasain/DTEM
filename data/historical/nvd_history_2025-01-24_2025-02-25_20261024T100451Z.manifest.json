@@ -1,0 +1,22 @@
+{
+  "source": "NVD CVE Change History API v2.0",
+  "source_url": "https://services.nvd.nist.gov/rest/json/cvehistory/2.0",
+  "retrieved_at": "2026-10-24T10:04:51.098145+00:00",
+  "status": "partial_error",
+  "requested_start_inclusive": "2025-01-24",
+  "requested_end_inclusive": "2025-02-25",
+  "request_count": 0,
+  "unique_event_count": 0,
+  "distinct_cves": 0,
+  "file": "nvd_history_2025-01-24_2025-02-25_20261024T100451Z.jsonl",
+  "errors": [
+    {
+      "window_start": "2025-01-24",
+      "window_end": "2025-02-25",
+      "start_index": 0,
+      "error": "ConnectionError: HTTPSConnectionPool(host='services.nvd.nist.gov', port=443): Max retries exceeded with url: /rest/json/cvehistory/2.0?changeStartDate=2025-01-24T00%3A00%3A00.000Z&changeEndDate=2025-02-25T23%3A59%3A59.999Z&resultsPerPage=5000&startIndex=0 (Caused by NameResolutionError(\"HTTPSConnection(host='services.nvd.nist.gov', port=443): Failed to resolve 'services.nvd.nist.gov' ([Errno 11001] getaddrinfo failed)\"))"
+    }
+  ],
+  "timestamp_policy": "NVD event created timestamp is used as the event and source availability time; no current record fields are retroactively assigned to the event",
+  "unit_limit": "NVD change events are a single-source record-history signal, not independent CTI reports; source diversity remains one, and event counts reflect NVD workflow updates"
+}

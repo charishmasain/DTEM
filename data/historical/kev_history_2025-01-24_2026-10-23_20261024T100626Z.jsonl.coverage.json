@@ -1,0 +1,17 @@
+{
+  "history_start": "2025-01-24T15:00:57.528200+00:00",
+  "complete_through": "2026-10-23T19:30:18.920900+00:00",
+  "coverage_intervals": [
+    {
+      "start": "2025-01-24T15:00:57.528200+00:00",
+      "complete_through": "2025-02-25T20:33:53.367600+00:00"
+    },
+    {
+      "start": "2025-02-25T20:33:53.367600+00:00",
+      "complete_through": "2026-10-23T19:30:18.920900+00:00"
+    }
+  ],
+  "source": "CISA official kev-data Git mirror",
+  "first_commit": "2dd57cfafb7bfc237b22d9cb0749fe44923d8c3f",
+  "last_commit": "b9c486ef8f3ba0709bb662ae843ffee96953c400"
+}

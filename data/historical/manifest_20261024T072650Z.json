@@ -1,0 +1,33 @@
+{
+  "retrieved_at": "2026-10-24T07:26:50.937556+00:00",
+  "snapshot_semantics": "current response as retrieved; not a historical availability archive",
+  "sources": {
+    "nvd": {
+      "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+      "retrieved_at": "2026-10-24T07:26:50.937556+00:00",
+      "status": "ok",
+      "record_count": 2000,
+      "file": "nvd_20261024T072650Z.json",
+      "total_results": 413864,
+      "truncated": true,
+      "date_fields": [
+        "published",
+        "lastModified"
+      ],
+      "availability_policy": "available no earlier than retrieved_at; response dates do not establish historical availability"
+    },
+    "kev": {
+      "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+      "retrieved_at": "2026-10-24T07:26:55.490330+00:00",
+      "status": "ok",
+      "record_count": 1756,
+      "file": "kev_20261024T072650Z.json",
+      "total_results": 1756,
+      "truncated": false,
+      "date_fields": [
+        "dateAdded"
+      ],
+      "availability_policy": "available no earlier than retrieved_at; response dates do not establish historical availability"
+    }
+  }
+}

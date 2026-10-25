@@ -1,0 +1,33 @@
+{
+  "source": "FIRST.org EPSS historical API",
+  "source_url": "https://api.first.org/data/v1/epss",
+  "retrieved_at": "2026-10-24T09:45:15.403398+00:00",
+  "status": "partial_error",
+  "requested_cves": 1,
+  "requested_days": 3,
+  "requested_start_inclusive": "2024-01-01",
+  "requested_end_inclusive": "2024-01-03",
+  "observation_count": 0,
+  "distinct_cves": 0,
+  "distinct_score_dates": 0,
+  "file": "epss_history_2024-01-01_2024-01-03_20261024T094515Z.jsonl",
+  "errors": [
+    {
+      "date": "2024-01-01",
+      "batch": "1",
+      "error": "ConnectionError: HTTPSConnectionPool(host='api.first.org', port=443): Max retries exceeded with url: /data/v1/epss?cve=CVE-2021-44228&date=2024-01-01 (Caused by NameResolutionError(\"HTTPSConnection(host='api.first.org', port=443): Failed to resolve 'api.first.org' ([Errno 11001] getaddrinfo failed)\"))"
+    },
+    {
+      "date": "2024-01-02",
+      "batch": "1",
+      "error": "ConnectionError: HTTPSConnectionPool(host='api.first.org', port=443): Max retries exceeded with url: /data/v1/epss?cve=CVE-2021-44228&date=2024-01-02 (Caused by NameResolutionError(\"HTTPSConnection(host='api.first.org', port=443): Failed to resolve 'api.first.org' ([Errno 11001] getaddrinfo failed)\"))"
+    },
+    {
+      "date": "2024-01-03",
+      "batch": "1",
+      "error": "ConnectionError: HTTPSConnectionPool(host='api.first.org', port=443): Max retries exceeded with url: /data/v1/epss?cve=CVE-2021-44228&date=2024-01-03 (Caused by NameResolutionError(\"HTTPSConnection(host='api.first.org', port=443): Failed to resolve 'api.first.org' ([Errno 11001] getaddrinfo failed)\"))"
+    }
+  ],
+  "availability_semantics": "FIRST historical API score_date is retained as a date, not an invented timestamp; a score is eligible only for a cutoff on a later UTC calendar date",
+  "model_version_caveat": "EPSS model versions change over time; scores across version transitions are not a stationary series."
+}

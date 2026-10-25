@@ -25,7 +25,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 # Force UTF-8 on Windows console
 # ---------------------------------------------------------------------------
-if sys.platform == "win32":
+if sys.platform == "win32" and __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(
         sys.stdout.buffer, encoding="utf-8", errors="replace"
     )

@@ -382,6 +382,7 @@ code, pre, .mono {
 }
 
 .badge-stage.dormant    { background: rgba(107, 114, 128, 0.2); color: var(--stage-dormant); }
+.badge-stage.unavailable, .badge-risk.unavailable, .badge-trend.unavailable { background: rgba(107, 114, 128, 0.2); color: #d1d5db; }
 .badge-stage.growing    { background: rgba(59, 130, 246, 0.2); color: var(--stage-growing); }
 .badge-stage.emerging   { background: rgba(245, 158, 11, 0.2); color: var(--stage-emerging); }
 .badge-stage.escalating { background: rgba(239, 68, 68, 0.2); color: var(--stage-escalating); }
@@ -732,3 +733,21 @@ table.intel-table tr:hover td {
   .col-3, .col-6 { grid-column: span 12; }
   .header { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
+
+.monitor-controls,.monitor-settings,.watchlist-form,.monitor-filters { display:flex; flex-wrap:wrap; gap:.65rem; align-items:center; margin:1rem 0; }
+.monitor-controls a { color:#67e8f9; padding:.5rem; }
+.overview-kpis { display:grid; grid-template-columns:repeat(4,minmax(100px,1fr)); gap:.75rem; margin:1rem 0; }
+.overview-kpis>div,.operations-list,.monitor-settings { background:rgba(15,23,42,.7); border:1px solid rgba(148,163,184,.16); border-radius:10px; padding:.85rem; }
+.overview-kpis strong,.overview-kpis span { display:block; }
+.overview-kpis strong { color:#67e8f9; font-size:1.35rem; }
+.overview-kpis span { color:#94a3b8; font-size:.8rem; }
+.monitor-settings input,.watchlist-form input,.watchlist-form select,.monitor-filters input,.monitor-filters select { background:#0f172a; color:#e2e8f0; border:1px solid #334155; border-radius:6px; padding:.55rem; }
+.operations-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+.operations-columns h3 { margin:.8rem 0; color:#cbd5e1; }
+.operations-list { max-height:340px; overflow:auto; color:#cbd5e1; }
+.operations-row { padding:.65rem 0; border-bottom:1px solid rgba(148,163,184,.14); font-size:.88rem; }
+.operations-row:last-child { border-bottom:0; }
+.operations-row button,.watch-action { margin-left:.35rem; padding:.35rem .55rem; border:1px solid #475569; border-radius:5px; color:#e2e8f0; background:#1e293b; cursor:pointer; }
+.watch-action.remove { color:#fca5a5; }
+.empty-state { color:#94a3b8; padding:.5rem 0; }
+@media(max-width:800px) { .overview-kpis { grid-template-columns:repeat(2,1fr); } .operations-columns { grid-template-columns:1fr; } }

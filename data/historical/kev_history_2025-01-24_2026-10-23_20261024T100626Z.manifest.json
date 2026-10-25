@@ -1,0 +1,2347 @@
+{
+  "source": "CISA official kev-data Git mirror",
+  "repository": "https://github.com/cisagov/kev-data",
+  "source_file": "known_exploited_vulnerabilities.json",
+  "retrieved_at": "2026-10-24T10:06:26.046389+00:00",
+  "status": "partial_error",
+  "snapshot_count": 330,
+  "commit_count": 331,
+  "event_count": 1768,
+  "added_events": 1760,
+  "removed_events": 4,
+  "date_revisions": 4,
+  "history_start": "2025-01-24T15:00:57.528200+00:00",
+  "complete_through": "2026-10-23T19:30:18.920900+00:00",
+  "first_commit": "2dd57cfafb7bfc237b22d9cb0749fe44923d8c3f",
+  "last_commit": "b9c486ef8f3ba0709bb662ae843ffee96953c400",
+  "file": "kev_history_2025-01-24_2026-10-23_20261024T100626Z.jsonl",
+  "snapshots": [
+    {
+      "commit": "2dd57cfafb7bfc237b22d9cb0749fe44923d8c3f",
+      "committed_at": "2025-01-27T22:38:50+00:00",
+      "date_released": "2025-01-24T15:00:57.528200+00:00",
+      "catalog_version": "2025.01.24",
+      "count": 1252
+    },
+    {
+      "commit": "49c9495366c4e9b9abc9db85f91657d8bb9a0be2",
+      "committed_at": "2025-01-29T17:59:10+00:00",
+      "date_released": "2025-01-29T17:02:51.976900+00:00",
+      "catalog_version": "2025.01.29",
+      "count": 1253
+    },
+    {
+      "commit": "85e0d86c8c7254d4d65ab5b32be2361163e2dd19",
+      "committed_at": "2025-02-04T15:53:42+00:00",
+      "date_released": "2025-02-04T15:00:47.717000+00:00",
+      "catalog_version": "2025.02.04",
+      "count": 1257
+    },
+    {
+      "commit": "10e017fa282a68cbdf5ceded0f0abd7d015bd574",
+      "committed_at": "2025-02-05T15:55:29+00:00",
+      "date_released": "2025-02-05T15:00:41.575400+00:00",
+      "catalog_version": "2025.02.05",
+      "count": 1258
+    },
+    {
+      "commit": "11b9ef98d6fc6fbd2340e05437df896d928cc45d",
+      "committed_at": "2025-02-05T18:30:51+00:00",
+      "date_released": "2025-02-05T18:21:14.676400+00:00",
+      "catalog_version": "2025.02.05",
+      "count": 1258
+    },
+    {
+      "commit": "3cba71bb87a59ecf6338c2bd24f7cb75c2d41fea",
+      "committed_at": "2025-02-07T18:58:19+00:00",
+      "date_released": "2025-02-07T18:02:47.830200+00:00",
+      "catalog_version": "2025.02.07",
+      "count": 1264
+    },
+    {
+      "commit": "d8b066857891b52e40b8851c19b2493cba163384",
+      "committed_at": "2025-02-11T19:09:20+00:00",
+      "date_released": "2025-02-11T18:20:55.267500+00:00",
+      "catalog_version": "2025.02.11",
+      "count": 1268
+    },
+    {
+      "commit": "70df51e20dc768db800fd85f0833c3865a5a4963",
+      "committed_at": "2025-02-12T14:09:57+00:00",
+      "date_released": "2025-02-11T19:20:49.456700+00:00",
+      "catalog_version": "2025.02.11",
+      "count": 1268
+    },
+    {
+      "commit": "26ebddcd03da2255e83ce89e6943a923b0c6f246",
+      "committed_at": "2025-02-12T17:08:25+00:00",
+      "date_released": "2025-02-12T15:00:15.301700+00:00",
+      "catalog_version": "2025.02.12",
+      "count": 1270
+    },
+    {
+      "commit": "476945e0992ad6d4861f51b26856c9485d7afb75",
+      "committed_at": "2025-02-13T18:54:05+00:00",
+      "date_released": "2025-02-13T17:59:30.363800+00:00",
+      "catalog_version": "2025.02.13",
+      "count": 1271
+    },
+    {
+      "commit": "a3d9941e9858f3a340dd4aa4d63f43fb8eabc3b0",
+      "committed_at": "2025-02-17T23:45:27+00:00",
+      "date_released": "2025-02-15T19:28:17.883200+00:00",
+      "catalog_version": "2025.02.15",
+      "count": 1271
+    },
+    {
+      "commit": "d7481c5ce0ca9155666920b77f819c90d2c8b858",
+      "committed_at": "2025-02-18T14:53:30+00:00",
+      "date_released": "2025-02-18T13:47:33.365600+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1271
+    },
+    {
+      "commit": "aabf332a06bbd37d37dec16f4810b444851339fa",
+      "committed_at": "2025-02-18T18:43:38+00:00",
+      "date_released": "2025-02-18T17:59:12.446400+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1273
+    },
+    {
+      "commit": "c1a93886cde8e504ce8c648fbfb0ea4bbe629937",
+      "committed_at": "2025-02-18T21:17:47+00:00",
+      "date_released": "2025-02-18T20:08:26.654300+00:00",
+      "catalog_version": "2025.02.18",
+      "count": 1273
+    },
+    {
+      "commit": "a8bfcf7ff8d03dd811cf45d306f8c31ecf41428a",
+      "committed_at": "2025-02-19T17:39:07+00:00",
+      "date_released": "2025-02-19T14:08:44.502100+00:00",
+      "catalog_version": "2025.02.19",
+      "count": 1273
+    },
+    {
+      "commit": "0389dfdfd7c185b25ae594ddf71974f82a20bb40",
+      "committed_at": "2025-02-20T15:43:10+00:00",
+      "date_released": "2025-02-20T15:00:28.983400+00:00",
+      "catalog_version": "2025.02.20",
+      "count": 1275
+    },
+    {
+      "commit": "dd0172782cbb8fc6dd452b0f69d3b7b78fb2c26d",
+      "committed_at": "2025-02-20T16:59:36+00:00",
+      "date_released": "2025-02-20T15:56:17.994500+00:00",
+      "catalog_version": "2025.02.20",
+      "count": 1275
+    },
+    {
+      "commit": "d86a5b0127e6d10d9b6436adaf8ea0b1c9929c3b",
+      "committed_at": "2025-02-21T15:34:12+00:00",
+      "date_released": "2025-02-21T15:00:27.572000+00:00",
+      "catalog_version": "2025.02.21",
+      "count": 1276
+    },
+    {
+      "commit": "93131449759537f30678e005ba6e4f6adf757b1c",
+      "committed_at": "2025-02-21T17:35:17+00:00",
+      "date_released": "2025-02-21T17:07:48.489600+00:00",
+      "catalog_version": "2025.02.21",
+      "count": 1276
+    },
+    {
+      "commit": "a20c0f52af3b419992a28ba97cc638abb0a8359f",
+      "committed_at": "2025-02-24T15:48:47+00:00",
+      "date_released": "2025-02-24T15:00:37.229600+00:00",
+      "catalog_version": "2025.02.24",
+      "count": 1278
+    },
+    {
+      "commit": "e611a64423bdf04c1633e29ce329df5c4bcb1057",
+      "committed_at": "2025-02-24T18:26:27+00:00",
+      "date_released": "2025-02-24T17:55:31.636500+00:00",
+      "catalog_version": "2025.02.24",
+      "count": 1278
+    },
+    {
+      "commit": "5d9b466b535e85aa00032764f7b8ecc93a302f41",
+      "committed_at": "2025-02-25T15:54:19+00:00",
+      "date_released": "2025-02-25T15:01:13.140200+00:00",
+      "catalog_version": "2025.02.25",
+      "count": 1280
+    },
+    {
+      "commit": "46f0b83e721e21bd581a3067cf00536265e57134",
+      "committed_at": "2025-02-25T21:41:01+00:00",
+      "date_released": "2025-02-25T20:33:53.367600+00:00",
+      "catalog_version": "2025.02.25",
+      "count": 1280
+    },
+    {
+      "commit": "9321cd41d93e2aa74791bf77a5ffd50a7f125b05",
+      "committed_at": "2025-02-26T06:45:37+00:00",
+      "date_released": "2025-02-25T20:33:53.367600+00:00",
+      "catalog_version": "2025.02.25",
+      "count": 1280
+    },
+    {
+      "commit": "d89d7ce7232db26c60f7dd03d290cf1f0d8f1876",
+      "committed_at": "2025-02-26T16:49:46+00:00",
+      "date_released": "2025-02-26T16:04:14.846800+00:00",
+      "catalog_version": "2025.02.26",
+      "count": 1280
+    },
+    {
+      "commit": "2c86bd7adbe96fd9ba180cf40a44937d5ecd0374",
+      "committed_at": "2025-03-03T16:05:24+00:00",
+      "date_released": "2025-03-03T15:04:15.927600+00:00",
+      "catalog_version": "2025.03.03",
+      "count": 1285
+    },
+    {
+      "commit": "baa7bbaac65b7122be5a76fa4e5a589ff9ec0dcc",
+      "committed_at": "2025-03-04T16:04:30+00:00",
+      "date_released": "2025-03-04T15:01:18.241400+00:00",
+      "catalog_version": "2025.03.04",
+      "count": 1289
+    },
+    {
+      "commit": "76efdc16cd58bf82e277edf68b482ccf7432be94",
+      "committed_at": "2025-03-10T17:54:13+00:00",
+      "date_released": "2025-03-10T17:01:21.533900+00:00",
+      "catalog_version": "2025.03.10",
+      "count": 1294
+    },
+    {
+      "commit": "45b5f396070bb8ce8ae1fdc98ed776f5d9175664",
+      "committed_at": "2025-03-11T17:50:28+00:00",
+      "date_released": "2025-03-11T17:10:05.645700+00:00",
+      "catalog_version": "2025.03.11",
+      "count": 1300
+    },
+    {
+      "commit": "a5d33001f570521df2c1678806b5ec08083a8959",
+      "committed_at": "2025-03-13T14:59:52+00:00",
+      "date_released": "2025-03-13T14:00:31.448800+00:00",
+      "catalog_version": "2025.03.13",
+      "count": 1302
+    },
+    {
+      "commit": "e33fdaa8a9b8fbddbf9deb88fc81507a78829407",
+      "committed_at": "2025-03-18T18:48:20+00:00",
+      "date_released": "2025-03-18T18:01:25.117600+00:00",
+      "catalog_version": "2025.03.18",
+      "count": 1304
+    },
+    {
+      "commit": "506486e82abcee635b970c68677dd21c8017e4a4",
+      "committed_at": "2025-03-19T18:56:44+00:00",
+      "date_released": "2025-03-19T18:00:10.541700+00:00",
+      "catalog_version": "2025.03.19",
+      "count": 1307
+    },
+    {
+      "commit": "c377560dcdd4bf883e6e57df1f0f2507426d4867",
+      "committed_at": "2025-03-24T18:48:42+00:00",
+      "date_released": "2025-03-24T18:01:34.066000+00:00",
+      "catalog_version": "2025.03.24",
+      "count": 1308
+    },
+    {
+      "commit": "cf9ebe95c679e9ea23c72d55525f09fcea8b7570",
+      "committed_at": "2025-03-27T15:35:01+00:00",
+      "date_released": "2025-03-26T20:10:45.211100+00:00",
+      "catalog_version": "2025.03.26",
+      "count": 1310
+    },
+    {
+      "commit": "b6ec201bce3fc8cf29484c35e54ab3c3f6c2b4a1",
+      "committed_at": "2025-03-27T18:34:36+00:00",
+      "date_released": "2025-03-27T17:55:47.820400+00:00",
+      "catalog_version": "2025.03.27",
+      "count": 1311
+    },
+    {
+      "commit": "6ff2cc19002acfb5d9214f4ee9bc428640c5084a",
+      "committed_at": "2025-03-31T18:47:50+00:00",
+      "date_released": "2025-03-31T18:00:40.358900+00:00",
+      "catalog_version": "2025.03.31",
+      "count": 1312
+    },
+    {
+      "commit": "1459986e48abe98949304c42cbbaabd14b3188c7",
+      "committed_at": "2025-04-01T18:59:02+00:00",
+      "date_released": "2025-04-01T18:54:41.081400+00:00",
+      "catalog_version": "2025.04.01",
+      "count": 1313
+    },
+    {
+      "commit": "c1ba17400d404797ae37d4b87c29c49f1d907955",
+      "committed_at": "2025-04-04T19:28:13+00:00",
+      "date_released": "2025-04-04T18:55:10.607200+00:00",
+      "catalog_version": "2025.04.04",
+      "count": 1314
+    },
+    {
+      "commit": "4ffdd0dd24ee4d7823af3e121472cbee52ec7281",
+      "committed_at": "2025-04-07T18:47:51+00:00",
+      "date_released": "2025-04-07T18:01:08.381300+00:00",
+      "catalog_version": "2025.04.07",
+      "count": 1315
+    },
+    {
+      "commit": "35cabd8f2b642b52c7890d3726abb06155c33b8d",
+      "committed_at": "2025-04-08T18:14:36+00:00",
+      "date_released": "2025-04-08T17:30:37.937800+00:00",
+      "catalog_version": "2025.04.08",
+      "count": 1317
+    },
+    {
+      "commit": "9e344de2236cc05fce7bbe46eefd6402f14f52b0",
+      "committed_at": "2025-04-09T18:46:52+00:00",
+      "date_released": "2025-04-09T18:01:15.732900+00:00",
+      "catalog_version": "2025.04.09",
+      "count": 1319
+    },
+    {
+      "commit": "1f74c583a925944d3bce9fd04c0d71a2bc15a032",
+      "committed_at": "2025-04-16T17:59:33+00:00",
+      "date_released": "2025-04-16T17:00:53.692200+00:00",
+      "catalog_version": "2025.04.16",
+      "count": 1320
+    },
+    {
+      "commit": "bd36e533a4176137da15192917bb7de7b3d51ef9",
+      "committed_at": "2025-04-17T17:47:41+00:00",
+      "date_released": "2025-04-17T17:01:44.453800+00:00",
+      "catalog_version": "2025.04.17",
+      "count": 1323
+    },
+    {
+      "commit": "b02b6c32dcfc925cb8fe70d6149cfcec93eec1eb",
+      "committed_at": "2025-04-29T14:22:16+00:00",
+      "date_released": "2025-04-29T10:55:54.233700+00:00",
+      "catalog_version": "2025.04.29",
+      "count": 1326
+    },
+    {
+      "commit": "d118e826468eb578449a5fd4a138870a50c7d459",
+      "committed_at": "2025-04-29T17:31:51+00:00",
+      "date_released": "2025-04-29T16:56:06.365700+00:00",
+      "catalog_version": "2025.04.29",
+      "count": 1327
+    },
+    {
+      "commit": "ecf4e2ee032613b1ec38482d5f40d04cf8d2764a",
+      "committed_at": "2025-05-02T13:41:09+00:00",
+      "date_released": "2025-05-01T17:00:59.311700+00:00",
+      "catalog_version": "2025.05.01",
+      "count": 1329
+    },
+    {
+      "commit": "6186e790e048dcd27b18169ef11b661380e2b6f4",
+      "committed_at": "2025-05-02T17:52:40+00:00",
+      "date_released": "2025-05-02T16:56:02.499900+00:00",
+      "catalog_version": "2025.05.02",
+      "count": 1331
+    },
+    {
+      "commit": "5201160912187ecbd51cd80f6836d7f947e5ed0b",
+      "committed_at": "2025-05-05T17:57:26+00:00",
+      "date_released": "2025-05-05T16:57:44.643100+00:00",
+      "catalog_version": "2025.05.05",
+      "count": 1332
+    },
+    {
+      "commit": "21b356f0a2f8549160371b8811411a650e0f7388",
+      "committed_at": "2025-05-06T17:39:51+00:00",
+      "date_released": "2025-05-06T17:03:13.622000+00:00",
+      "catalog_version": "2025.05.06",
+      "count": 1333
+    },
+    {
+      "commit": "6bf1c25a9cad5bc10a4baf69ad75877e1d9b68dd",
+      "committed_at": "2025-05-07T17:54:45+00:00",
+      "date_released": "2025-05-07T17:00:03.499200+00:00",
+      "catalog_version": "2025.05.07",
+      "count": 1335
+    },
+    {
+      "commit": "f6e140668216ef14804dfb44ab26e62b0924d95e",
+      "committed_at": "2025-05-12T17:49:39+00:00",
+      "date_released": "2025-05-12T17:01:33.539400+00:00",
+      "catalog_version": "2025.05.12",
+      "count": 1336
+    },
+    {
+      "commit": "a42115de9d5d50d5af57a1678ec52e8f0196ed5c",
+      "committed_at": "2025-05-13T18:29:36+00:00",
+      "date_released": "2025-05-13T17:56:12.624800+00:00",
+      "catalog_version": "2025.05.13",
+      "count": 1341
+    },
+    {
+      "commit": "a3da7a7a8d0d75df5d464a6fd076702610f278bb",
+      "committed_at": "2025-05-14T18:07:35+00:00",
+      "date_released": "2025-05-14T17:00:08.428800+00:00",
+      "catalog_version": "2025.05.14",
+      "count": 1342
+    },
+    {
+      "commit": "7ab72ece65f4aaf0cb835f2452bc41eafb6c7c3e",
+      "committed_at": "2025-05-15T18:08:45+00:00",
+      "date_released": "2025-05-15T17:04:05.663300+00:00",
+      "catalog_version": "2025.05.15",
+      "count": 1345
+    },
+    {
+      "commit": "095e43d88e692d468c72936d96d1c14b2ef64c6b",
+      "committed_at": "2025-05-19T18:24:25+00:00",
+      "date_released": "2025-05-19T17:01:04.940100+00:00",
+      "catalog_version": "2025.05.19",
+      "count": 1351
+    },
+    {
+      "commit": "5e51cd844924eca59865154fa1eaf0aa6998e28b",
+      "committed_at": "2025-05-22T18:01:50+00:00",
+      "date_released": "2025-05-22T17:00:28.778500+00:00",
+      "catalog_version": "2025.05.22",
+      "count": 1352
+    },
+    {
+      "commit": "2790dea9cde93733ab874c6d74b6cadab36fe8aa",
+      "committed_at": "2025-06-09T16:15:21+00:00",
+      "date_released": "2025-06-09T12:35:28.591000+00:00",
+      "catalog_version": "2025.06.09",
+      "count": 1360
+    },
+    {
+      "commit": "ef19a757cefff4f7b555ed8fd48cc3e6a951f29a",
+      "committed_at": "2025-06-09T17:54:56+00:00",
+      "date_released": "2025-06-09T17:02:20.853800+00:00",
+      "catalog_version": "2025.06.09",
+      "count": 1362
+    },
+    {
+      "commit": "90597e6225e04c8cc8313ccf11992f76faf9546c",
+      "committed_at": "2025-06-10T17:58:51+00:00",
+      "date_released": "2025-06-10T17:05:43.038200+00:00",
+      "catalog_version": "2025.06.10",
+      "count": 1364
+    },
+    {
+      "commit": "a77a31494bb92710c71c92c9fbf575e8c96187d2",
+      "committed_at": "2025-06-16T17:48:59+00:00",
+      "date_released": "2025-06-16T17:00:12.254100+00:00",
+      "catalog_version": "2025.06.16",
+      "count": 1366
+    },
+    {
+      "commit": "1be58fc4705a755d268d7686c65f27e7b90eb9ba",
+      "committed_at": "2025-06-17T17:34:20+00:00",
+      "date_released": "2025-06-17T17:00:46.202500+00:00",
+      "catalog_version": "2025.06.17",
+      "count": 1367
+    },
+    {
+      "commit": "1e48dddfc5c6442ee11ee924d7ace33cae945393",
+      "committed_at": "2025-06-25T17:40:49+00:00",
+      "date_released": "2025-06-25T16:52:26.974400+00:00",
+      "catalog_version": "2025.06.25",
+      "count": 1370
+    },
+    {
+      "commit": "a9687484b533a95b796c79be3c03d8e606c3945e",
+      "committed_at": "2025-07-01T18:05:22+00:00",
+      "date_released": "2025-07-01T17:00:59.134000+00:00",
+      "catalog_version": "2025.07.01",
+      "count": 1373
+    },
+    {
+      "commit": "7394755bcfb4b5f3d44d2e9eb04eaf5735fa7307",
+      "committed_at": "2025-07-02T18:00:38+00:00",
+      "date_released": "2025-07-02T17:00:37.497200+00:00",
+      "catalog_version": "2025.07.02",
+      "count": 1374
+    },
+    {
+      "commit": "155886a7a0c2b5515e121a5a158f61b8ea408b02",
+      "committed_at": "2025-07-07T17:51:30+00:00",
+      "date_released": "2025-07-07T17:00:02.840600+00:00",
+      "catalog_version": "2025.07.07",
+      "count": 1378
+    },
+    {
+      "commit": "1e644ecbac17049afd8dfe78263a2103f49230bd",
+      "committed_at": "2025-07-11T15:00:18+00:00",
+      "date_released": "2025-07-10T16:05:09.522000+00:00",
+      "catalog_version": "2025.07.10",
+      "count": 1379
+    },
+    {
+      "commit": "3519d29297fad4bcd5e46eb890cce5bb5739a845",
+      "committed_at": "2025-07-14T17:50:45+00:00",
+      "date_released": "2025-07-14T17:04:09.013300+00:00",
+      "catalog_version": "2025.07.14",
+      "count": 1380
+    },
+    {
+      "commit": "3bc90b1315c4a32793c8b6f44762193d82da4c7c",
+      "committed_at": "2025-07-18T17:43:04+00:00",
+      "date_released": "2025-07-18T17:00:02.434700+00:00",
+      "catalog_version": "2025.07.18",
+      "count": 1381
+    },
+    {
+      "commit": "8ab382abedbd7f9b68b9adf9e6eecee54e8c82e6",
+      "committed_at": "2025-07-21T16:00:48+00:00",
+      "date_released": "2025-07-20T19:06:00.833200+00:00",
+      "catalog_version": "2025.07.20",
+      "count": 1382
+    },
+    {
+      "commit": "1ee09c1cf1b6291abc242d40156761de5181b591",
+      "committed_at": "2025-07-22T17:55:11+00:00",
+      "date_released": "2025-07-22T17:01:26.719800+00:00",
+      "catalog_version": "2025.07.22",
+      "count": 1388
+    },
+    {
+      "commit": "d918dc12a3c46203671ec680ed2441a28152bd78",
+      "committed_at": "2025-07-25T12:21:15+00:00",
+      "date_released": "2025-07-24T17:30:26.591200+00:00",
+      "catalog_version": "2025.07.24",
+      "count": 1388
+    },
+    {
+      "commit": "0cca62ed469c333a45760beeaf35fcc53352aedd",
+      "committed_at": "2025-07-28T14:59:03+00:00",
+      "date_released": "2025-07-28T14:00:14.674600+00:00",
+      "catalog_version": "2025.07.28",
+      "count": 1391
+    },
+    {
+      "commit": "0823e23218ec120ec492180fcf83b22e93df549b",
+      "committed_at": "2025-08-05T18:11:22+00:00",
+      "date_released": "2025-08-05T18:03:16.752200+00:00",
+      "catalog_version": "2025.08.05",
+      "count": 1394
+    },
+    {
+      "commit": "59d65a194fde2c4434a9c25bdaca0250fd373d71",
+      "committed_at": "2025-08-12T18:01:15+00:00",
+      "date_released": "2025-08-12T17:01:51.587900+00:00",
+      "catalog_version": "2025.08.12",
+      "count": 1397
+    },
+    {
+      "commit": "44e6b2d2af831c7f8f9da6193341a24a9e0bbc76",
+      "committed_at": "2025-08-13T20:28:49+00:00",
+      "date_released": "2025-08-13T19:43:38.929600+00:00",
+      "catalog_version": "2025.08.13",
+      "count": 1399
+    },
+    {
+      "commit": "fb756078b12819ae10b0af30201ebdd773539e88",
+      "committed_at": "2025-08-18T15:12:09+00:00",
+      "date_released": "2025-08-18T13:43:39.408000+00:00",
+      "catalog_version": "2025.08.18",
+      "count": 1400
+    },
+    {
+      "commit": "c955f9cb822ed852d5d008c4901c4180815f021d",
+      "committed_at": "2025-08-21T18:32:55+00:00",
+      "date_released": "2025-08-21T17:02:19.804600+00:00",
+      "catalog_version": "2025.08.21",
+      "count": 1401
+    },
+    {
+      "commit": "eacf03ec6637cc7be6d3d4ed50785493da5126a2",
+      "committed_at": "2025-08-25T18:07:51+00:00",
+      "date_released": "2025-08-25T17:04:19.979600+00:00",
+      "catalog_version": "2025.08.25",
+      "count": 1404
+    },
+    {
+      "commit": "753ad84381c34a9a892ccac053b6e79faddecd1c",
+      "committed_at": "2025-08-26T22:05:26+00:00",
+      "date_released": "2025-08-26T20:21:40.129100+00:00",
+      "catalog_version": "2025.08.26",
+      "count": 1405
+    },
+    {
+      "commit": "9d28701f99f7652a1a467353082ea733f048adcf",
+      "committed_at": "2025-08-29T18:07:24+00:00",
+      "date_released": "2025-08-29T17:00:23.701500+00:00",
+      "catalog_version": "2025.08.29",
+      "count": 1406
+    },
+    {
+      "commit": "849c86df8458e02f1e842aa6f3040633938a635c",
+      "committed_at": "2025-09-02T14:05:50+00:00",
+      "date_released": "2025-09-02T14:00:03.809600+00:00",
+      "catalog_version": "2025.09.02",
+      "count": 1408
+    },
+    {
+      "commit": "87b602f4a2276d5a93209bc787dd05fe5292362f",
+      "committed_at": "2025-09-03T17:05:01+00:00",
+      "date_released": "2025-09-03T17:00:44.122000+00:00",
+      "catalog_version": "2025.09.03",
+      "count": 1410
+    },
+    {
+      "commit": "39e22593d0742e6752495c9835ca6d8a0dc6e2c3",
+      "committed_at": "2025-09-04T18:07:14+00:00",
+      "date_released": "2025-09-04T17:01:10.608800+00:00",
+      "catalog_version": "2025.09.04",
+      "count": 1413
+    },
+    {
+      "commit": "8654347f95d95bb02af728c2f0f16638c143b6d0",
+      "committed_at": "2025-09-04T20:06:29+00:00",
+      "date_released": "2025-09-04T18:50:12.483700+00:00",
+      "catalog_version": "2025.09.04",
+      "count": 1413
+    },
+    {
+      "commit": "4bf7ef93be06ed4b7e662bbc53cd2199fbacc021",
+      "committed_at": "2025-09-11T18:06:55+00:00",
+      "date_released": "2025-09-11T17:00:46.004600+00:00",
+      "catalog_version": "2025.09.11",
+      "count": 1414
+    },
+    {
+      "commit": "e0f3a197a719d2f99976044e1faa3e58330e5424",
+      "committed_at": "2025-09-23T18:08:09+00:00",
+      "date_released": "2025-09-23T17:01:35.105400+00:00",
+      "catalog_version": "2025.09.23",
+      "count": 1415
+    },
+    {
+      "commit": "206dacd1bef810d5570f21d2fc2bf462a7eb8cfc",
+      "committed_at": "2025-09-25T16:30:15+00:00",
+      "date_released": "2025-09-25T16:17:38.044700+00:00",
+      "catalog_version": "2025.09.25",
+      "count": 1417
+    },
+    {
+      "commit": "8a96dda96470264ff8c821276336f45a3e209cc6",
+      "committed_at": "2025-09-29T18:17:42+00:00",
+      "date_released": "2025-09-29T17:00:52.357400+00:00",
+      "catalog_version": "2025.09.29",
+      "count": 1422
+    },
+    {
+      "commit": "f0cdec4e193d5e7020dcb7546e919939c69dedf0",
+      "committed_at": "2025-09-29T21:44:13+00:00",
+      "date_released": "2025-09-29T20:00:02.772100+00:00",
+      "catalog_version": "2025.09.29",
+      "count": 1422
+    },
+    {
+      "commit": "a984003fa38d3032d66e344332368f937cb5be7b",
+      "committed_at": "2025-09-30T13:13:38+00:00",
+      "date_released": "2025-09-30T12:35:25.440100+00:00",
+      "catalog_version": "2025.09.30",
+      "count": 1422
+    },
+    {
+      "commit": "85d546fe345eb79d3eb6dd579ea55108be55bef1",
+      "committed_at": "2025-10-02T16:06:30+00:00",
+      "date_released": "2025-10-02T14:59:13.769600+00:00",
+      "catalog_version": "2025.10.02",
+      "count": 1427
+    },
+    {
+      "commit": "32ed184c1ad0584b8f99f590cc24e999dabf6224",
+      "committed_at": "2025-10-06T18:24:46+00:00",
+      "date_released": "2025-10-06T17:05:34.817700+00:00",
+      "catalog_version": "2025.10.06",
+      "count": 1434
+    },
+    {
+      "commit": "2690e48874780f4635ba6572178263d4621d43fd",
+      "committed_at": "2025-10-06T19:07:13+00:00",
+      "date_released": "2025-10-06T18:26:19.345800+00:00",
+      "catalog_version": "2025.10.06",
+      "count": 1434
+    },
+    {
+      "commit": "24194638c83d753d308863d2c5545a2e0180bf0c",
+      "committed_at": "2025-10-06T20:06:38+00:00",
+      "date_released": "2025-10-06T18:50:56.210400+00:00",
+      "catalog_version": "2025.10.06",
+      "count": 1434
+    },
+    {
+      "commit": "ca2cc7f3084d24bf5ecd946c840ef5e2fb08a00f",
+      "committed_at": "2025-10-07T18:08:20+00:00",
+      "date_released": "2025-10-07T17:09:43.431200+00:00",
+      "catalog_version": "2025.10.07",
+      "count": 1435
+    },
+    {
+      "commit": "fa60f9592b588c3396f380cc5f87e1099c24ae67",
+      "committed_at": "2025-10-07T22:05:34+00:00",
+      "date_released": "2025-10-07T21:07:50.897900+00:00",
+      "catalog_version": "2025.10.07",
+      "count": 1435
+    },
+    {
+      "commit": "e45a9a1a956c93a7c3affd9a365db3e763471a94",
+      "committed_at": "2025-10-08T21:32:12+00:00",
+      "date_released": "2025-10-08T15:06:53.373100+00:00",
+      "catalog_version": "2025.10.08",
+      "count": 1435
+    },
+    {
+      "commit": "062c38c84ef141d2dcf080ac7e54676542d1e578",
+      "committed_at": "2025-10-09T17:40:50+00:00",
+      "date_released": "2025-10-09T16:52:28.654700+00:00",
+      "catalog_version": "2025.10.09",
+      "count": 1436
+    },
+    {
+      "commit": "05193b484257fc46809c3795be977c4a000dd20a",
+      "committed_at": "2025-10-14T18:30:32+00:00",
+      "date_released": "2025-10-14T17:11:17.090500+00:00",
+      "catalog_version": "2025.10.14",
+      "count": 1441
+    },
+    {
+      "commit": "ff983a64ca8141c658f60fa901b9e82aaad2a0a0",
+      "committed_at": "2025-10-14T20:11:21+00:00",
+      "date_released": "2025-10-14T18:00:15.936800+00:00",
+      "catalog_version": "2025.10.14",
+      "count": 1441
+    },
+    {
+      "commit": "9a582b614f27a09820da42c6eece8558fe5d67c1",
+      "committed_at": "2025-10-15T18:08:44+00:00",
+      "date_released": "2025-10-15T17:18:02.715200+00:00",
+      "catalog_version": "2025.10.15",
+      "count": 1442
+    },
+    {
+      "commit": "eb4bbdc1d594bddc435b1f9a26575f500f8c645d",
+      "committed_at": "2025-10-15T19:05:04+00:00",
+      "date_released": "2025-10-15T18:34:38.947900+00:00",
+      "catalog_version": "2025.10.15",
+      "count": 1442
+    },
+    {
+      "commit": "9b760d33418291a727b24ff2238a34db3bf97cf8",
+      "committed_at": "2025-10-20T15:05:55+00:00",
+      "date_released": "2025-10-20T13:56:54.059300+00:00",
+      "catalog_version": "2025.10.20",
+      "count": 1447
+    },
+    {
+      "commit": "207c44fe2d859d01290c786e643390866758efac",
+      "committed_at": "2025-10-21T19:05:29+00:00",
+      "date_released": "2025-10-21T18:29:57.987400+00:00",
+      "catalog_version": "2025.10.21",
+      "count": 1447
+    },
+    {
+      "commit": "29fb5448cf80c582462c4906f0bbcfed80101f7f",
+      "committed_at": "2025-10-22T18:09:14+00:00",
+      "date_released": "2025-10-22T17:24:42.950300+00:00",
+      "catalog_version": "2025.10.22",
+      "count": 1447
+    },
+    {
+      "commit": "07209438677fbd6f58846b01fc63694f955db4b1",
+      "committed_at": "2025-10-24T18:08:19+00:00",
+      "date_released": "2025-10-24T16:55:58.321000+00:00",
+      "catalog_version": "2025.10.24",
+      "count": 1449
+    },
+    {
+      "commit": "9e80d43992e53ab2867b637cfe8d7685ab3291ed",
+      "committed_at": "2025-10-28T18:08:36+00:00",
+      "date_released": "2025-10-28T16:56:01.172100+00:00",
+      "catalog_version": "2025.10.28",
+      "count": 1451
+    },
+    {
+      "commit": "e02f19f6bead3ec55da276e1a1c5d7397a3181b8",
+      "committed_at": "2025-10-29T19:05:08+00:00",
+      "date_released": "2025-10-29T18:39:31.837300+00:00",
+      "catalog_version": "2025.10.29",
+      "count": 1451
+    },
+    {
+      "commit": "cec939ad1f5e78ba4e06933ae8d12e074e1bf811",
+      "committed_at": "2025-10-30T18:08:02+00:00",
+      "date_released": "2025-10-30T16:58:33.580400+00:00",
+      "catalog_version": "2025.10.30",
+      "count": 1453
+    },
+    {
+      "commit": "b3d2b729205c5cd1e4249bc3b144ea5027533e52",
+      "committed_at": "2025-10-30T19:05:03+00:00",
+      "date_released": "2025-10-30T17:58:16.162700+00:00",
+      "catalog_version": "2025.10.30",
+      "count": 1453
+    },
+    {
+      "commit": "bc3f4ddd512db275f2ba9b0680dd5c45bc250211",
+      "committed_at": "2025-11-04T19:05:02+00:00",
+      "date_released": "2025-11-04T17:55:00.440500+00:00",
+      "catalog_version": "2025.11.04",
+      "count": 1455
+    },
+    {
+      "commit": "0ab42c8dd1574866549aecd8027142ed6475061e",
+      "committed_at": "2025-11-10T19:05:09+00:00",
+      "date_released": "2025-11-10T17:48:31.034500+00:00",
+      "catalog_version": "2025.11.10",
+      "count": 1456
+    },
+    {
+      "commit": "de0c3da8a4d20725473dd02a34b3299e72bf7b9b",
+      "committed_at": "2025-11-12T16:07:47+00:00",
+      "date_released": "2025-11-12T14:50:28.424400+00:00",
+      "catalog_version": "2025.11.12",
+      "count": 1459
+    },
+    {
+      "commit": "e1342b2c1068dda036c151c125702854e0eb043e",
+      "committed_at": "2025-11-14T18:08:13+00:00",
+      "date_released": "2025-11-14T16:29:18.498400+00:00",
+      "catalog_version": "2025.11.14",
+      "count": 1460
+    },
+    {
+      "commit": "80ad9a0da9bfa5aac0a8b5c4ed3b95943553db5b",
+      "committed_at": "2025-11-18T22:05:36+00:00",
+      "date_released": "2025-11-18T20:22:16.453400+00:00",
+      "catalog_version": "2025.11.18",
+      "count": 1461
+    },
+    {
+      "commit": "54d0ade04de1dfea8db648dfbe5fddb1e4c3f831",
+      "committed_at": "2025-11-19T19:05:06+00:00",
+      "date_released": "2025-11-19T18:00:42.085900+00:00",
+      "catalog_version": "2025.11.19",
+      "count": 1462
+    },
+    {
+      "commit": "4c6ef1ee34986b0af434f16a1f766d3893212ed9",
+      "committed_at": "2025-11-21T22:05:58+00:00",
+      "date_released": "2025-11-21T20:48:10.414800+00:00",
+      "catalog_version": "2025.11.21",
+      "count": 1463
+    },
+    {
+      "commit": "a8cf88d2de5f779ad514b1fcde459af43480ec06",
+      "committed_at": "2025-11-28T18:07:51+00:00",
+      "date_released": "2025-11-28T17:48:26.200300+00:00",
+      "catalog_version": "2025.11.28",
+      "count": 1464
+    },
+    {
+      "commit": "d4dcefe7e41a5bdca6db89b75626e842147ce2f0",
+      "committed_at": "2025-12-02T18:09:09+00:00",
+      "date_released": "2025-12-02T18:01:27.398700+00:00",
+      "catalog_version": "2025.12.02",
+      "count": 1466
+    },
+    {
+      "commit": "c34857d8c82c58886ae48586f43eb65ec0dcca0d",
+      "committed_at": "2025-12-03T19:07:06+00:00",
+      "date_released": "2025-12-03T18:00:03.114100+00:00",
+      "catalog_version": "2025.12.03",
+      "count": 1467
+    },
+    {
+      "commit": "1da42901c6d3af161839308f866baea58186a754",
+      "committed_at": "2025-12-05T15:06:49+00:00",
+      "date_released": "2025-12-05T14:13:22.628500+00:00",
+      "catalog_version": "2025.12.05",
+      "count": 1468
+    },
+    {
+      "commit": "59c869c24d74518b20476f2ef1f6413b2f714ea0",
+      "committed_at": "2025-12-08T19:05:15+00:00",
+      "date_released": "2025-12-08T18:00:40.100800+00:00",
+      "catalog_version": "2025.12.08",
+      "count": 1470
+    },
+    {
+      "commit": "63061f3648e75d01ff7714cef31e269efcc5c0ae",
+      "committed_at": "2025-12-08T21:05:37+00:00",
+      "date_released": "2025-12-08T20:20:10.546600+00:00",
+      "catalog_version": "2025.12.08",
+      "count": 1470
+    },
+    {
+      "commit": "87ceef0dd04c883dfcd6341145f26b2664e0cb25",
+      "committed_at": "2025-12-09T19:05:11+00:00",
+      "date_released": "2025-12-09T18:19:14.011800+00:00",
+      "catalog_version": "2025.12.09",
+      "count": 1472
+    },
+    {
+      "commit": "46032e78fc031eb30e96f7e2b5c96c2b4ffc9175",
+      "committed_at": "2025-12-09T21:05:20+00:00",
+      "date_released": "2025-12-09T20:17:01.980900+00:00",
+      "catalog_version": "2025.12.09",
+      "count": 1472
+    },
+    {
+      "commit": "efaebb85a372cdfc634d949c32671051d3451143",
+      "committed_at": "2025-12-09T23:06:20+00:00",
+      "date_released": "2025-12-09T21:45:47.043200+00:00",
+      "catalog_version": "2025.12.09",
+      "count": 1472
+    },
+    {
+      "commit": "e61be28812c525da80c30dbdf61be6b2a3f41195",
+      "committed_at": "2025-12-11T20:07:10+00:00",
+      "date_released": "2025-12-11T19:12:53.410500+00:00",
+      "catalog_version": "2025.12.11",
+      "count": 1473
+    },
+    {
+      "commit": "1ca0f11256569d70b593896bcc6ce75bce74cae8",
+      "committed_at": "2025-12-12T16:06:48+00:00",
+      "date_released": "2025-12-12T15:13:22.342200+00:00",
+      "catalog_version": "2025.12.12",
+      "count": 1473
+    },
+    {
+      "commit": "fec033aaf4a6d7450a6c2d866df5f84d348985a0",
+      "committed_at": "2025-12-12T18:09:12+00:00",
+      "date_released": "2025-12-12T17:32:31.636300+00:00",
+      "catalog_version": "2025.12.12",
+      "count": 1473
+    },
+    {
+      "commit": "1bcf9a9412f97cdd7cef23735f8fbfc6c3112869",
+      "committed_at": "2025-12-12T19:05:31+00:00",
+      "date_released": "2025-12-12T17:59:39.220900+00:00",
+      "catalog_version": "2025.12.12",
+      "count": 1474
+    },
+    {
+      "commit": "2926ca549865b7aa27184c169e26960d42c848a5",
+      "committed_at": "2025-12-12T21:05:25+00:00",
+      "date_released": "2025-12-12T20:26:48.178000+00:00",
+      "catalog_version": "2025.12.12",
+      "count": 1475
+    },
+    {
+      "commit": "262c4094d19fc9e1ce444f771299896b35333810",
+      "committed_at": "2025-12-15T18:27:29+00:00",
+      "date_released": "2025-12-15T17:40:39.432200+00:00",
+      "catalog_version": "2025.12.15",
+      "count": 1477
+    },
+    {
+      "commit": "95f47ed20ce92da34e592a69213cc162a3509dab",
+      "committed_at": "2025-12-15T19:06:44+00:00",
+      "date_released": "2025-12-15T18:15:53.195200+00:00",
+      "catalog_version": "2025.12.15",
+      "count": 1477
+    },
+    {
+      "commit": "8056eb677702ad3be3e6f5b4f8c2c15f3cf0cddd",
+      "committed_at": "2025-12-16T18:09:07+00:00",
+      "date_released": "2025-12-16T18:00:01.750100+00:00",
+      "catalog_version": "2025.12.16",
+      "count": 1478
+    },
+    {
+      "commit": "c84af05b0d177ab93e40a681fa977cca4837bf20",
+      "committed_at": "2025-12-17T15:07:01+00:00",
+      "date_released": "2025-12-17T13:52:19.187400+00:00",
+      "catalog_version": "2025.12.17",
+      "count": 1478
+    },
+    {
+      "commit": "01114d7b3eea4ef12a422971113612489483b3cf",
+      "committed_at": "2025-12-17T21:05:58+00:00",
+      "date_released": "2025-12-17T20:04:39.015900+00:00",
+      "catalog_version": "2025.12.17",
+      "count": 1481
+    },
+    {
+      "commit": "6981b4185447b3fc12e9deae69cc1b7d5977b816",
+      "committed_at": "2025-12-18T14:07:05+00:00",
+      "date_released": "2025-12-18T13:42:24.085900+00:00",
+      "catalog_version": "2025.12.18",
+      "count": 1481
+    },
+    {
+      "commit": "e616eb0002d3e29b52ccd7f73c9740c2022ad81b",
+      "committed_at": "2025-12-19T18:08:33+00:00",
+      "date_released": "2025-12-19T16:56:47.990300+00:00",
+      "catalog_version": "2025.12.19",
+      "count": 1481
+    },
+    {
+      "commit": "1f1b08c01e4ceb92a424483b978782d5f007b2b1",
+      "committed_at": "2025-12-19T19:05:34+00:00",
+      "date_released": "2025-12-19T18:01:33.355500+00:00",
+      "catalog_version": "2025.12.19",
+      "count": 1482
+    },
+    {
+      "commit": "9be38a1fce26068018b32d51f0a1d4ec442fd096",
+      "committed_at": "2025-12-22T19:05:48+00:00",
+      "date_released": "2025-12-22T18:30:33.167000+00:00",
+      "catalog_version": "2025.12.22",
+      "count": 1483
+    },
+    {
+      "commit": "7b6be08055a42cf238a080745a3a2ff9f7e43ac5",
+      "committed_at": "2025-12-29T21:05:33+00:00",
+      "date_released": "2025-12-29T19:35:19.911000+00:00",
+      "catalog_version": "2025.12.29",
+      "count": 1484
+    },
+    {
+      "commit": "b3d5b61fed7a66111008b0f272e27469550632f3",
+      "committed_at": "2026-01-07T19:06:57+00:00",
+      "date_released": "2026-01-07T18:05:19.723800+00:00",
+      "catalog_version": "2026.01.07",
+      "count": 1486
+    },
+    {
+      "commit": "c547d5791e4617c9767860ccefbf8cae2780dd53",
+      "committed_at": "2026-01-09T16:07:18+00:00",
+      "date_released": "2026-01-09T15:37:59.762000+00:00",
+      "catalog_version": "2026.01.09",
+      "count": 1486
+    },
+    {
+      "commit": "4c042d35614c1f1cced887188aaf72fbe24910f0",
+      "committed_at": "2026-01-12T19:07:12+00:00",
+      "date_released": "2026-01-12T18:00:17.556500+00:00",
+      "catalog_version": "2026.01.12",
+      "count": 1487
+    },
+    {
+      "commit": "752689873036a53292dad54c883cc437eef9b871",
+      "committed_at": "2026-01-13T19:06:42+00:00",
+      "date_released": "2026-01-13T19:00:21.708600+00:00",
+      "catalog_version": "2026.01.13",
+      "count": 1488
+    },
+    {
+      "commit": "5ea79fa5e4a7805dc0fb988000264092c3155d9d",
+      "committed_at": "2026-01-13T22:06:43+00:00",
+      "date_released": "2026-01-13T21:11:22.376900+00:00",
+      "catalog_version": "2026.01.13",
+      "count": 1488
+    },
+    {
+      "commit": "278d882734afbc9515b83db808cf7e7c3c49a65b",
+      "committed_at": "2026-01-21T21:10:50+00:00",
+      "date_released": "2026-01-21T20:14:44.491700+00:00",
+      "catalog_version": "2026.01.21",
+      "count": 1489
+    },
+    {
+      "commit": "8d9d351d4c3ecb3e59702c256876a3c2a7ceecd9",
+      "committed_at": "2026-01-22T19:09:38+00:00",
+      "date_released": "2026-01-22T18:00:26.119400+00:00",
+      "catalog_version": "2026.01.22",
+      "count": 1493
+    },
+    {
+      "commit": "e8c84e62f710ee26dd4db370b7c015b9405fc2b5",
+      "committed_at": "2026-01-23T19:09:17+00:00",
+      "date_released": "2026-01-23T18:00:05.420700+00:00",
+      "catalog_version": "2026.01.23",
+      "count": 1494
+    },
+    {
+      "commit": "9a38508bffb10e78fb614a1c7b936fae6881cdcc",
+      "committed_at": "2026-01-26T21:07:45+00:00",
+      "date_released": "2026-01-26T19:53:47.728900+00:00",
+      "catalog_version": "2026.01.26",
+      "count": 1498
+    },
+    {
+      "commit": "97868e35bd473b88537550f8fd2d6ca9f0f075df",
+      "committed_at": "2026-01-26T22:06:29+00:00",
+      "date_released": "2026-01-26T20:47:09.659000+00:00",
+      "catalog_version": "2026.01.26",
+      "count": 1499
+    },
+    {
+      "commit": "c98c42742ce75dbaf687d48f59a849a6a61fb60a",
+      "committed_at": "2026-01-27T16:09:26+00:00",
+      "date_released": "2026-01-27T14:55:21.643100+00:00",
+      "catalog_version": "2026.01.27",
+      "count": 1499
+    },
+    {
+      "commit": "c7bc14a33d0e80f7c5584d58b20e9514fa042c30",
+      "committed_at": "2026-01-27T23:06:35+00:00",
+      "date_released": "2026-01-27T20:51:50.768800+00:00",
+      "catalog_version": "2026.01.27",
+      "count": 1500
+    },
+    {
+      "commit": "311c2657ffdc27db2d7d6b06b9a8209e5876c195",
+      "committed_at": "2026-01-29T15:17:45+00:00",
+      "date_released": "2026-01-29T14:16:45.567300+00:00",
+      "catalog_version": "2026.01.29",
+      "count": 1500
+    },
+    {
+      "commit": "6bc191b6944f5989ccbe22528e0761e50f1c558f",
+      "committed_at": "2026-01-29T18:15:11+00:00",
+      "date_released": "2026-01-29T18:02:05.237800+00:00",
+      "catalog_version": "2026.01.29",
+      "count": 1501
+    },
+    {
+      "commit": "dbb1fb417505c8c13c63ba5a46be8c27027e1af0",
+      "committed_at": "2026-01-29T19:14:48+00:00",
+      "date_released": "2026-01-29T18:06:38.812600+00:00",
+      "catalog_version": "2026.01.29",
+      "count": 1500
+    },
+    {
+      "commit": "349cf84024ee164beed849d18d1f91a2f5ddef46",
+      "committed_at": "2026-01-29T20:41:01+00:00",
+      "date_released": "2026-01-29T20:24:37.095900+00:00",
+      "catalog_version": "2026.01.29",
+      "count": 1501
+    },
+    {
+      "commit": "f8af51a702e961ef4216891ba1aa1ec38a0795f3",
+      "committed_at": "2026-02-03T16:20:51+00:00",
+      "date_released": "2026-02-03T15:17:06.693300+00:00",
+      "catalog_version": "2026.02.03",
+      "count": 1504
+    },
+    {
+      "commit": "992233b09e76c1029c70a7eae9306ca9a52d9044",
+      "committed_at": "2026-02-03T19:20:55+00:00",
+      "date_released": "2026-02-03T18:02:42.411700+00:00",
+      "catalog_version": "2026.02.03",
+      "count": 1505
+    },
+    {
+      "commit": "42d93ca1fc26f0c53fccb3efd0c7c7ebc5e3769a",
+      "committed_at": "2026-02-04T13:29:38+00:00",
+      "date_released": "2026-02-04T12:50:10.383700+00:00",
+      "catalog_version": "2026.02.04",
+      "count": 1505
+    },
+    {
+      "commit": "c8eb1c8090e8b5aba3256a1a6c83c82d84605789",
+      "committed_at": "2026-02-05T21:10:20+00:00",
+      "date_released": "2026-02-05T20:01:35.051200+00:00",
+      "catalog_version": "2026.02.05",
+      "count": 1507
+    },
+    {
+      "commit": "89c6359551fa53780ff7b7d3251141c38f42c063",
+      "committed_at": "2026-02-05T23:08:21+00:00",
+      "date_released": "2026-02-05T22:04:54.341600+00:00",
+      "catalog_version": "2026.02.05",
+      "count": 1507
+    },
+    {
+      "commit": "fa89730625d291b46acfffd6cdaae2875948e5ca",
+      "committed_at": "2026-02-06T14:19:22+00:00",
+      "date_released": "2026-02-06T13:29:56.548500+00:00",
+      "catalog_version": "2026.02.06",
+      "count": 1507
+    },
+    {
+      "commit": "55fe9ac51de66c7bff6ef3888075700569d3a4fc",
+      "committed_at": "2026-02-10T19:27:48+00:00",
+      "date_released": "2026-02-10T18:24:20.557200+00:00",
+      "catalog_version": "2026.02.10",
+      "count": 1513
+    },
+    {
+      "commit": "66a3372eaf14d246e1e697cb63e54bbd427407e6",
+      "committed_at": "2026-02-10T20:17:38+00:00",
+      "date_released": "2026-02-10T19:37:12.389900+00:00",
+      "catalog_version": "2026.02.10",
+      "count": 1513
+    },
+    {
+      "commit": "af6648e1c4c83d455788c4a67d9c9646e55ba5f7",
+      "committed_at": "2026-02-11T16:26:47+00:00",
+      "date_released": "2026-02-11T15:13:05.196700+00:00",
+      "catalog_version": "2026.02.11",
+      "count": 1513
+    },
+    {
+      "commit": "a05243bd47937be0ce7087a948907c1c77169bec",
+      "committed_at": "2026-02-12T19:25:35+00:00",
+      "date_released": "2026-02-12T18:01:14.171600+00:00",
+      "catalog_version": "2026.02.12",
+      "count": 1516
+    },
+    {
+      "commit": "6a13373466839babbfc672a3594d8ec8a66c2318",
+      "committed_at": "2026-02-12T21:12:10+00:00",
+      "date_released": "2026-02-12T20:00:05.121100+00:00",
+      "catalog_version": "2026.02.12",
+      "count": 1517
+    },
+    {
+      "commit": "ebc6254e4fc1f7ccfc7c2cc6c00fdd087419b94b",
+      "committed_at": "2026-02-14T00:32:50+00:00",
+      "date_released": "2026-02-13T23:49:15.628000+00:00",
+      "catalog_version": "2026.02.13",
+      "count": 1518
+    },
+    {
+      "commit": "4448c2f15823de7813a5676ab5b0ff49465a2008",
+      "committed_at": "2026-02-17T21:13:33+00:00",
+      "date_released": "2026-02-17T20:07:57.438700+00:00",
+      "catalog_version": "2026.02.17",
+      "count": 1522
+    },
+    {
+      "commit": "bfc8399ed87436de5f3a9a019afcf33e17948c63",
+      "committed_at": "2026-02-18T16:32:35+00:00",
+      "date_released": "2026-02-18T15:55:57.915100+00:00",
+      "catalog_version": "2026.02.18",
+      "count": 1524
+    },
+    {
+      "commit": "8d4e81191c191e4978ae407b8144da18d3591081",
+      "committed_at": "2026-02-19T21:10:53+00:00",
+      "date_released": "2026-02-19T20:35:51.412000+00:00",
+      "catalog_version": "2026.02.19",
+      "count": 1524
+    },
+    {
+      "commit": "7c82a9c42f35e0e74ecbd552657c4171b24942f8",
+      "committed_at": "2026-02-20T21:07:03+00:00",
+      "date_released": "2026-02-20T19:27:58.767600+00:00",
+      "catalog_version": "2026.02.20",
+      "count": 1526
+    },
+    {
+      "commit": "4091d4c77fa25e2d61e489cf6b6b80cbbae7f19c",
+      "committed_at": "2026-02-24T19:24:32+00:00",
+      "date_released": "2026-02-24T17:59:30.775100+00:00",
+      "catalog_version": "2026.02.24",
+      "count": 1527
+    },
+    {
+      "commit": "149f9338a40605d03671925c6c89ec5eda30e2f0",
+      "committed_at": "2026-02-25T17:26:10+00:00",
+      "date_released": "2026-02-25T16:25:36.964700+00:00",
+      "catalog_version": "2026.02.25",
+      "count": 1529
+    },
+    {
+      "commit": "d280c434a57d12a3cc58962f2cdef46a7e34e6fd",
+      "committed_at": "2026-02-26T17:26:14+00:00",
+      "date_released": "2026-02-26T16:22:48.456100+00:00",
+      "catalog_version": "2026.02.26",
+      "count": 1529
+    },
+    {
+      "commit": "1c741d6443eea352dca758b84c018674db200e0d",
+      "committed_at": "2026-03-03T18:18:52+00:00",
+      "date_released": "2026-03-03T17:37:44.782400+00:00",
+      "catalog_version": "2026.03.03",
+      "count": 1531
+    },
+    {
+      "commit": "3bacf4531ce5079121312065d3bf9f97c85ae7ad",
+      "committed_at": "2026-03-04T18:17:38+00:00",
+      "date_released": "2026-03-04T17:04:44.592900+00:00",
+      "catalog_version": "2026.03.04",
+      "count": 1531
+    },
+    {
+      "commit": "5e2843e963211c65e4285ca3feebff934f9ad1c8",
+      "committed_at": "2026-03-05T19:29:36+00:00",
+      "date_released": "2026-03-05T18:57:19.297300+00:00",
+      "catalog_version": "2026.03.05",
+      "count": 1536
+    },
+    {
+      "commit": "234f11e3bd0e327f48719e24ed22ed3e28de8d33",
+      "committed_at": "2026-03-09T20:10:25+00:00",
+      "date_released": "2026-03-09T19:46:11.697200+00:00",
+      "catalog_version": "2026.03.09",
+      "count": 1539
+    },
+    {
+      "commit": "a8cd2c5d66f09316a0156bb5d7ef9c8bffa57cc0",
+      "committed_at": "2026-03-11T18:22:01+00:00",
+      "date_released": "2026-03-11T17:24:27.113400+00:00",
+      "catalog_version": "2026.03.11",
+      "count": 1540
+    },
+    {
+      "commit": "9c6d0a5019b5bdcf801d6ab9e15e645af730af61",
+      "committed_at": "2026-03-13T18:14:18+00:00",
+      "date_released": "2026-03-13T16:38:24.564000+00:00",
+      "catalog_version": "2026.03.13",
+      "count": 1542
+    },
+    {
+      "commit": "72d9b11a9ac08dea4aa5015d135c322680c76a34",
+      "committed_at": "2026-03-16T18:24:23+00:00",
+      "date_released": "2026-03-16T16:37:30.642200+00:00",
+      "catalog_version": "2026.03.16",
+      "count": 1543
+    },
+    {
+      "commit": "2f2c99285ecdeaba731f5b73b1c48b4c9da8f98f",
+      "committed_at": "2026-03-18T18:24:28+00:00",
+      "date_released": "2026-03-18T16:49:00.094200+00:00",
+      "catalog_version": "2026.03.18",
+      "count": 1544
+    },
+    {
+      "commit": "9cf6af0efa9a46619eb7169cb47793dc2d81404c",
+      "committed_at": "2026-03-18T20:14:16+00:00",
+      "date_released": "2026-03-18T19:24:20.281100+00:00",
+      "catalog_version": "2026.03.18",
+      "count": 1545
+    },
+    {
+      "commit": "a7bfe434e3af0ddcfedd23ff5b1985caa5d569b9",
+      "committed_at": "2026-03-19T13:34:11+00:00",
+      "date_released": "2026-03-19T13:06:37.065500+00:00",
+      "catalog_version": "2026.03.19",
+      "count": 1545
+    },
+    {
+      "commit": "6a2217f66beb8fbc44b5dd59d87a8c07de215b55",
+      "committed_at": "2026-03-19T16:23:07+00:00",
+      "date_released": "2026-03-19T15:13:53.679800+00:00",
+      "catalog_version": "2026.03.19",
+      "count": 1546
+    },
+    {
+      "commit": "3514ec5c55ad697a5bb9b8220b57660fdbd18d37",
+      "committed_at": "2026-03-20T15:18:42+00:00",
+      "date_released": "2026-03-20T15:03:55.638200+00:00",
+      "catalog_version": "2026.03.20",
+      "count": 1551
+    },
+    {
+      "commit": "8587341d96f380dfa84d9bae86c8f3f0c1715840",
+      "committed_at": "2026-03-25T18:23:25+00:00",
+      "date_released": "2026-03-25T16:56:27.664700+00:00",
+      "catalog_version": "2026.03.25",
+      "count": 1552
+    },
+    {
+      "commit": "8eccd0d0f5a630c24290145c2f304aa92e11ab2f",
+      "committed_at": "2026-03-26T17:26:26+00:00",
+      "date_released": "2026-03-26T16:51:41.378100+00:00",
+      "catalog_version": "2026.03.26",
+      "count": 1553
+    },
+    {
+      "commit": "dca33a66269700e694c81c3d6487ccdbf8aab70a",
+      "committed_at": "2026-03-26T18:25:47+00:00",
+      "date_released": "2026-03-26T17:17:20.265800+00:00",
+      "catalog_version": "2026.03.26",
+      "count": 1553
+    },
+    {
+      "commit": "af12fd3956a0cd2c4cfef3068d4cf9c9818479e4",
+      "committed_at": "2026-03-27T20:13:01+00:00",
+      "date_released": "2026-03-27T19:29:44.585200+00:00",
+      "catalog_version": "2026.03.27",
+      "count": 1554
+    },
+    {
+      "commit": "be0d21858b2ce9d4acc4085e2f7f95642812b682",
+      "committed_at": "2026-03-27T23:12:24+00:00",
+      "date_released": "2026-03-27T22:10:24.477200+00:00",
+      "catalog_version": "2026.03.27",
+      "count": 1554
+    },
+    {
+      "commit": "6fe63a2e8d9be004dae532d8ce94aeb56f716e11",
+      "committed_at": "2026-03-30T19:25:29+00:00",
+      "date_released": "2026-03-30T18:55:21.858500+00:00",
+      "catalog_version": "2026.03.30",
+      "count": 1555
+    },
+    {
+      "commit": "72998801139ed0be573620f47cdb7d663a47eee3",
+      "committed_at": "2026-04-01T20:17:18+00:00",
+      "date_released": "2026-04-01T19:07:40.536300+00:00",
+      "catalog_version": "2026.04.01",
+      "count": 1556
+    },
+    {
+      "commit": "741c472f97d16770c9077fd576cd5cd75135d3d8",
+      "committed_at": "2026-04-02T18:21:57+00:00",
+      "date_released": "2026-04-02T16:57:08.381100+00:00",
+      "catalog_version": "2026.04.02",
+      "count": 1556
+    },
+    {
+      "commit": "8e2714720214a0e6907e0a9451352a19b9c72bb2",
+      "committed_at": "2026-04-02T21:14:19+00:00",
+      "date_released": "2026-04-02T19:32:22.117100+00:00",
+      "catalog_version": "2026.04.02",
+      "count": 1557
+    },
+    {
+      "commit": "64dccb767d42ee7f353e5ba1f8730c6c38a90d17",
+      "committed_at": "2026-04-06T16:19:17+00:00",
+      "date_released": "2026-04-06T14:59:12.246700+00:00",
+      "catalog_version": "2026.04.06",
+      "count": 1558
+    },
+    {
+      "commit": "c668319ada3973cf9b05cd30839413a8ca8f115f",
+      "committed_at": "2026-04-08T17:27:24+00:00",
+      "date_released": "2026-04-08T16:59:09.337800+00:00",
+      "catalog_version": "2026.04.08",
+      "count": 1559
+    },
+    {
+      "commit": "2f2f162e26187e1b4d2f64173e3fe61f887680d7",
+      "committed_at": "2026-04-13T17:26:55+00:00",
+      "date_released": "2026-04-13T17:09:50.514900+00:00",
+      "catalog_version": "2026.04.13",
+      "count": 1566
+    },
+    {
+      "commit": "71f5f76ea03aa31cf810acd1e065126b06d13cb5",
+      "committed_at": "2026-04-14T17:28:45+00:00",
+      "date_released": "2026-04-14T17:02:49.912200+00:00",
+      "catalog_version": "2026.04.14",
+      "count": 1568
+    },
+    {
+      "commit": "871682763dc5786e8200e2bcf8da26272db800ee",
+      "committed_at": "2026-04-16T14:39:36+00:00",
+      "date_released": "2026-04-16T13:06:56.623200+00:00",
+      "catalog_version": "2026.04.16",
+      "count": 1568
+    },
+    {
+      "commit": "c992eb1e341afc71f61757066aa4dd26253795c0",
+      "committed_at": "2026-04-16T18:29:50+00:00",
+      "date_released": "2026-04-16T17:01:07.167500+00:00",
+      "catalog_version": "2026.04.16",
+      "count": 1569
+    },
+    {
+      "commit": "215f615766791c0553a19ffa57c8ce3de77e409f",
+      "committed_at": "2026-04-20T19:28:05+00:00",
+      "date_released": "2026-04-20T19:01:09.319500+00:00",
+      "catalog_version": "2026.04.20",
+      "count": 1577
+    },
+    {
+      "commit": "d1637bfb8859d657b5a84d854a2c0c14a15b914d",
+      "committed_at": "2026-04-21T13:37:06+00:00",
+      "date_released": "2026-04-21T13:08:13.623600+00:00",
+      "catalog_version": "2026.04.21",
+      "count": 1577
+    },
+    {
+      "commit": "8691b97d360c508c126ffd9aa47239da53761d82",
+      "committed_at": "2026-04-21T18:30:57+00:00",
+      "date_released": "2026-04-21T17:10:43.466600+00:00",
+      "catalog_version": "2026.04.21",
+      "count": 1577
+    },
+    {
+      "commit": "d58f7774bea3da955ad3a6786c0e97ad7a1efa6e",
+      "committed_at": "2026-04-22T19:52:32+00:00",
+      "date_released": "2026-04-22T19:00:25.701200+00:00",
+      "catalog_version": "2026.04.22",
+      "count": 1578
+    },
+    {
+      "commit": "bb872e007943a04b21c769cf120ada1682f4243a",
+      "committed_at": "2026-04-23T18:30:17+00:00",
+      "date_released": "2026-04-23T17:00:03.832000+00:00",
+      "catalog_version": "2026.04.23",
+      "count": 1579
+    },
+    {
+      "commit": "d068379337873edff75d620d987ce4cfbd7ba357",
+      "committed_at": "2026-04-24T17:28:06+00:00",
+      "date_released": "2026-04-24T16:52:07.223300+00:00",
+      "catalog_version": "2026.04.24",
+      "count": 1583
+    },
+    {
+      "commit": "f4fae1604a81150988889658f10bfaac1825311b",
+      "committed_at": "2026-04-28T17:36:00+00:00",
+      "date_released": "2026-04-28T17:29:22.212000+00:00",
+      "catalog_version": "2026.04.28",
+      "count": 1585
+    },
+    {
+      "commit": "bf15ab05afc03b663dd50f3b66aa296ffa9283cb",
+      "committed_at": "2026-04-30T17:33:55+00:00",
+      "date_released": "2026-04-30T16:30:36.316000+00:00",
+      "catalog_version": "2026.04.30",
+      "count": 1586
+    },
+    {
+      "commit": "a1a651f24e56c6ff8886d6235056936a9cfda6f2",
+      "committed_at": "2026-05-01T19:30:47+00:00",
+      "date_released": "2026-05-01T18:00:49.455100+00:00",
+      "catalog_version": "2026.05.01",
+      "count": 1587
+    },
+    {
+      "commit": "fa12147c8016eeb5e7d13b7d4316878da379409a",
+      "committed_at": "2026-05-04T14:48:16+00:00",
+      "date_released": "2026-05-04T14:01:30.756600+00:00",
+      "catalog_version": "2026.05.04",
+      "count": 1587
+    },
+    {
+      "commit": "cc9fa16d957505973d84c275975c0ce2196329a7",
+      "committed_at": "2026-05-05T15:40:01+00:00",
+      "date_released": "2026-05-05T12:50:12.806800+00:00",
+      "catalog_version": "2026.05.05",
+      "count": 1587
+    },
+    {
+      "commit": "7075827e7018e3a63dd467fd9a4837d0f33d3c2e",
+      "committed_at": "2026-05-06T18:38:59+00:00",
+      "date_released": "2026-05-06T17:44:48.559600+00:00",
+      "catalog_version": "2026.05.06",
+      "count": 1588
+    },
+    {
+      "commit": "dd28c5e0ee356e54f47f29c5eacf764e4f7af13a",
+      "committed_at": "2026-05-06T20:34:14+00:00",
+      "date_released": "2026-05-06T20:05:35.853800+00:00",
+      "catalog_version": "2026.05.06",
+      "count": 1588
+    },
+    {
+      "commit": "0e09fa71ee1bf7ed2d120e0f65228482532e7ec7",
+      "committed_at": "2026-05-07T16:12:20+00:00",
+      "date_released": "2026-05-07T15:36:05.331800+00:00",
+      "catalog_version": "2026.05.07",
+      "count": 1589
+    },
+    {
+      "commit": "e4d8c32bfdb01d93f5b00462c919f211bad37489",
+      "committed_at": "2026-05-08T17:34:33+00:00",
+      "date_released": "2026-05-08T16:46:06.871500+00:00",
+      "catalog_version": "2026.05.08",
+      "count": 1590
+    },
+    {
+      "commit": "465cee4ec4d5a24b7944552a14dafa46fedf4069",
+      "committed_at": "2026-05-08T18:35:03+00:00",
+      "date_released": "2026-05-08T17:31:07.687700+00:00",
+      "catalog_version": "2026.05.08",
+      "count": 1590
+    },
+    {
+      "commit": "71a5a7f23207161408ea90c1c11c8c1d88fc9e70",
+      "committed_at": "2026-05-13T19:35:33+00:00",
+      "date_released": "2026-05-13T17:58:37.351800+00:00",
+      "catalog_version": "2026.05.13",
+      "count": 1590
+    },
+    {
+      "commit": "8cac279014bf482f294a4e5bcd8271822277da6b",
+      "committed_at": "2026-05-14T17:37:19+00:00",
+      "date_released": "2026-05-14T16:47:45.370300+00:00",
+      "catalog_version": "2026.05.14",
+      "count": 1591
+    },
+    {
+      "commit": "bd56199b78aedf3bd58aff678227d05811aa90d5",
+      "committed_at": "2026-05-14T18:41:39+00:00",
+      "date_released": "2026-05-14T17:31:13.239700+00:00",
+      "catalog_version": "2026.05.14",
+      "count": 1591
+    },
+    {
+      "commit": "7980d424593178b31f7ef7759bcb8405afbf4eff",
+      "committed_at": "2026-05-15T17:34:36+00:00",
+      "date_released": "2026-05-15T16:55:06.608600+00:00",
+      "catalog_version": "2026.05.15",
+      "count": 1592
+    },
+    {
+      "commit": "e50e1d4d3c28a830ffdf31e5ed7233b18f1eb136",
+      "committed_at": "2026-05-20T17:08:45+00:00",
+      "date_released": "2026-05-20T16:50:12.291900+00:00",
+      "catalog_version": "2026.05.20",
+      "count": 1599
+    },
+    {
+      "commit": "d29e3ea6c8a68442fbe65ec042a9929b4b594abb",
+      "committed_at": "2026-05-20T19:04:19+00:00",
+      "date_released": "2026-05-20T17:38:28.160500+00:00",
+      "catalog_version": "2026.05.20",
+      "count": 1599
+    },
+    {
+      "commit": "9cdc8fab63e02d10b46fb8452114e421ceeff1fc",
+      "committed_at": "2026-05-21T17:46:19+00:00",
+      "date_released": "2026-05-21T16:46:30.474700+00:00",
+      "catalog_version": "2026.05.21",
+      "count": 1599
+    },
+    {
+      "commit": "54cda52bbd56136c6985836d1484278bb2cc455d",
+      "committed_at": "2026-05-21T19:36:46+00:00",
+      "date_released": "2026-05-21T18:43:06.232300+00:00",
+      "catalog_version": "2026.05.21",
+      "count": 1601
+    },
+    {
+      "commit": "88f9807e8f4de002310c412c7d51dd12478314ae",
+      "committed_at": "2026-05-22T18:56:39+00:00",
+      "date_released": "2026-05-22T18:00:11.503500+00:00",
+      "catalog_version": "2026.05.22",
+      "count": 1602
+    },
+    {
+      "commit": "04e09b6541923c12c445ffd215720c04ecd1e5f7",
+      "committed_at": "2026-05-26T18:52:34+00:00",
+      "date_released": "2026-05-26T17:02:17.279700+00:00",
+      "catalog_version": "2026.05.26",
+      "count": 1603
+    },
+    {
+      "commit": "6421d388bdd703be4687ea5f380b699adc9df965",
+      "committed_at": "2026-05-27T17:51:29+00:00",
+      "date_released": "2026-05-27T17:08:41.063800+00:00",
+      "catalog_version": "2026.05.27",
+      "count": 1606
+    },
+    {
+      "commit": "cb9b5f7bff33197d4ad4ecc18fac23fba08f3a27",
+      "committed_at": "2026-05-28T18:57:05+00:00",
+      "date_released": "2026-05-28T16:27:12.922700+00:00",
+      "catalog_version": "2026.05.28",
+      "count": 1606
+    },
+    {
+      "commit": "007244bea3548e03e14f2c9d469cb3d657108570",
+      "committed_at": "2026-05-29T19:12:56+00:00",
+      "date_released": "2026-05-29T19:00:06.342900+00:00",
+      "catalog_version": "2026.05.29",
+      "count": 1607
+    },
+    {
+      "commit": "733c1246953ad5f5a5a07ec0df34f65e8e710fcd",
+      "committed_at": "2026-06-01T18:23:25+00:00",
+      "date_released": "2026-06-01T16:59:32.727200+00:00",
+      "catalog_version": "2026.06.01",
+      "count": 1608
+    },
+    {
+      "commit": "3884824dcb5bfa18cc77eaaf8d7864a6fa878518",
+      "committed_at": "2026-06-02T17:37:12+00:00",
+      "date_released": "2026-06-02T17:04:13.119300+00:00",
+      "catalog_version": "2026.06.02",
+      "count": 1610
+    },
+    {
+      "commit": "60c17f04c330a6619c34435f04100069968c34c4",
+      "committed_at": "2026-06-03T17:44:41+00:00",
+      "date_released": "2026-06-03T16:48:16.931000+00:00",
+      "catalog_version": "2026.06.03",
+      "count": 1611
+    },
+    {
+      "commit": "cf254a74b220612294d8a35de2ce83aa8ba3689a",
+      "committed_at": "2026-06-03T19:24:58+00:00",
+      "date_released": "2026-06-03T17:30:12.220500+00:00",
+      "catalog_version": "2026.06.03",
+      "count": 1611
+    },
+    {
+      "commit": "f89a1d7a943365ed83dce427bcb650f3dd8cf2d2",
+      "committed_at": "2026-06-05T17:38:20+00:00",
+      "date_released": "2026-06-05T17:00:14.652000+00:00",
+      "catalog_version": "2026.06.05",
+      "count": 1612
+    },
+    {
+      "commit": "65557c7c88d46c3c332df4af9bd8428446359c68",
+      "committed_at": "2026-06-08T18:57:37+00:00",
+      "date_released": "2026-06-08T17:02:09.138500+00:00",
+      "catalog_version": "2026.06.08",
+      "count": 1613
+    },
+    {
+      "commit": "741d148a2419098e59de1ffe69d7830ed87b38d5",
+      "committed_at": "2026-06-08T19:45:44+00:00",
+      "date_released": "2026-06-08T19:00:18.348100+00:00",
+      "catalog_version": "2026.06.08",
+      "count": 1614
+    },
+    {
+      "commit": "c37e0a20da7ab66ed8cde8ead698a7af2b960f12",
+      "committed_at": "2026-06-09T17:01:02+00:00",
+      "date_released": "2026-06-09T15:22:35.699600+00:00",
+      "catalog_version": "2026.06.09",
+      "count": 1614
+    },
+    {
+      "commit": "2aee233f04a9ec93e2b42a4d0d0a136b0f062727",
+      "committed_at": "2026-06-09T18:48:58+00:00",
+      "date_released": "2026-06-09T18:13:20.439500+00:00",
+      "catalog_version": "2026.06.09",
+      "count": 1617
+    },
+    {
+      "commit": "f896ad81b2a02dc2abcfbac3b9c0bd9b32e70371",
+      "committed_at": "2026-06-11T19:04:32+00:00",
+      "date_released": "2026-06-11T18:31:27.874000+00:00",
+      "catalog_version": "2026.06.11",
+      "count": 1618
+    },
+    {
+      "commit": "3b4fee8c5dc497b07b34f1ba834bd58a87b9b2c7",
+      "committed_at": "2026-06-11T20:52:53+00:00",
+      "date_released": "2026-06-11T19:02:08.071500+00:00",
+      "catalog_version": "2026.06.11",
+      "count": 1618
+    },
+    {
+      "commit": "432051d5e341e6cd903d4175ee8e77e5e262b681",
+      "committed_at": "2026-06-12T18:45:20+00:00",
+      "date_released": "2026-06-12T16:46:48.054900+00:00",
+      "catalog_version": "2026.06.12",
+      "count": 1619
+    },
+    {
+      "commit": "2ca681ca4b661d2f7b5e9d06fa4d0783c4428039",
+      "committed_at": "2026-06-15T20:15:05+00:00",
+      "date_released": "2026-06-15T19:00:14.579700+00:00",
+      "catalog_version": "2026.06.15",
+      "count": 1621
+    },
+    {
+      "commit": "40ba95cf2ddc6f3d574a95a132a9c1dbcf11d33a",
+      "committed_at": "2026-06-16T21:52:19+00:00",
+      "date_released": "2026-06-16T19:21:58.433000+00:00",
+      "catalog_version": "2026.06.16",
+      "count": 1622
+    },
+    {
+      "commit": "ca7194bcb257755a1e079ee5b5658ed200b3541e",
+      "committed_at": "2026-06-18T17:07:44+00:00",
+      "date_released": "2026-06-18T16:00:20.190500+00:00",
+      "catalog_version": "2026.06.18",
+      "count": 1623
+    },
+    {
+      "commit": "6ad83ae68fe5005c9163610b04263d1c1638370e",
+      "committed_at": "2026-06-23T17:38:09+00:00",
+      "date_released": "2026-06-23T17:00:37.294400+00:00",
+      "catalog_version": "2026.06.23",
+      "count": 1627
+    },
+    {
+      "commit": "af7e033a4ba14c1fef33ec1621431fc453b810a2",
+      "committed_at": "2026-06-25T19:36:56+00:00",
+      "date_released": "2026-06-25T19:03:21.803700+00:00",
+      "catalog_version": "2026.06.25",
+      "count": 1629
+    },
+    {
+      "commit": "7fcbb76620344f15c91411e287fc1ca15e1cefea",
+      "committed_at": "2026-06-29T19:36:14+00:00",
+      "date_released": "2026-06-29T18:57:01.411300+00:00",
+      "catalog_version": "2026.06.29",
+      "count": 1630
+    },
+    {
+      "commit": "d506da19ebb1f0282d803c4f218aa551ac758365",
+      "committed_at": "2026-07-01T20:37:56+00:00",
+      "date_released": "2026-07-01T19:00:06.901600+00:00",
+      "catalog_version": "2026.07.01",
+      "count": 1631
+    },
+    {
+      "commit": "da74638721468c593fce61dd60a5decc5ef9b0b7",
+      "committed_at": "2026-07-07T14:35:41+00:00",
+      "date_released": "2026-07-07T14:03:18.160500+00:00",
+      "catalog_version": "2026.07.07",
+      "count": 1631
+    },
+    {
+      "commit": "860e9cb9c6056187f53df93e629c3df8b4435880",
+      "committed_at": "2026-07-07T19:56:02+00:00",
+      "date_released": "2026-07-07T18:28:17.892600+00:00",
+      "catalog_version": "2026.07.07",
+      "count": 1635
+    },
+    {
+      "commit": "a35cad83b705964915e6d14d9a4977422b884a7c",
+      "committed_at": "2026-07-10T18:23:00+00:00",
+      "date_released": "2026-07-10T17:00:25.732700+00:00",
+      "catalog_version": "2026.07.10",
+      "count": 1637
+    },
+    {
+      "commit": "edad504cb11f41fe03bf77e6b554a068c88ea5fe",
+      "committed_at": "2026-07-13T18:43:24+00:00",
+      "date_released": "2026-07-13T17:00:17.965000+00:00",
+      "catalog_version": "2026.07.13",
+      "count": 1638
+    },
+    {
+      "commit": "b6636c4e6ece4b5e02af1d2d4d7baeea5f172ec8",
+      "committed_at": "2026-07-14T20:11:43+00:00",
+      "date_released": "2026-07-14T19:00:56.138900+00:00",
+      "catalog_version": "2026.07.14",
+      "count": 1642
+    },
+    {
+      "commit": "46887d9ebae72243eb0e476876a75152e63e90d9",
+      "committed_at": "2026-07-15T16:22:14+00:00",
+      "date_released": "2026-07-15T14:53:48.946000+00:00",
+      "catalog_version": "2026.07.15",
+      "count": 1642
+    },
+    {
+      "commit": "3b472a956956de72332d3d7769074108e1a80b11",
+      "committed_at": "2026-07-15T18:07:46+00:00",
+      "date_released": "2026-07-15T16:42:14.826100+00:00",
+      "catalog_version": "2026.07.15",
+      "count": 1644
+    },
+    {
+      "commit": "87ba74fc7c502adcf482fc7b06e65ce9ea4d9ef2",
+      "committed_at": "2026-07-16T19:11:42+00:00",
+      "date_released": "2026-07-16T17:00:15.684500+00:00",
+      "catalog_version": "2026.07.16",
+      "count": 1647
+    },
+    {
+      "commit": "bc9dbb256ec16f37b646b564770af99b0a96cbe1",
+      "committed_at": "2026-07-21T15:43:32+00:00",
+      "date_released": "2026-07-21T15:12:01.557000+00:00",
+      "catalog_version": "2026.07.21",
+      "count": 1651
+    },
+    {
+      "commit": "5e8d7305cf94a2ec98d486f6cdaf5428ccc865e7",
+      "committed_at": "2026-07-22T21:08:03+00:00",
+      "date_released": "2026-07-22T19:00:21.852400+00:00",
+      "catalog_version": "2026.07.22",
+      "count": 1653
+    },
+    {
+      "commit": "3ccc2e9fc67b3653fb20461d56c3f5a72992fd4a",
+      "committed_at": "2026-07-23T18:12:12+00:00",
+      "date_released": "2026-07-23T16:21:10.808200+00:00",
+      "catalog_version": "2026.07.23",
+      "count": 1653
+    },
+    {
+      "commit": "4105cacdff460c2f89ad668551ae6e32b1d08497",
+      "committed_at": "2026-07-24T18:17:49+00:00",
+      "date_released": "2026-07-24T17:40:56.008600+00:00",
+      "catalog_version": "2026.07.24",
+      "count": 1653
+    },
+    {
+      "commit": "3a54bf12f993da3c94a2a2c4959a180468f091ac",
+      "committed_at": "2026-07-27T18:40:08+00:00",
+      "date_released": "2026-07-27T17:00:05.726900+00:00",
+      "catalog_version": "2026.07.27",
+      "count": 1654
+    },
+    {
+      "commit": "9da75eecf25254b6fd7691eaa9942da4ef3244df",
+      "committed_at": "2026-07-27T20:22:31+00:00",
+      "date_released": "2026-07-27T19:00:15.863200+00:00",
+      "catalog_version": "2026.07.27",
+      "count": 1655
+    },
+    {
+      "commit": "564b8c59f9039926e2d9548ba5b334db45cb6b50",
+      "committed_at": "2026-07-29T19:16:45+00:00",
+      "date_released": "2026-07-29T18:45:59.580900+00:00",
+      "catalog_version": "2026.07.29",
+      "count": 1656
+    },
+    {
+      "commit": "9fe0d6ab194a05de81b6ea0f24d9954f5dcd1417",
+      "committed_at": "2026-08-03T19:37:39+00:00",
+      "date_released": "2026-08-03T18:43:10.857400+00:00",
+      "catalog_version": "2026.08.03",
+      "count": 1657
+    },
+    {
+      "commit": "57b172b5df6dce56d1cb04df0c977fd050ace6b3",
+      "committed_at": "2026-08-03T21:03:03+00:00",
+      "date_released": "2026-08-03T18:55:09.067000+00:00",
+      "catalog_version": "2026.08.03",
+      "count": 1657
+    },
+    {
+      "commit": "0759d6775084b7b00b3e433d14945e124c657622",
+      "committed_at": "2026-08-04T18:27:11+00:00",
+      "date_released": "2026-08-04T16:45:52.078300+00:00",
+      "catalog_version": "2026.08.04",
+      "count": 1660
+    },
+    {
+      "commit": "7248a9bf4f5f9185f6fe1a5c5087bbc515691abd",
+      "committed_at": "2026-08-05T17:37:34+00:00",
+      "date_released": "2026-08-05T16:50:38.645800+00:00",
+      "catalog_version": "2026.08.05",
+      "count": 1661
+    },
+    {
+      "commit": "fb55bf57d55fd5b3e768facbe1012c6c983bc3cf",
+      "committed_at": "2026-08-06T15:16:38+00:00",
+      "date_released": "2026-08-06T12:26:27.015000+00:00",
+      "catalog_version": "2026.08.06",
+      "count": 1661
+    },
+    {
+      "commit": "970428211c11666db563109797cf3d20304dba00",
+      "committed_at": "2026-08-06T21:59:26+00:00",
+      "date_released": "2026-08-06T18:15:23.829500+00:00",
+      "catalog_version": "2026.08.06",
+      "count": 1661
+    },
+    {
+      "commit": "ca49071c856b46fab8410a4ab4213a245c750477",
+      "committed_at": "2026-08-07T17:49:46+00:00",
+      "date_released": "2026-08-07T16:45:47.064800+00:00",
+      "catalog_version": "2026.08.07",
+      "count": 1662
+    },
+    {
+      "commit": "b82bd290510b1f553dafc6a0d996e6c38305bc66",
+      "committed_at": "2026-08-10T17:56:45+00:00",
+      "date_released": "2026-08-10T16:19:34.176700+00:00",
+      "catalog_version": "2026.08.10",
+      "count": 1662
+    },
+    {
+      "commit": "370909440a1aa74544d2e693cc635ab4605a3257",
+      "committed_at": "2026-08-11T19:05:07+00:00",
+      "date_released": "2026-08-11T18:02:53.368500+00:00",
+      "catalog_version": "2026.08.11",
+      "count": 1662
+    },
+    {
+      "commit": "3204b12176c29f8572e6a825028e59249306a0d8",
+      "committed_at": "2026-08-11T20:43:19+00:00",
+      "date_released": "2026-08-11T18:59:43.686100+00:00",
+      "catalog_version": "2026.08.11",
+      "count": 1665
+    },
+    {
+      "commit": "9f0c5cb0ba6c91737932f0d6a58aa6059c559dfd",
+      "committed_at": "2026-08-14T16:52:56+00:00",
+      "date_released": "2026-08-14T16:34:49.039100+00:00",
+      "catalog_version": "2026.08.14",
+      "count": 1665
+    },
+    {
+      "commit": "b95cfc541960e8f1c90ff7f3f1fba34b082271af",
+      "committed_at": "2026-08-17T15:25:05+00:00",
+      "date_released": "2026-08-17T13:47:08.506700+00:00",
+      "catalog_version": "2026.08.17",
+      "count": 1666
+    },
+    {
+      "commit": "261b124f926e350e11e2da5b06256375bd5866c7",
+      "committed_at": "2026-08-17T18:40:21+00:00",
+      "date_released": "2026-08-17T17:00:24.765500+00:00",
+      "catalog_version": "2026.08.17",
+      "count": 1666
+    },
+    {
+      "commit": "5c10c0c052dabb1c686a35fa50e421699ab9a79b",
+      "committed_at": "2026-08-18T18:38:16+00:00",
+      "date_released": "2026-08-18T16:52:08.539800+00:00",
+      "catalog_version": "2026.08.18",
+      "count": 1670
+    },
+    {
+      "commit": "190d479ba137610261129f865888e18ee97bb519",
+      "committed_at": "2026-08-19T17:26:29+00:00",
+      "date_released": "2026-08-19T17:00:32.136600+00:00",
+      "catalog_version": "2026.08.19",
+      "count": 1671
+    },
+    {
+      "commit": "26f9ba333951a03320f66718c275c743b57fd4b9",
+      "committed_at": "2026-08-20T18:38:59+00:00",
+      "date_released": "2026-08-20T17:00:27.883700+00:00",
+      "catalog_version": "2026.08.20",
+      "count": 1673
+    },
+    {
+      "commit": "6f9a22ab732d635a56677e91e4279cb5129703fc",
+      "committed_at": "2026-08-21T12:48:02+00:00",
+      "date_released": "2026-08-21T11:57:27.463200+00:00",
+      "catalog_version": "2026.08.21",
+      "count": 1673
+    },
+    {
+      "commit": "935d1ecbfff6eaf27c441307fd016d4e1ac78853",
+      "committed_at": "2026-08-21T17:28:39+00:00",
+      "date_released": "2026-08-21T16:42:49.563700+00:00",
+      "catalog_version": "2026.08.21",
+      "count": 1675
+    },
+    {
+      "commit": "eb3a0d74cf7c938fc8eaa946b1168d1b5c8f54e6",
+      "committed_at": "2026-08-21T18:38:03+00:00",
+      "date_released": "2026-08-21T17:44:24.522700+00:00",
+      "catalog_version": "2026.08.21",
+      "count": 1675
+    },
+    {
+      "commit": "e7ad2b019b39b438c2a906fb86c7a7208e680d3f",
+      "committed_at": "2026-08-21T18:42:39+00:00",
+      "date_released": "2026-08-21T17:46:43.601900+00:00",
+      "catalog_version": "2026.08.21",
+      "count": 1674
+    },
+    {
+      "commit": "7ed515260d08da53831787e84b9d097169e55388",
+      "committed_at": "2026-08-24T19:29:17+00:00",
+      "date_released": "2026-08-24T18:00:04.705600+00:00",
+      "catalog_version": "2026.08.24",
+      "count": 1675
+    },
+    {
+      "commit": "b9e084904113c07f6e2d4b059af7048e313f6381",
+      "committed_at": "2026-08-25T18:39:02+00:00",
+      "date_released": "2026-08-25T17:43:58.430100+00:00",
+      "catalog_version": "2026.08.25",
+      "count": 1676
+    },
+    {
+      "commit": "70b98bb245e60707d49785eac81766d40f41e3f4",
+      "committed_at": "2026-08-26T16:17:22+00:00",
+      "date_released": "2026-08-26T15:25:41.001900+00:00",
+      "catalog_version": "2026.08.26",
+      "count": 1676
+    },
+    {
+      "commit": "9363aaf2e164e556ea0985dbffa3a9be2d0f6016",
+      "committed_at": "2026-08-26T19:08:05+00:00",
+      "date_released": "2026-08-26T17:00:09.897600+00:00",
+      "catalog_version": "2026.08.26",
+      "count": 1682
+    },
+    {
+      "commit": "5665af188f94ef09be76e53630b5fc520777fa69",
+      "committed_at": "2026-08-28T01:18:10+00:00",
+      "date_released": "2026-08-27T17:00:36.663200+00:00",
+      "catalog_version": "2026.08.27",
+      "count": 1685
+    },
+    {
+      "commit": "9d5557b3a39b61ad340a89a4218dce5295bdde15",
+      "committed_at": "2026-08-31T16:45:44+00:00",
+      "date_released": "2026-08-31T14:55:13.385600+00:00",
+      "catalog_version": "2026.08.31",
+      "count": 1687
+    },
+    {
+      "commit": "2d5aab3aef546281b9a7a82310c5c3dce31ce507",
+      "committed_at": "2026-09-01T19:42:34+00:00",
+      "date_released": "2026-09-01T19:22:46.216200+00:00",
+      "catalog_version": "2026.09.01",
+      "count": 1687
+    },
+    {
+      "commit": "782e9b631fbe1386d73dd0be9810df39cec3b1fe",
+      "committed_at": "2026-09-02T17:39:31+00:00",
+      "date_released": "2026-09-02T16:54:39.832100+00:00",
+      "catalog_version": "2026.09.02",
+      "count": 1694
+    },
+    {
+      "commit": "ac9d37166471fbed6a03dff6c84f05e9c6b1d2c2",
+      "committed_at": "2026-09-04T17:23:32+00:00",
+      "date_released": "2026-09-04T16:47:03.519700+00:00",
+      "catalog_version": "2026.09.04",
+      "count": 1695
+    },
+    {
+      "commit": "d1274a96dac793937335f1d5451d5e88ce760475",
+      "committed_at": "2026-09-08T18:25:34+00:00",
+      "date_released": "2026-09-08T18:00:21.107900+00:00",
+      "catalog_version": "2026.09.08",
+      "count": 1699
+    },
+    {
+      "commit": "f0c89323ca71ee0d65cf5ea38244280efa20f8b3",
+      "committed_at": "2026-09-09T17:37:28+00:00",
+      "date_released": "2026-09-09T12:56:45.013600+00:00",
+      "catalog_version": "2026.09.09",
+      "count": 1699
+    },
+    {
+      "commit": "f6fafe2585c7cc2a7568d13d08024cf142b37d3a",
+      "committed_at": "2026-09-09T20:34:07+00:00",
+      "date_released": "2026-09-09T19:00:50.259100+00:00",
+      "catalog_version": "2026.09.09",
+      "count": 1703
+    },
+    {
+      "commit": "0a1255a328aa070d311d402b576f397cd2ee6d95",
+      "committed_at": "2026-09-10T21:27:09+00:00",
+      "date_released": "2026-09-10T19:00:05.194900+00:00",
+      "catalog_version": "2026.09.10",
+      "count": 1705
+    },
+    {
+      "commit": "eaaf8fe5c61c19171f7a40df62cf74ce066a7c08",
+      "committed_at": "2026-09-11T17:35:13+00:00",
+      "date_released": "2026-09-11T15:39:54.626000+00:00",
+      "catalog_version": "2026.09.11",
+      "count": 1705
+    },
+    {
+      "commit": "acdcfd43102c098c377568b417a42c0e00cc63a5",
+      "committed_at": "2026-09-11T20:35:22+00:00",
+      "date_released": "2026-09-11T19:32:16.899300+00:00",
+      "catalog_version": "2026.09.11",
+      "count": 1709
+    },
+    {
+      "commit": "349e157aed0b72843c991efc0ec37854f81d6515",
+      "committed_at": "2026-09-14T22:17:56+00:00",
+      "date_released": "2026-09-14T19:00:02.426000+00:00",
+      "catalog_version": "2026.09.14",
+      "count": 1710
+    },
+    {
+      "commit": "0bbe87834dfd057ef2e961ea86bbba220e3cb911",
+      "committed_at": "2026-09-16T14:40:17+00:00",
+      "date_released": "2026-09-16T13:23:15.678000+00:00",
+      "catalog_version": "2026.09.16",
+      "count": 1711
+    },
+    {
+      "commit": "33b1d9394d4cdd69cade1b0d9104142da33639fa",
+      "committed_at": "2026-09-16T18:42:36+00:00",
+      "date_released": "2026-09-16T18:10:24.655500+00:00",
+      "catalog_version": "2026.09.16",
+      "count": 1712
+    },
+    {
+      "commit": "9b6a0a2834a4d099a1362eb5593367ecd6454cc6",
+      "committed_at": "2026-09-16T21:55:47+00:00",
+      "date_released": "2026-09-16T18:47:50.679600+00:00",
+      "catalog_version": "2026.09.16",
+      "count": 1713
+    },
+    {
+      "commit": "a6058958423b25fed6a302d1c22da748712a266e",
+      "committed_at": "2026-09-18T17:32:47+00:00",
+      "date_released": "2026-09-18T13:49:41.723600+00:00",
+      "catalog_version": "2026.09.18",
+      "count": 1715
+    },
+    {
+      "commit": "8f26120eca10ef7425d7dc4154754b9276a8200a",
+      "committed_at": "2026-09-18T20:31:31+00:00",
+      "date_released": "2026-09-18T19:00:05.097400+00:00",
+      "catalog_version": "2026.09.18",
+      "count": 1716
+    },
+    {
+      "commit": "caf90b83d68119c647b4a23a39397d4a71d40e98",
+      "committed_at": "2026-09-21T20:49:19+00:00",
+      "date_released": "2026-09-21T18:46:35.087300+00:00",
+      "catalog_version": "2026.09.21",
+      "count": 1717
+    },
+    {
+      "commit": "43e8cd69d9dde4353897ca63f8a172c1b071de21",
+      "committed_at": "2026-09-22T21:49:21+00:00",
+      "date_released": "2026-09-22T19:02:09.978800+00:00",
+      "catalog_version": "2026.09.22",
+      "count": 1721
+    },
+    {
+      "commit": "4a8ab2f71f71c57148b9bdbd3a59d1588c743dc6",
+      "committed_at": "2026-09-23T15:22:31+00:00",
+      "date_released": "2026-09-23T12:51:35.821000+00:00",
+      "catalog_version": "2026.09.23",
+      "count": 1721
+    },
+    {
+      "commit": "203fa4633af39c6944608e30984996f04ccc4541",
+      "committed_at": "2026-09-24T22:01:41+00:00",
+      "date_released": "2026-09-24T19:00:55.048100+00:00",
+      "catalog_version": "2026.09.24",
+      "count": 1723
+    },
+    {
+      "commit": "28801cd08857d6b5986b27215fbb853cd1de1ab4",
+      "committed_at": "2026-09-25T18:15:39+00:00",
+      "date_released": "2026-09-25T14:39:25.365400+00:00",
+      "catalog_version": "2026.09.25",
+      "count": 1725
+    },
+    {
+      "commit": "9dfdff658ee0fbbca1c648235a29a5402f6533ca",
+      "committed_at": "2026-09-25T22:00:23+00:00",
+      "date_released": "2026-09-25T18:58:16.502900+00:00",
+      "catalog_version": "2026.09.25",
+      "count": 1726
+    },
+    {
+      "commit": "4d1aff213a881341db8a276c89802e05bf69481c",
+      "committed_at": "2026-09-27T22:23:41+00:00",
+      "date_released": "2026-09-27T21:30:35.552100+00:00",
+      "catalog_version": "2026.09.27",
+      "count": 1728
+    },
+    {
+      "commit": "03ee1fcfd18aa54cf2065ab7609e2481bf374dbd",
+      "committed_at": "2026-09-29T14:46:37+00:00",
+      "date_released": "2026-09-29T13:51:33.385200+00:00",
+      "catalog_version": "2026.09.29",
+      "count": 1729
+    },
+    {
+      "commit": "a0c559f6c53d970e5f196044ef9c50936bbc0e26",
+      "committed_at": "2026-09-30T21:15:08+00:00",
+      "date_released": "2026-09-30T16:59:23.068800+00:00",
+      "catalog_version": "2026.09.30",
+      "count": 1730
+    },
+    {
+      "commit": "a25b61fbc5e3125030a15e09adba33f427cc0e25",
+      "committed_at": "2026-10-01T21:35:08+00:00",
+      "date_released": "2026-10-01T19:54:04.930800+00:00",
+      "catalog_version": "2026.10.01",
+      "count": 1731
+    },
+    {
+      "commit": "7009facc2019306d41f6d6df6c8a057b99b4b468",
+      "committed_at": "2026-10-02T20:23:40+00:00",
+      "date_released": "2026-10-02T15:19:38.294500+00:00",
+      "catalog_version": "2026.10.02",
+      "count": 1733
+    },
+    {
+      "commit": "9f58419b453e026c8663a457d95d58588647abbe",
+      "committed_at": "2026-10-04T19:15:38+00:00",
+      "date_released": "2026-10-04T18:52:56.063500+00:00",
+      "catalog_version": "2026.10.04",
+      "count": 1734
+    },
+    {
+      "commit": "62fee4f4c6c270f234debba8a62a5a32c57374e3",
+      "committed_at": "2026-10-08T18:32:11+00:00",
+      "date_released": "2026-10-08T17:20:54.304000+00:00",
+      "catalog_version": "2026.10.08",
+      "count": 1739
+    },
+    {
+      "commit": "be330da604b41a3b29c84b3f0a0122d6d2167417",
+      "committed_at": "2026-10-08T23:39:30+00:00",
+      "date_released": "2026-10-08T20:09:18.983300+00:00",
+      "catalog_version": "2026.10.08",
+      "count": 1739
+    },
+    {
+      "commit": "f14dde8787ac19895e467fbbcb5494269367c2e5",
+      "committed_at": "2026-10-13T18:00:43+00:00",
+      "date_released": "2026-10-13T16:36:26.167900+00:00",
+      "catalog_version": "2026.10.13",
+      "count": 1740
+    },
+    {
+      "commit": "83ca0d3a425277e0f56443d066f7a0790a1ee086",
+      "committed_at": "2026-10-13T22:34:50+00:00",
+      "date_released": "2026-10-13T19:10:43.656800+00:00",
+      "catalog_version": "2026.10.13",
+      "count": 1741
+    },
+    {
+      "commit": "7606917390b43dc02b251d88dbceed6296a919fc",
+      "committed_at": "2026-10-14T22:04:16+00:00",
+      "date_released": "2026-10-14T19:27:28.010500+00:00",
+      "catalog_version": "2026.10.14",
+      "count": 1745
+    },
+    {
+      "commit": "7923b5f7040256ca9887d268b4c2a02453a2ff30",
+      "committed_at": "2026-10-15T18:02:52+00:00",
+      "date_released": "2026-10-15T17:00:11.279500+00:00",
+      "catalog_version": "2026.10.15",
+      "count": 1746
+    },
+    {
+      "commit": "6a392940c663b52271fa4e6aa7b39995b18c9a71",
+      "committed_at": "2026-10-16T19:22:34+00:00",
+      "date_released": "2026-10-16T17:15:48.875200+00:00",
+      "catalog_version": "2026.10.16",
+      "count": 1748
+    },
+    {
+      "commit": "3de597fd70382f1f09acb09bf5e15dca4fa22678",
+      "committed_at": "2026-10-20T22:12:41+00:00",
+      "date_released": "2026-10-20T19:00:31.876500+00:00",
+      "catalog_version": "2026.10.20",
+      "count": 1754
+    },
+    {
+      "commit": "fd12990e9c566a1ad3060e1a2073129778f438cc",
+      "committed_at": "2026-10-21T18:25:57+00:00",
+      "date_released": "2026-10-21T14:04:39.898300+00:00",
+      "catalog_version": "2026.10.21",
+      "count": 1754
+    },
+    {
+      "commit": "e46ba16e5d78ed6ae0fc6d5e46bc756fae2d40f4",
+      "committed_at": "2026-10-23T18:07:18+00:00",
+      "date_released": "2026-10-23T17:00:09.900100+00:00",
+      "catalog_version": "2026.10.23",
+      "count": 1755
+    },
+    {
+      "commit": "b9c486ef8f3ba0709bb662ae843ffee96953c400",
+      "committed_at": "2026-10-23T21:52:46+00:00",
+      "date_released": "2026-10-23T19:30:18.920900+00:00",
+      "catalog_version": "2026.10.23",
+      "count": 1756
+    }
+  ],
+  "errors": [
+    {
+      "commit": "15200f913fd2502d9908827913862b3d8dda49c4",
+      "error": "Unterminated string starting at: line 4003 column 13 (char 276037)"
+    }
+  ],
+  "coverage_intervals": [
+    {
+      "start": "2025-01-24T15:00:57.528200+00:00",
+      "complete_through": "2025-02-25T20:33:53.367600+00:00"
+    },
+    {
+      "start": "2025-02-25T20:33:53.367600+00:00",
+      "complete_through": "2026-10-23T19:30:18.920900+00:00"
+    }
+  ],
+  "coverage_policy": "Each repository snapshot is the CISA catalog mirrored at that release; history is treated as complete only from the first recorded snapshot through the last. CISA may rarely remove entries, so removals are retained as events."
+}

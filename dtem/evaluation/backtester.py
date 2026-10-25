@@ -2,8 +2,8 @@
 dtem.evaluation.backtester
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Implements retrospective time-series backtesting for DTEM, comparing its emergence
-warning lead-time against static CVSS severity, simulated EPSS probability, and CISA KEV.
+Implements time-clamped prototype timelines. Baseline values remain unavailable
+until actual timestamped observations are integrated.
 
 Supports two modes:
   1. Curated validation data (for offline research evaluation).
@@ -11,6 +11,7 @@ Supports two modes:
 """
 
 import logging
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -32,7 +33,8 @@ EVAL_OUTPUT_DIR = PROJECT_ROOT / "output" / "evaluation"
 PLOT_PATH = EVAL_OUTPUT_DIR / "baseline_timeline.png"
 
 
-def _compute_timeline(records: list[dict[str, Any]], base_time: datetime) -> list[dict[str, Any]]:
+def _compute_timeline(records: list[dict[str, Any]], base_time: datetime,
+                      require_availability: bool = False) -> list[dict[str, Any]]:
     """
     Core timeline computation shared by both the research backtest
     and the live dashboard API. Takes raw CTI records and a reference
@@ -50,9 +52,16 @@ def _compute_timeline(records: list[dict[str, Any]], base_time: datetime) -> lis
         filtered_records = []
         for rec in records:
             pub_str = rec.get("published_at")
+            available_str = rec.get("available_at") or rec.get("collected_at")
             if pub_str:
                 try:
                     pub_dt = pd.to_datetime(pub_str, utc=True)
+                    if require_availability and not available_str:
+                        continue
+                    if available_str:
+                        available_dt = pd.to_datetime(available_str, utc=True)
+                        if available_dt > cutoff_time:
+                            continue
                     if pub_dt <= cutoff_time:
                         filtered_records.append(rec)
                 except Exception:
@@ -60,18 +69,20 @@ def _compute_timeline(records: list[dict[str, Any]], base_time: datetime) -> lis
 
         # Extract features for the time-clamped subset
         if not filtered_records:
-            dtem_score = 0.0
+            dtem_score = None
         else:
+            # Keep the timeline calculation on the same record identity and
+            # exploit evidence hierarchy as the live scoring engine.
+            filtered_records = extractor._deduplicate_records(filtered_records)
             freq = extractor.calculate_detection_frequency(filtered_records)
-            growth_rate, _, _, _ = extractor.calculate_growth_rate(filtered_records)
+            growth_rate, _, recent_count, previous_count = extractor.calculate_growth_rate(filtered_records, as_of=cutoff_time)
             div, _ = extractor.calculate_source_diversity(filtered_records)
-            has_exploit, exploit_cnt = extractor.calculate_exploit_availability(filtered_records)
+            _, exploit_evidence_score = extractor.classify_exploit_evidence(filtered_records)
 
             f_sub = engine._normalize_frequency(freq)
-            g_sub = engine._normalize_growth_rate(growth_rate)
+            g_sub = engine._normalize_growth_rate(growth_rate) if recent_count + previous_count else 0.0
             d_sub = engine._normalize_source_diversity(div)
-            exploit_ratio = exploit_cnt / max(len(filtered_records), 1)
-            e_sub = engine._normalize_exploit_availability(has_exploit, exploit_ratio)
+            e_sub = float(exploit_evidence_score)
 
             w = engine.weights
             dtem_score = (w["detection_frequency"] * f_sub +
@@ -80,28 +91,12 @@ def _compute_timeline(records: list[dict[str, Any]], base_time: datetime) -> lis
                           w["exploit_availability"] * e_sub)
             dtem_score = round(float(dtem_score), 2)
 
-        # Simulated baselines
-        cvss_score = 85.0
-
-        if day_offset < -15:
-            epss_score = 2.0
-        elif day_offset < -10:
-            epss_score = 8.0
-        elif day_offset < -5:
-            epss_score = 18.0
-        elif day_offset < -2:
-            epss_score = 45.0
-        else:
-            epss_score = 88.0
-
-        cisa_kev = 100.0 if day_offset >= -3 else 0.0
-
         timeline_data.append({
             "day": day_offset,
             "dtem": dtem_score,
-            "cvss": cvss_score,
-            "epss": epss_score,
-            "cisa_kev": cisa_kev,
+            "cvss": None,
+            "epss": None,
+            "cisa_kev": None,
         })
 
     return timeline_data
@@ -114,17 +109,23 @@ def run_timeline_backtest_for_api(keyword: str) -> dict[str, Any]:
     without generating matplotlib plots.
     """
     records = fetch_intel_for_keyword(keyword.strip().lower())
+    records = [record for record in records if not ThreatInfoExtractor._is_prototype_record(record)]
+    # CVE timelines must use the same exact-identifier matching rule as the
+    # main extractor, rather than any broader database query matches.
+    if re.fullmatch(r"CVE-\d{4}-\d{4,}", keyword.strip(), re.IGNORECASE):
+        records = [record for record in records
+                   if ThreatInfoExtractor._record_mentions_cve(record, keyword.strip())]
 
     if not records:
-        return {"timeline": [], "early_warning_lead_days": 0}
+        return {"timeline": [], "early_warning_lead_days": None,
+                "lead_time_status": "no_timestamped_outcome"}
 
     base_time = datetime.now(timezone.utc)
-    timeline = _compute_timeline(records, base_time)
+    timeline = _compute_timeline(records, base_time, require_availability=True)
 
-    # Calculate early warning lead: first day DTEM >= 50 vs first day EPSS >= 50
-    dtem_first_50 = next((t["day"] for t in timeline if t["dtem"] >= 50), 0)
-    epss_first_50 = next((t["day"] for t in timeline if t["epss"] >= 50), 0)
-    lead_days = abs(epss_first_50 - dtem_first_50) if dtem_first_50 < epss_first_50 else 0
+    # Live prototype records do not include a timestamped outcome or a
+    # date-matched baseline; therefore lead time is not estimable.
+    lead_days = None
 
     # Current day-0 snapshot for the comparison table
     day_zero = timeline[-1] if timeline else {"dtem": 0, "cvss": 0, "epss": 0, "cisa_kev": 0}
@@ -132,6 +133,7 @@ def run_timeline_backtest_for_api(keyword: str) -> dict[str, Any]:
     return {
         "timeline": timeline,
         "early_warning_lead_days": lead_days,
+        "lead_time_status": "no_timestamped_outcome",
         "current_snapshot": day_zero,
     }
 
@@ -158,12 +160,9 @@ def run_timeline_backtest(keyword: str = "eval_lockbit") -> dict[str, Any]:
     plt.figure(figsize=(10, 6))
 
     plt.plot(df["day"], df["dtem"], label="DTEM Emergence Score (Dynamic)", color="#00f2fe", linewidth=3, marker="o")
-    plt.plot(df["day"], df["cvss"], label="CVSS Base Score (Static)", color="#6b7280", linestyle="--", linewidth=2)
-    plt.plot(df["day"], df["epss"], label="EPSS Exploit Probability (Lagging)", color="#a855f7", linewidth=2, marker="s")
-    plt.step(df["day"], df["cisa_kev"], label="CISA KEV Catalog Status (Reactive)", color="#ef4444", where="mid", linewidth=2, alpha=0.8)
 
-    plt.title(f"Early Warning Timeline Comparison: {keyword.replace('eval_', '').upper()}", fontsize=14, fontweight="bold", pad=15)
-    plt.xlabel("Timeline (Days Relative to Outbreak/Today)", fontsize=11, labelpad=10)
+    plt.title(f"Curated Prototype Timeline: {keyword.replace('eval_', '').upper()}", fontsize=14, fontweight="bold", pad=15)
+    plt.xlabel("Timeline (Days Relative to Reference Time)", fontsize=11, labelpad=10)
     plt.ylabel("Normalized Metric Value (0 - 100)", fontsize=11, labelpad=10)
 
     plt.xlim(-30, 0)
@@ -171,8 +170,6 @@ def run_timeline_backtest(keyword: str = "eval_lockbit") -> dict[str, Any]:
     plt.grid(True, linestyle=":", alpha=0.3)
     plt.legend(loc="upper left", framealpha=0.9, fontsize=10)
 
-    plt.axvspan(-22, -3, color="#00f2fe", alpha=0.08, label="DTEM Early Warning Window")
-    plt.text(-18, 55, "DTEM Warning\nWindow (19 days)", color="#00a2ae", fontsize=11, fontweight="bold", bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.3'))
 
     EVAL_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     plt.savefig(PLOT_PATH, dpi=300, bbox_inches="tight")
@@ -182,7 +179,9 @@ def run_timeline_backtest(keyword: str = "eval_lockbit") -> dict[str, Any]:
 
     return {
         "timeline": df.to_dict(orient="records"),
-        "early_warning_lead_days": 19,
+        "early_warning_lead_days": None,
+        "evaluation_type": "curated_prototype_only",
+        "lead_time_status": "not_estimable_without_timestamped_future_event",
     }
 
 
@@ -192,4 +191,4 @@ if __name__ == "__main__":
     print("Backtest Completed.")
     print("Timeline sample:")
     for row in res["timeline"][-6:]:
-        print(f"Day {row['day']:>3d}: DTEM={row['dtem']:>5.1f} | CVSS={row['cvss']:>5.1f} | EPSS={row['epss']:>5.1f} | KEV={row['cisa_kev']:>5.1f}")
+        print(f"Day {row['day']:>3d}: DTEM={row['dtem']:>5.1f} | CVSS={row['cvss'] if row['cvss'] is not None else 'N/A'} | EPSS={row['epss'] if row['epss'] is not None else 'N/A'} | KEV={row['cisa_kev'] if row['cisa_kev'] is not None else 'N/A'}")
