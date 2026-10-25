@@ -35,14 +35,17 @@ def _parse_cutoff(value: Any) -> datetime | None:
     return parsed.replace(tzinfo=timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
 
 
-def chronological_split(rows: list[dict[str, Any]], *, dev_fraction: float = 0.6,
-                        val_fraction: float = 0.2, threshold: float = 50.0,
-                        dtem_score_key: str = "score") -> dict[str, Any]:
-    """Partition rows into time-ordered periods and summarize each period.
+def partition_periods(rows: list[dict[str, Any]], *, dev_fraction: float = 0.6,
+                      val_fraction: float = 0.2) -> dict[str, Any]:
+    """Assign rows to chronological periods and return the actual row buckets.
 
-    ``dev_fraction`` and ``val_fraction`` are proportions of the *distinct cutoff
-    timestamps*, so every cutoff for a given moment lands in the same period. The
-    remainder becomes the held-out test period.
+    The bucket boundaries are computed exactly as in :func:`chronological_split`
+    (distinct cutoff timestamps ordered chronologically), but unlike that
+    summary function this returns the rows themselves so a caller can fit on
+    development data, select on validation, and evaluate once on the held-out
+    test period. Rows without a parseable ``cutoff`` are dropped. ``boundaries``
+    are ``None`` when there are too few distinct cutoffs to form every period;
+    callers must treat a missing test bucket as 'not evaluable', not as empty.
     """
     if dev_fraction <= 0 or val_fraction <= 0 or dev_fraction + val_fraction >= 1:
         raise ValueError("dev_fraction and val_fraction must be positive and sum to less than 1")
@@ -50,8 +53,8 @@ def chronological_split(rows: list[dict[str, Any]], *, dev_fraction: float = 0.6
     ordered_cutoffs = sorted({row["cutoff"] for row in usable},
                              key=lambda value: _parse_cutoff(value))
     if not ordered_cutoffs:
-        return {"status": "no_dated_cutoffs", "periods": {}, "leakage": {},
-                "recommendation": "Provide rows with an ISO 'cutoff' timestamp before splitting."}
+        return {"status": "no_dated_cutoffs", "boundaries": {},
+                "buckets": {name: [] for name in PERIODS}}
 
     n = len(ordered_cutoffs)
     dev_end = ordered_cutoffs[max(0, int(round(dev_fraction * n)) - 1)]
@@ -68,6 +71,30 @@ def chronological_split(rows: list[dict[str, Any]], *, dev_fraction: float = 0.6
             buckets["validation"].append(row)
         else:
             buckets["test"].append(row)
+
+    return {"status": "computed", "boundaries": {"development_through": dev_end,
+                                                 "validation_through": val_end,
+                                                 "test_after": val_end},
+            "buckets": buckets}
+
+
+def chronological_split(rows: list[dict[str, Any]], *, dev_fraction: float = 0.6,
+                        val_fraction: float = 0.2, threshold: float = 50.0,
+                        dtem_score_key: str = "score") -> dict[str, Any]:
+    """Partition rows into time-ordered periods and summarize each period.
+
+    ``dev_fraction`` and ``val_fraction`` are proportions of the *distinct cutoff
+    timestamps*, so every cutoff for a given moment lands in the same period. The
+    remainder becomes the held-out test period.
+    """
+    partition = partition_periods(rows, dev_fraction=dev_fraction, val_fraction=val_fraction)
+    if partition["status"] == "no_dated_cutoffs":
+        return {"status": "no_dated_cutoffs", "periods": {}, "leakage": {},
+                "recommendation": "Provide rows with an ISO 'cutoff' timestamp before splitting."}
+    buckets = partition["buckets"]
+    boundaries = partition["boundaries"]
+    dev_end = boundaries["development_through"]
+    val_end = boundaries["validation_through"]
 
     periods: dict[str, Any] = {}
     for name, items in buckets.items():

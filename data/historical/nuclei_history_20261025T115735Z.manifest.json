@@ -1,0 +1,14 @@
+{
+  "source": "Nuclei Templates git history (projectdiscovery/nuclei-templates)",
+  "repository": "output\\nuclei-templates",
+  "pathspec": "http/cves",
+  "retrieved_at": "2026-10-25T11:57:35.472544+00:00",
+  "template_add_events_scanned": 4576,
+  "cve_detection_event_count": 4501,
+  "distinct_cves": 4473,
+  "earliest_add": "2023-04-27T09:58:59+05:30",
+  "latest_add": "2026-10-25T05:31:45+05:30",
+  "file": "nuclei_history_20261025T115735Z.jsonl",
+  "timestamp_policy": "template first-added commit date equals available_at; a lower bound on public detection-template availability, never back-dated",
+  "coverage_limit": "only CVE-named yaml templates under http/cves are captured; workflow or non-CVE templates are excluded"
+}

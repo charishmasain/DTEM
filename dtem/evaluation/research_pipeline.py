@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -25,8 +26,10 @@ from dtem.evaluation.historical import (
 )
 from dtem.evaluation.ablation import run_ablation
 from dtem.evaluation.baselines import run_baselines
-from dtem.evaluation.metrics import bootstrap_pr_auc_ci, pr_auc
+from dtem.evaluation.diagnostics import feature_correlation, source_independence_audit
+from dtem.evaluation.metrics import alert_budget_metrics, bootstrap_pr_auc_ci, pr_auc
 from dtem.evaluation.split import chronological_split
+from dtem.evaluation.weight_learning import run_weight_learning
 from dtem.extractor.features import ThreatInfoExtractor
 from dtem.model.scoring import DTEMScoringEngine
 
@@ -36,6 +39,7 @@ NVD_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 EPSS_URL = "https://api.first.org/data/v1/epss"
 KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
 NVD_HISTORY_URL = "https://services.nvd.nist.gov/rest/json/cvehistory/2.0"
+GHSA_URL = "https://api.github.com/advisories"
 
 
 def _get_json(session: requests.Session, url: str, *, params: dict[str, Any] | None,
@@ -304,6 +308,412 @@ def import_kev_git_history(repo_path: Path, output_dir: Path = DATA_DIR,
                     "first_commit": manifest["first_commit"],
                     "last_commit": manifest["last_commit"]}, indent=2),
         encoding="utf-8")
+    return manifest
+
+
+def collect_ghsa_history(start_date: str, end_date: str, output_dir: Path = DATA_DIR,
+                         *, timeout: int = 30, per_page: int = 100, max_pages: int = 60,
+                         request_delay: float = 0.5) -> dict[str, Any]:
+    """Archive GitHub Security Advisories (GHSA) with their real published time.
+
+    GHSA is an independent publisher whose ``publishedAt`` is the moment GitHub
+    made the advisory public, so it is a verifiable historical availability time
+    (unlike a current NVD record whose present state cannot be back-dated). One
+    advisory may reference a CVE that NVD also reports, giving genuine
+    multi-source corroboration with distinct first-seen times.
+
+    Enumerates reviewed advisories whose publish date falls in the inclusive
+    ``start_date``..``end_date`` window, paginating up to ``max_pages``. A
+    ``GITHUB_TOKEN`` in the environment raises the rate limit; unauthenticated
+    use is capped by GitHub (about 60 requests/hour), so partial coverage is
+    recorded in the manifest rather than silently truncated. Missing CVE mappings
+    and unparseable dates are skipped, never guessed.
+    """
+    start = datetime.strptime(start_date, "%Y-%m-%d").date()
+    end = datetime.strptime(end_date, "%Y-%m-%d").date()
+    if end < start:
+        raise ValueError("end_date must be on or after start_date")
+    if per_page <= 0 or per_page > 100:
+        raise ValueError("per_page must be in 1..100")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    retrieved = datetime.now(timezone.utc)
+    stamp = retrieved.strftime("%Y%m%dT%H%M%SZ")
+    headers = {"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+    if os.environ.get("GITHUB_TOKEN"):
+        headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
+    session = requests.Session()
+    observations: dict[str, dict[str, Any]] = {}
+    errors: list[dict[str, Any]] = []
+    request_count = 0
+    published_range = f"{start.isoformat()}..{end.isoformat()}"
+    for page in range(1, max_pages + 1):
+        try:
+            payload = _get_json(session, GHSA_URL, params={
+                "per_page": per_page, "page": page, "type": "reviewed",
+                "published": published_range, "sort": "published", "direction": "asc",
+            }, headers=headers, timeout=timeout)
+            request_count += 1
+        except (requests.RequestException, ValueError) as exc:
+            errors.append({"page": page, "error": f"{type(exc).__name__}: {exc}"})
+            break
+        advisories = payload if isinstance(payload, list) else []
+        if not advisories:
+            break
+        for advisory in advisories:
+            cve = str(advisory.get("cve_id") or "").upper()
+            ghsa_id = str(advisory.get("ghsa_id") or "")
+            published = parse_time(advisory.get("published_at"))
+            if not CVE_RE.fullmatch(cve) or published is None or not ghsa_id:
+                continue
+            cvss = (advisory.get("cvss") or {})
+            score = cvss.get("score")
+            severity = str(advisory.get("severity") or "")
+            record = {
+                "cve_id": cve, "source": "GitHub Advisory (GHSA)", "source_type": "public_api",
+                "event_id": ghsa_id, "ghsa_id": ghsa_id,
+                "title": str(advisory.get("summary") or f"GHSA {ghsa_id}"),
+                "content": str(advisory.get("description") or "")[:2000],
+                "published_at": published.isoformat(),
+                "available_at": published.isoformat(),
+                "timestamp_semantics": "GitHub advisory publishedAt is the time GitHub made it publicly visible; used as verified historical availability",
+                "url": str(advisory.get("html_url") or f"https://github.com/advisories/{ghsa_id}"),
+                "severity": f"CVSS {score} ({severity})" if score is not None else severity,
+                "cvss_vector": cvss.get("vector_string"),
+                "references": [r.get("url") for r in (advisory.get("references") or []) if isinstance(r, dict)],
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                "raw_data": {"ghsa_id": ghsa_id, "cve_id": cve, "severity": severity,
+                             "cvss": cvss, "vulnerabilities": advisory.get("vulnerabilities")},
+            }
+            observations[ghsa_id] = record
+        if len(advisories) < per_page:
+            break
+        if request_delay > 0:
+            time.sleep(request_delay)
+
+    events = sorted(observations.values(), key=lambda row: (row["published_at"], row["event_id"]))
+    path = output_dir / f"ghsa_history_{start.isoformat()}_{end.isoformat()}_{stamp}.jsonl"
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        for event in events:
+            handle.write(json.dumps(event, ensure_ascii=False) + "\n")
+    distinct_dates = {row["published_at"][:10] for row in events}
+    manifest = {
+        "source": "GitHub Security Advisories REST API", "source_url": GHSA_URL,
+        "retrieved_at": retrieved.isoformat(), "status": "partial_error" if errors else "ok",
+        "requested_start_inclusive": start.isoformat(), "requested_end_inclusive": end.isoformat(),
+        "request_count": request_count, "advisory_count": len(events),
+        "distinct_cves": len({row["cve_id"] for row in events}),
+        "distinct_publish_dates": len(distinct_dates), "file": path.name, "errors": errors,
+        "authenticated": bool(os.environ.get("GITHUB_TOKEN")),
+        "timestamp_policy": "advisory publishedAt governs historical availability and equals available_at; no date is back-dated",
+        "unit_limit": "GitHub advisories are one additional independent publisher; overlap with NVD gives genuine corroboration, but GHSA skews toward open-source packages and may publish after NVD for the same CVE",
+    }
+    (output_dir / f"ghsa_history_{start.isoformat()}_{end.isoformat()}_{stamp}.manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest
+
+
+def collect_ghsa_for_cves(cve_ids: list[str], output_dir: Path = DATA_DIR,
+                          *, timeout: int = 30, request_delay: float = 0.8) -> dict[str, Any]:
+    """Look up specific CVEs in GHSA to get their advisory publishedAt timestamps.
+
+    Unlike the range-based ``collect_ghsa_history`` that paginates the entire
+    advisory list (rate-limit-heavy), this queries one CVE at a time — only
+    N requests for N CVEs — so 12 positives use 12 of 60 unauthenticated calls.
+    Each GHSA advisory gives a verifiable publication date from an independent
+    publisher, making it a genuine second/third observation source whose
+    published_at ≤ cutoff is leakage-safe.
+    """
+    unique = sorted({c.upper().strip() for c in cve_ids
+                     if CVE_RE.fullmatch(c.upper().strip())})
+    if not unique:
+        raise ValueError("At least one valid CVE ID is required")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    retrieved = datetime.now(timezone.utc)
+    stamp = retrieved.strftime("%Y%m%dT%H%M%SZ")
+    headers = {"Accept": "application/vnd.github+json",
+               "X-GitHub-Api-Version": "2022-11-28"}
+    if os.environ.get("GITHUB_TOKEN"):
+        headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
+    session = requests.Session()
+    observations: dict[str, dict[str, Any]] = {}
+    errors: list[dict[str, str]] = []
+    cves_with_advisories: set[str] = set()
+    for cve in unique:
+        try:
+            advisories = _get_json(session, GHSA_URL,
+                                   params={"cve_id": cve, "type": "reviewed", "per_page": 10},
+                                   headers=headers, timeout=timeout)
+            if not isinstance(advisories, list):
+                advisories = []
+            cves_with_advisories.add(cve)
+            for advisory in advisories:
+                ghsa_id = str(advisory.get("ghsa_id") or "")
+                published = parse_time(advisory.get("published_at"))
+                if not ghsa_id or published is None:
+                    continue
+                record = {
+                    "cve_id": cve,
+                    "source": "GitHub Advisory (GHSA)",
+                    "source_type": "security_advisory",
+                    "event_id": ghsa_id,
+                    "title": str(advisory.get("summary") or f"GHSA {ghsa_id}"),
+                    "content": str(advisory.get("description") or "")[:2000],
+                    "published_at": published.isoformat(),
+                    "available_at": published.isoformat(),
+                    "timestamp_semantics": "GitHub advisory publishedAt is the moment it became publicly visible; verified historical availability",
+                    "url": str(advisory.get("html_url") or f"https://github.com/advisories/{ghsa_id}"),
+                    "severity": str(advisory.get("severity") or ""),
+                    "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                }
+                observations[ghsa_id] = record
+        except (requests.RequestException, ValueError, TypeError) as exc:
+            errors.append({"cve": cve, "error": f"{type(exc).__name__}: {exc}"})
+        if request_delay > 0:
+            time.sleep(request_delay)
+    events = sorted(observations.values(), key=lambda r: (r["published_at"], r["event_id"]))
+    path = output_dir / f"ghsa_targeted_{stamp}.jsonl"
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
+        for event in events:
+            fh.write(json.dumps(event, ensure_ascii=False) + "\n")
+    manifest = {
+        "source": "GitHub Security Advisories (targeted CVE lookup)",
+        "method": "per-CVE API call (minimal rate-budget)",
+        "retrieved_at": retrieved.isoformat(),
+        "authenticated": bool(os.environ.get("GITHUB_TOKEN")),
+        "status": "partial_error" if errors else "ok",
+        "cves_requested": len(unique),
+        "cves_with_advisories": len(cves_with_advisories),
+        "advisory_count": len(events),
+        "distinct_cves": len({r["cve_id"] for r in events}),
+        "file": path.name, "errors": errors,
+        "timestamp_policy": "publishedAt governs availability; no back-dating",
+    }
+    (output_dir / f"ghsa_targeted_{stamp}.manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest
+
+
+def merge_observation_files(paths: list[Path], output_path: Path, *,
+                            source_label: str | None = None) -> dict[str, Any]:
+    """Concatenate timestamped observation JSONL files into one multi-source set.
+
+    De-duplicates on (source, url, event_id, published_at) so re-importing the
+    same archive does not inflate detection frequency. Records lacking a CVE
+    association or a verifiable available_at are preserved unchanged; the
+    backtest still excludes what it cannot place before a cutoff. The manifest
+    records per-source counts so a reviewer can see the cohort is genuinely
+    multi-source rather than one source copied under two labels.
+    """
+    if not paths:
+        raise ValueError("at least one observation file is required")
+    seen: set[tuple[Any, ...]] = set()
+    merged: list[dict[str, Any]] = []
+    per_source: dict[str, int] = {}
+    duplicates = 0
+    for path in paths:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            identity = (str(row.get("source", "")).casefold(), str(row.get("url", "")),
+                        str(row.get("event_id", "")), str(row.get("published_at", "")))
+            if identity in seen:
+                duplicates += 1
+                continue
+            seen.add(identity)
+            if source_label:
+                row["merged_source"] = source_label
+            source = str(row.get("source") or "unknown")
+            per_source[source] = per_source.get(source, 0) + 1
+            merged.append(row)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8", newline="\n") as handle:
+        for row in merged:
+            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+    manifest = {
+        "merged_record_count": len(merged), "dropped_duplicates": duplicates,
+        "inputs": [p.name for p in paths], "output": output_path.name,
+        "per_source_counts": per_source, "distinct_sources": len(per_source),
+        "distinct_cves": len({r.get("cve_id") for r in merged if r.get("cve_id")}),
+    }
+    output_path.with_suffix(output_path.suffix + ".manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest
+
+
+def _extract_cve_tokens_from_path(path: str) -> list[str]:
+    """Pull CVE ids declared in a Metasploit module filename (e.g. cve_2021_34527)."""
+    found: list[str] = []
+    for year, number in re.findall(r"cve[_-]?(\d{4})[_-](\d{3,})", path, re.IGNORECASE):
+        token = f"CVE-{year}-{int(number):04d}"
+        if CVE_RE.fullmatch(token) and token not in found:
+            found.append(token)
+    for token in CVE_RE.findall(path):
+        upper = token.upper()
+        if upper not in found:
+            found.append(upper)
+    return found
+
+
+def _parse_msf_add_log(log_text: str, *, modules_prefix: str = "modules") -> tuple[list[dict[str, Any]], int]:
+    """Parse ``git log --reverse --diff-filter=A --name-only --format=%cI\t%H`` output.
+
+    Returns (events, added_module_files_scanned). Pure and git-free so the CVE
+    extraction and first-add-date assignment can be tested directly. Commit
+    headers are lines starting with an ISO date and containing a tab; every
+    following non-empty line is a file path added in that commit.
+    """
+    current_time: str | None = None
+    current_sha: str | None = None
+    seen: set[tuple[str, str]] = set()
+    events: list[dict[str, Any]] = []
+    added_files = 0
+    for raw in log_text.splitlines():
+        line = raw.rstrip("\n")
+        if not line:
+            continue
+        if "\t" in line and re.match(r"\d{4}-\d{2}-\d{2}", line):
+            ts, sha = line.split("\t", 1)
+            if parse_time(ts) is not None:
+                current_time, current_sha = ts, sha
+                continue
+        path = line.strip()
+        if not current_time or not path.startswith(modules_prefix):
+            continue
+        added_files += 1
+        module_type = path.split("/")[1] if path.count("/") >= 2 else ""
+        for cve in _extract_cve_tokens_from_path(path):
+            key = (cve, path)
+            if key in seen:
+                continue
+            seen.add(key)
+            events.append({
+                "cve_id": cve, "source": "Metasploit", "source_type": "exploit_module",
+                "event_id": f"{cve}|{path}",
+                "title": f"Metasploit {module_type or 'module'}: {path.rsplit('/', 1)[-1]}",
+                "content": "Public Metasploit exploit module (exploit code available)",
+                "published_at": current_time, "available_at": current_time,
+                "timestamp_semantics": "metasploit-framework commit date when the module was first added; verifiable public-availability lower bound",
+                "url": f"https://github.com/rapid7/metasploit-framework/blob/{current_sha}/{path}",
+                "exploit_evidence": "verified_exploit", "module_path": path,
+                "raw_data": {"path": path, "added_at": current_time, "source_commit": current_sha},
+            })
+    return events, added_files
+
+
+def import_metasploit_git_history(repo_path: Path, output_dir: Path = DATA_DIR,
+                                  *, modules_prefix: str = "modules",
+                                  timeout: int = 1800) -> dict[str, Any]:
+    """Convert the public Metasploit Framework git history into dated exploit events.
+
+    Clone/fetch the repository separately (as with the KEV importer) and point
+    ``--repo`` at the local clone. This reads only git *metadata* (commit dates and
+    file paths), so a blobless clone is sufficient and no per-file content or API
+    access is required. Each module file that names a CVE in its path becomes an
+    exploit-availability observation whose ``published_at``/``available_at`` is the
+    date that module was first added to the public repository — a verifiable lower
+    bound on when that public exploit became available. It never back-dates an
+    observation, so it is safe against look-ahead leakage at a cutoff.
+
+    Coverage is limited to modules whose filename declares the CVE; modules named
+    only after a product are not captured, and that gap is reported, not hidden.
+    """
+    log = subprocess.run(
+        ["git", "-C", str(repo_path), "log", "--reverse", "--diff-filter=A",
+         "--name-only", "--format=%cI%x09%H", "--", modules_prefix],
+        check=True, capture_output=True, text=True, timeout=timeout,
+    ).stdout
+    output_dir.mkdir(parents=True, exist_ok=True)
+    retrieved = datetime.now(timezone.utc)
+    stamp = retrieved.strftime("%Y%m%dT%H%M%SZ")
+    events, added_files = _parse_msf_add_log(log, modules_prefix=modules_prefix)
+    for event in events:
+        event["retrieved_at"] = retrieved.isoformat()
+    events.sort(key=lambda row: (row["published_at"], row["cve_id"], row["module_path"]))
+    path_out = output_dir / f"metasploit_history_{stamp}.jsonl"
+    with path_out.open("w", encoding="utf-8", newline="\n") as handle:
+        for event in events:
+            handle.write(json.dumps(event, ensure_ascii=False) + "\n")
+    first_ts = events[0]["published_at"] if events else None
+    last_ts = events[-1]["published_at"] if events else None
+    manifest = {
+        "source": "Metasploit Framework git history (rapid7/metasploit-framework)",
+        "repository": str(repo_path), "retrieved_at": retrieved.isoformat(),
+        "module_add_events_scanned": added_files, "exploit_event_count": len(events),
+        "distinct_cves": len({row["cve_id"] for row in events}),
+        "earliest_add": first_ts, "latest_add": last_ts, "file": path_out.name,
+        "timestamp_policy": "module first-added commit date equals available_at; a lower bound on public exploit availability, never back-dated",
+        "coverage_limit": "only modules whose filename declares a CVE id are captured; product-named modules are missed and are not assumed absent",
+    }
+    (output_dir / f"metasploit_history_{stamp}.manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
+    return manifest
+
+
+def import_nuclei_git_history(repo_path: Path, output_dir: Path = DATA_DIR,
+                              *, pathspec: str = "http/cves",
+                              timeout: int = 1800) -> dict[str, Any]:
+    """Convert nuclei-templates git history into dated CVE-detection events.
+
+    Nuclei CVE templates are stored at paths like
+    ``http/cves/2025/CVE-2025-0108.yaml``, so the CVE is directly in the
+    filename. The first-added commit date is a verifiable public-availability
+    lower bound — a community detection template was publicly accessible from
+    that date onward. This is independent of NVD and Metasploit and provides
+    genuine source-diversity evidence for the DTEM model.
+
+    Only CVE-named template adds are scanned (``http/cves`` pathspec), so
+    non-CVE workflow templates do not pollute the count.
+    """
+    log = subprocess.run(
+        ["git", "-C", str(repo_path), "log", "--reverse", "--diff-filter=A",
+         "--name-only", "--format=%cI%x09%H", "--", pathspec],
+        check=True, capture_output=True, text=True, timeout=timeout,
+    ).stdout
+    output_dir.mkdir(parents=True, exist_ok=True)
+    retrieved = datetime.now(timezone.utc)
+    stamp = retrieved.strftime("%Y%m%dT%H%M%SZ")
+    # Reuse the generic path-CVE extraction; pathspec prefix filters non-CVE dirs
+    events_raw, added_files = _parse_msf_add_log(log, modules_prefix=pathspec)
+    # Convert from Metasploit-specific labels to Nuclei detection
+    events: list[dict[str, Any]] = []
+    for ev in events_raw:
+        ev["source"] = "Nuclei"
+        ev["source_type"] = "detection_template"
+        ev["title"] = f"Nuclei CVE template: {ev['module_path'].rsplit('/', 1)[-1]}"
+        ev["content"] = "Public Nuclei detection template (CVE-specific scan query available)"
+        ev["timestamp_semantics"] = (
+            "nuclei-templates commit date when the CVE template was first added; "
+            "verifiable public-availability lower bound for this detection signal"
+        )
+        ev["url"] = ev["url"].replace(
+            "https://github.com/rapid7/metasploit-framework/blob/",
+            f"https://github.com/projectdiscovery/nuclei-templates/blob/",
+        )
+        # Detection ≠ exploit — remove exploit_evidence tier
+        ev.pop("exploit_evidence", None)
+        ev["retrieved_at"] = retrieved.isoformat()
+        events.append(ev)
+    events.sort(key=lambda r: (r["published_at"], r["cve_id"]))
+    path_out = output_dir / f"nuclei_history_{stamp}.jsonl"
+    with path_out.open("w", encoding="utf-8", newline="\n") as handle:
+        for event in events:
+            handle.write(json.dumps(event, ensure_ascii=False) + "\n")
+    first_ts = events[0]["published_at"] if events else None
+    last_ts = events[-1]["published_at"] if events else None
+    manifest = {
+        "source": "Nuclei Templates git history (projectdiscovery/nuclei-templates)",
+        "repository": str(repo_path), "pathspec": pathspec,
+        "retrieved_at": retrieved.isoformat(),
+        "template_add_events_scanned": added_files,
+        "cve_detection_event_count": len(events),
+        "distinct_cves": len({r["cve_id"] for r in events}),
+        "earliest_add": first_ts, "latest_add": last_ts, "file": path_out.name,
+        "timestamp_policy": "template first-added commit date equals available_at; a lower bound on public detection-template availability, never back-dated",
+        "coverage_limit": "only CVE-named yaml templates under http/cves are captured; workflow or non-CVE templates are excluded",
+    }
+    (output_dir / f"nuclei_history_{stamp}.manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8")
     return manifest
 
 
@@ -606,10 +1016,20 @@ def run_temporal_backtest(observations_path: Path, kev_path: Path, output_path: 
                                         growth_mode=engine.growth_mode)
         baselines_summary = run_baselines(predictions, engine, threshold=threshold,
                                           epss_threshold=epss_threshold, dtem_scores=scores)
+        diagnostics_summary = feature_correlation(predictions, engine,
+                                                  growth_mode=engine.growth_mode)
+        source_audit = source_independence_audit(obs)
+        learned_summary = run_weight_learning(predictions, engine, threshold=threshold,
+                                              growth_mode=engine.growth_mode)
+        dtem_alert_budget = alert_budget_metrics(labels, scores)
     else:
         split_summary = {"status": "no_predictions"}
         ablation_summary = {"status": "no_predictions"}
         baselines_summary = {"status": "no_predictions"}
+        diagnostics_summary = {"status": "no_predictions"}
+        source_audit = {"status": "no_predictions"}
+        learned_summary = {"status": "no_predictions"}
+        dtem_alert_budget = {"status": "no_predictions"}
     report = {
         "status": ("exploratory_nvd_only" if predictions and nvd_only else
                    "completed" if predictions else "insufficient_historical_coverage"),
@@ -645,14 +1065,19 @@ def run_temporal_backtest(observations_path: Path, kev_path: Path, output_path: 
         "pr_auc_status": dtem_ranking.get("status"),
         "pr_auc_random_baseline": dtem_ranking.get("random_baseline"),
         "pr_auc_bootstrap": dtem_bootstrap,
+        "dtem_alert_budget": dtem_alert_budget,
         "chronological_split": split_summary,
         "ablation": ablation_summary,
         "baselines": baselines_summary,
+        "feature_diagnostics": diagnostics_summary,
+        "source_independence_audit": source_audit,
+        "learned_weights": learned_summary,
         "limitations": ["KEV is a proxy outcome, not exploitation onset.",
                         "Current source snapshots do not establish historical availability.",
                         "NVD change events are database workflow activity, not independent threat-intelligence detections.",
-                        "The chronological split is descriptive: this runner does not fit or select weights on development data.",
+                        "The chronological split is descriptive; the learned_weights block is what fits on development, selects on validation, and evaluates the test period once.",
                         "Ablation and baseline tables reuse these rows and inherit their scope; they are not validation unless the rows are genuine CTI with both classes.",
+                        "Learned-weight comparison fits on development, selects on validation, and reads the test period once; with a single-source cohort it inherits the same scope limitation as every other table here.",
                         "No output is evidence of real-world predictive validity."],
         "predictions": predictions,
     }
@@ -678,6 +1103,17 @@ def main(argv: list[str] | None = None) -> int:
     kev_import = commands.add_parser("import-kev-history", help="convert a local CISA kev-data Git clone to versioned state events")
     kev_import.add_argument("--repo", type=Path, required=True, help="local clone of cisagov/kev-data")
     kev_import.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    msf_import = commands.add_parser("import-msf-history", help="convert a local Metasploit Framework git clone into dated exploit observations")
+    msf_import.add_argument("--repo", type=Path, required=True, help="local clone of rapid7/metasploit-framework")
+    msf_import.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    msf_import.add_argument("--timeout", type=int, default=1800,
+                            help="seconds for the git-log scan; a full Framework history takes several minutes")
+    nuclei_import = commands.add_parser("import-nuclei-history", help="convert a local nuclei-templates git clone into dated CVE-detection observations")
+    nuclei_import.add_argument("--repo", type=Path, required=True, help="local clone of projectdiscovery/nuclei-templates")
+    nuclei_import.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    nuclei_import.add_argument("--pathspec", default="http/cves", help="git pathspec to filter scanned dirs")
+    nuclei_import.add_argument("--timeout", type=int, default=1800,
+                               help="seconds for the git-log scan")
     epss_history = commands.add_parser("epss-history", help="collect actual daily historical EPSS values for specified CVEs")
     epss_history.add_argument("--cves-file", type=Path, required=True, help="text file with one CVE ID per line")
     epss_history.add_argument("--start", required=True, help="inclusive YYYY-MM-DD (not before 2021-04-14)")
@@ -685,6 +1121,20 @@ def main(argv: list[str] | None = None) -> int:
     epss_history.add_argument("--dates-file", type=Path,
                               help="optional sparse YYYY-MM-DD list; requests only these dates within start/end")
     epss_history.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    ghsa = commands.add_parser("ghsa", help="archive timestamped GitHub Security Advisories (GHSA)")
+    ghsa.add_argument("--start", required=True, help="inclusive YYYY-MM-DD published lower bound")
+    ghsa.add_argument("--end", required=True, help="inclusive YYYY-MM-DD published upper bound")
+    ghsa.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    ghsa.add_argument("--max-pages", type=int, default=60,
+                      help="cap pages per run; unauthenticated GitHub is ~60 requests/hour")
+    ghsa_cves = commands.add_parser("ghsa-cves", help="query GHSA for specific CVEs (targeted, minimal rate usage)")
+    ghsa_cves.add_argument("--cves", nargs="+", required=True, help="CVE IDs to look up (e.g. CVE-2025-0108)")
+    ghsa_cves.add_argument("--cves-file", type=Path, help="file with one CVE per line (merged with --cves)")
+    ghsa_cves.add_argument("--output-dir", type=Path, default=DATA_DIR)
+    ghsa_cves.add_argument("--delay", type=float, default=0.8, help="seconds between API calls")
+    merge = commands.add_parser("merge-observations", help="merge timestamped JSONL sources into one set")
+    merge.add_argument("--inputs", type=Path, nargs="+", required=True)
+    merge.add_argument("--output", type=Path, required=True)
     backtest = commands.add_parser("backtest", help="run against archived timestamped observations")
     backtest.add_argument("--observations", type=Path, required=True)
     backtest.add_argument("--kev", type=Path, required=True)
@@ -701,6 +1151,11 @@ def main(argv: list[str] | None = None) -> int:
                                      request_delay=args.request_delay)
     elif args.command == "import-kev-history":
         result = import_kev_git_history(args.repo, args.output_dir)
+    elif args.command == "import-msf-history":
+        result = import_metasploit_git_history(args.repo, args.output_dir, timeout=args.timeout)
+    elif args.command == "import-nuclei-history":
+        result = import_nuclei_git_history(args.repo, args.output_dir,
+                                           pathspec=args.pathspec, timeout=args.timeout)
     elif args.command == "epss":
         result = collect_epss_snapshots(args.cves, args.output_dir)
     elif args.command == "epss-history":
@@ -708,6 +1163,16 @@ def main(argv: list[str] | None = None) -> int:
         dates = args.dates_file.read_text(encoding="utf-8").splitlines() if args.dates_file else None
         result = collect_epss_history(cves, args.start, args.end, args.output_dir,
                                      requested_dates=dates)
+    elif args.command == "ghsa":
+        result = collect_ghsa_history(args.start, args.end, args.output_dir,
+                                      max_pages=args.max_pages)
+    elif args.command == "ghsa-cves":
+        cve_list = list(args.cves)
+        if args.cves_file:
+            cve_list.extend(args.cves_file.read_text(encoding="utf-8").split())
+        result = collect_ghsa_for_cves(cve_list, args.output_dir, request_delay=args.delay)
+    elif args.command == "merge-observations":
+        result = merge_observation_files(args.inputs, args.output)
     else:
         result = run_temporal_backtest(args.observations, args.kev, args.output,
                                        start=parse_time(args.start), end=parse_time(args.end),

@@ -62,6 +62,64 @@ def threshold_metrics(labels: Sequence[int], scores: Sequence[float],
     }
 
 
+def alert_budget_metrics(labels: Sequence[int], scores: Sequence[float], *,
+                         top_k: int | None = None, budget_fraction: float | None = None,
+                         ) -> dict[str, Any]:
+    """Precision, recall, and false alerts within a fixed analyst alert budget.
+
+    A prioritization tool is used under a finite review capacity, so ranking
+    quality near the top matters more than a global threshold. The budget is the
+    number of highest-scored items an analyst would actually inspect: ``top_k``
+    items, or ``budget_fraction`` of the population when ``top_k`` is not given
+    (default 10%). Items are ranked by descending score; ties are broken by the
+    original row order so the result is deterministic, and ``n_ties_at_cutoff``
+    reports how many scores sit exactly at the budget boundary so a reader can
+    see when the ranking is being decided by tie-break rather than by score.
+    Undefined values (for example recall when no positives exist) are reported as
+    ``None`` and listed in ``undefined_metrics`` rather than coerced to zero.
+    """
+    _validate(labels, scores)
+    total = len(labels)
+    if total == 0:
+        return {"status": "no_samples", "budget": 0, "sample_count": 0}
+    if top_k is None:
+        if budget_fraction is None:
+            budget_fraction = 0.1
+        if not 0 < budget_fraction <= 1:
+            raise ValueError("budget_fraction must be in (0, 1]")
+        k = max(1, math.ceil(budget_fraction * total))
+    else:
+        if top_k <= 0:
+            raise ValueError("top_k must be positive")
+        k = min(int(top_k), total)
+    order = sorted(range(total), key=lambda i: (-float(scores[i]), i))
+    selected = order[:k]
+    positives = sum(1 for y in labels if int(y) == 1)
+    hits = sum(1 for i in selected if int(labels[i]) == 1)
+    false_alerts = k - hits
+    precision = hits / k if k else None
+    recall = hits / positives if positives else None
+    boundary_score = float(scores[selected[-1]])
+    n_ties = sum(1 for s in scores if float(s) == boundary_score)
+    return {
+        "status": "computed",
+        "sample_count": total,
+        "budget": k,
+        "budget_basis": f"top-{k}" if top_k is not None else f"{budget_fraction:.0%} of {total}",
+        "positives_in_population": positives,
+        "positives_captured": hits,
+        "false_alerts": false_alerts,
+        "precision_at_budget": round(precision, 6) if precision is not None else None,
+        "recall_at_budget": round(recall, 6) if recall is not None else None,
+        "random_precision_baseline": round(positives / total, 6) if total else None,
+        "n_ties_at_cutoff": n_ties,
+        "undefined_metrics": [name for name, value in
+                              (("recall", recall),) if value is None],
+        "note": "Compare precision_at_budget against random_precision_baseline (prevalence); "
+                "with ties the cutoff rows are decided by input order, which must be disclosed.",
+    }
+
+
 def pr_auc(labels: Sequence[int], scores: Sequence[float]) -> dict[str, Any]:
     """Average precision (the area under the precision-recall step curve).
 

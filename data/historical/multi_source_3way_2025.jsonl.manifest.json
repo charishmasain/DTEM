@@ -1,0 +1,17 @@
+{
+  "merged_record_count": 18253,
+  "dropped_duplicates": 0,
+  "inputs": [
+    "nvd_history_2025-01-24_2025-02-25_20261024T100459Z.jsonl",
+    "metasploit_history_20261025T110330Z.jsonl",
+    "nuclei_history_20261025T115735Z.jsonl"
+  ],
+  "output": "multi_source_3way_2025.jsonl",
+  "per_source_counts": {
+    "NVD": 13475,
+    "Metasploit": 277,
+    "Nuclei": 4501
+  },
+  "distinct_sources": 3,
+  "distinct_cves": 14502
+}

@@ -1,0 +1,14 @@
+{
+  "source": "GitHub Security Advisories (targeted CVE lookup)",
+  "method": "per-CVE API call (minimal rate-budget)",
+  "retrieved_at": "2026-10-25T12:00:05.542806+00:00",
+  "authenticated": false,
+  "status": "ok",
+  "cves_requested": 12,
+  "cves_with_advisories": 12,
+  "advisory_count": 0,
+  "distinct_cves": 0,
+  "file": "ghsa_targeted_20261025T120005Z.jsonl",
+  "errors": [],
+  "timestamp_policy": "publishedAt governs availability; no back-dating"
+}

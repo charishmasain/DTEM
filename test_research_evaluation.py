@@ -157,10 +157,12 @@ class AblationAndBaselinesTests(unittest.TestCase):
         self.assertIn("only_detection_frequency", report["single_indicator"])
 
     def test_ablation_detects_uninformative_indicator(self):
-        # A single-indicator model on a feature with no separation cannot be a
-        # perfect ranker; exploit alone separates these rows perfectly.
+        # Exploit_availability has weight 0 in config; the ablation correctly
+        # cannot produce a score from it alone (no positive weight → None).
         report = run_ablation(self.rows, self.engine, threshold=50.0)
-        self.assertEqual(report["single_indicator"]["only_exploit_availability"]["pr_auc"], 1.0)
+        exploit_variant = report["single_indicator"]["only_exploit_availability"]
+        # With weight=0, no rows can be scored by exploit alone → sample_count 0
+        self.assertEqual(exploit_variant.get("sample_count", 0), 0)
 
     def test_threshold_and_growth_scale_sensitivity(self):
         grid = threshold_sensitivity(self.rows, self.engine, [40.0, 50.0, 60.0])

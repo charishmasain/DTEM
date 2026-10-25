@@ -1,0 +1,13 @@
+{
+  "source": "Metasploit Framework git history (rapid7/metasploit-framework)",
+  "repository": "output\\metasploit-framework",
+  "retrieved_at": "2026-10-25T11:03:30.674578+00:00",
+  "module_add_events_scanned": 5871,
+  "exploit_event_count": 277,
+  "distinct_cves": 251,
+  "earliest_add": "2007-03-31T05:29:37Z",
+  "latest_add": "2026-10-02T10:54:25+01:00",
+  "file": "metasploit_history_20261025T110330Z.jsonl",
+  "timestamp_policy": "module first-added commit date equals available_at; a lower bound on public exploit availability, never back-dated",
+  "coverage_limit": "only modules whose filename declares a CVE id are captured; product-named modules are missed and are not assumed absent"
+}
