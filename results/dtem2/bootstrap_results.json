@@ -1,0 +1,31 @@
+{
+  "dtem2_cluster_bootstrap": {
+    "status": "computed",
+    "mean": 0.0011975200000000014,
+    "median": 0.001177,
+    "ci95": [
+      0.000639,
+      0.00189
+    ],
+    "n_resamples": 500
+  },
+  "frequency_cluster_bootstrap": {
+    "status": "computed",
+    "mean": 0.0018217960000000003,
+    "median": 0.00146,
+    "ci95": [
+      0.000617,
+      0.004787
+    ],
+    "n_resamples": 500
+  },
+  "difference": {
+    "status": "computed",
+    "mean_difference": -0.0006242759999999989,
+    "median_difference": -0.00028299999999999983,
+    "ci95": [
+      -0.004148,
+      0.0012729999999999998
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "experiment_id": "dtem_2_redesign",
+  "status": "prototype",
+  "artifact_path": "output\\evaluation\\historical_backtest_3way.json",
+  "date": "2026-11-13",
+  "objective": "Preserve ranking signal by eliminating over-saturated score transforms and using actual recent/previous count growth.",
+  "inputs": [
+    "output/evaluation/historical_backtest_3way.json"
+  ],
+  "outputs": [
+    "feature_distribution_analysis.csv",
+    "indicator_ablation_results.csv",
+    "scoring_variant_comparison.csv",
+    "dtem_2_redesign_results.json"
+  ]
+}

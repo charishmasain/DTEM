@@ -158,6 +158,23 @@ Run `uvicorn dtem.web.app:app --reload --port 8000`, open `http://127.0.0.1:8000
 
 The overview uses persisted analyses and records. Threshold crossings and configured significant score increases create SQLite alerts; users can acknowledge or resolve them. **History** shows only persisted score snapshots, and **Report** opens a printable report. New installs show empty history until analyses run. Settings and watchlist are stored in SQLite. Export JSON or CSV from the dashboard links or `/api/export`. Do not interpret the score, heuristic exploit tier, or public-feed monitoring as proof of active exploitation or complete real-time coverage.
 
+## DTEM 2.0 experimental branch
+
+The DTEM 2.0 implementation is kept separate from the original DTEM 1.0 baseline and lives under `dtem2/`.
+
+```powershell
+# Validate the experimental leakage and scoring contract
+python -m pytest -q test_dtem2.py
+
+# Preserve the original historical evaluation baseline
+python -m pytest -q test_research_evaluation.py
+
+# Run the experimental DTEM 2.0 comparator on the archived historical backtest
+python -m dtem2 --backtest output/evaluation/historical_backtest_3way.json --output-dir results/dtem2
+```
+
+The DTEM 2.0 output directory contains the experimental metrics and CSV exports under `results/dtem2/`.
+
 ---
 
 ## License

@@ -1,0 +1,19 @@
+{
+  "experiment_id": "dtem2_historical_backtest_3way",
+  "dataset_file": "output\\evaluation\\historical_backtest_3way.json",
+  "dataset_hash": "sha256:860469641081",
+  "source_names": [
+    "NVD",
+    "Metasploit",
+    "Nuclei"
+  ],
+  "prediction_count": 36274,
+  "positive_count": 33,
+  "negative_count": 36241,
+  "weights": {
+    "frequency": 0.3,
+    "growth": 0.25,
+    "diversity": 0.2,
+    "exploit": 0.25
+  }
+}

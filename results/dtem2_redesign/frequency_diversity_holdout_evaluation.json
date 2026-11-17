@@ -1,0 +1,21 @@
+{
+  "experiment": "frequency_plus_diversity_holdout_validation",
+  "selection_rule": "weights chosen on development and validation periods only; test period evaluated once",
+  "selected_weights": {
+    "frequency_weight": 0.4,
+    "diversity_weight": 0.6
+  },
+  "selection_metrics": {
+    "development_pr_auc": 0.001281,
+    "validation_pr_auc": 0.002605
+  },
+  "test_period": {
+    "positive_count": 12,
+    "negative_count": 12251,
+    "frequency_diversity_pr_auc": 0.001519,
+    "original_dtem_pr_auc": 0.001551,
+    "absolute_difference": -0.000032,
+    "direction": "frequency_diversity_underperforms_original_dtem"
+  },
+  "interpretation": "The frequency + diversity hypothesis does not survive independent evaluation on the untouched test period. The observed advantage in the pooled historical backtest was not reproduced under a leakage-safe dev/validation/test split."
+}

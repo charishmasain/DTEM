@@ -327,9 +327,9 @@ To validate the proposed framework beyond a theoretical model, DTEM was implemen
 
 An opt-in \texttt{dtem.monitoring} background thread periodically re-collects intelligence for watchlisted threats, recomputes scores, and raises alerts when the emergence score crosses the configured threshold or increases by more than a configurable delta between intervals.
 
-The historical evaluation additionally uses \texttt{dtem.evaluation}, which implements the full backtest pipeline, leave-one-out ablation, chronological splitting, baseline comparisons, bootstrap confidence intervals, and the multi-source ingestion commands (Metasploit and Nuclei git-history import, GHSA per-CVE lookup, source merging). This module is invoked from the command line and requires no web server.
+The historical evaluation additionally uses \texttt{dtem.evaluation}, which implements the full backtest pipeline, leave-one-out ablation, chronological splitting, baseline comparisons, bootstrap confidence intervals, and the multi-source ingestion commands (Metasploit and Nuclei git-history import, GHSA per-CVE lookup, source merging). This module is invoked from the command line and requires no web server. We distinguish two artifacts: the earlier exploratory NVD-only run is explicitly labeled as such and is not the same as the archived three-source historical cohort; all claims in this section refer to the latter unless otherwise stated.
 
-The prototype is built in Python~3.10+ and deployed via Docker (with a \texttt{Procfile} for platform-as-a-service hosting); dependencies are pinned in \texttt{requirements.txt}. The Collector Manager draws on the NVD, AlienVault OTX (when an API key is available), and the simulated DarkWebSimulator for the live dashboard, while the historical evaluation uses only the three verified sources described in Section~III-B.
+The prototype is built in Python~3.10+ and deployed via Docker (with a \texttt{Procfile} for platform-as-a-service hosting); dependencies are pinned in \texttt{requirements.txt}. The Collector Manager draws on the NVD, AlienVault OTX (when an API key is available), and the simulated DarkWebSimulator for the live dashboard, while the archived historical backtest reviewed here uses the three verified sources described in Section~III-B: NVD, Metasploit, and Nuclei.
 
 \subsection{Dashboard and Explainability}
 

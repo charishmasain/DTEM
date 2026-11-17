@@ -1,0 +1,5 @@
+variant,pr_auc,mean_score
+without_frequency,0.00091,0.0
+without_growth,0.00091,0.0
+without_diversity,0.00091,0.0
+without_exploit,0.00091,0.0

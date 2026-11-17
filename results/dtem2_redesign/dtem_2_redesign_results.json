@@ -1,0 +1,30 @@
+{
+  "experiment_id": "dtem_2_redesign",
+  "dataset": "output\\evaluation\\historical_backtest_3way.json",
+  "prediction_count": 36274,
+  "positive_count": 33,
+  "negative_count": 36241,
+  "model_summary": {
+    "original_dtem_1_0": 0.001361,
+    "frequency_only_redesign": 0.001427,
+    "growth_only_redesign": 0.00091,
+    "dtem_2_redesign": 0.00133
+  },
+  "score_distribution": {
+    "original_dtem_1_0": {
+      "mean": 22.198877157193944,
+      "median": 29.75,
+      "std": 11.550829680400211,
+      "tie_fraction": 0.9992832331697634,
+      "unique_scores": 80
+    },
+    "dtem_2_redesign": {
+      "mean": 36.06238265725251,
+      "median": 33.86859507142915,
+      "std": 4.811193615288467,
+      "tie_fraction": 0.9999448640899818,
+      "unique_scores": 25
+    }
+  },
+  "decision": "count-based growth and bounded normalization preserve ranking signal better than repeated saturation; however the redesign still does not clearly outperform the preserved DTEM 1.0 historical baseline on this cohort."
+}
